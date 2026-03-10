@@ -1,20 +1,34 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Projeto: Site institucional + e-commerce para escritório de engenharia (Scalioniengenharia 2.0)
+  
+  Stack:
+    Backend: Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Alembic, Pydantic v2, Pytest
+    Frontend: Node.js, TypeScript, Next.js 15 (App Router), React, TailwindCSS, Shadcn/UI, Vitest
+    Banco de dados: PostgreSQL 16
+    Storage: Volume Docker (dev) / MinIO (prod)
+    Pagamento: Mercado Pago SDK Python
+    Email: SMTP / SendGrid
+    Infra: Docker + Docker Compose + GitHub Actions
+  
+  Arquitetura: Monorepo com Clean Architecture no backend
+    - backend/ → FastAPI (domain, application, infrastructure, interfaces)
+    - frontend/ → Next.js (site público em SSG/ISR + painel /admin em CSR)
+  
+  Convenções:
+    - Commits convencionais (feat, fix, docs, test, chore)
+    - Tipos TypeScript gerados via openapi-typescript do OpenAPI do FastAPI
+    - Migrações versionadas com Alembic
+    - Testes unitários e de integração obrigatórios
+    - Docker Compose para dev local
+    - GitHub Actions para CI/CD (testes em PR, deploy em push para main)
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - Máximo 400 palavras
+    - Incluir seção Non-goals
+  tasks:
+    - Tasks atômicas, máximo 2 horas cada
+    - Agrupar por camada: banco → backend → frontend → infra
+    - Incluir testes como task separada para cada feature
