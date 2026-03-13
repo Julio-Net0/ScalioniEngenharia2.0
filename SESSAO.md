@@ -1,5 +1,17 @@
 # Contexto da Sessão — Scalioniengenharia 2.0
-**Data:** 2026-03-10
+**Última atualização:** 2026-03-13
+
+---
+
+## ⏸️ Estado atual (2026-03-13)
+
+- **Fase:** Design completo — pronto para iniciar implementação com `/opsx-apply`
+- **Documentos de design gerados:**
+  - `openspec/changes/site-scalioniengenharia/proposal.md`
+  - `openspec/changes/site-scalioniengenharia/design.md`
+  - `openspec/changes/site-scalioniengenharia/design-leads-pagamento.md` ← **novo**
+  - `openspec/changes/site-scalioniengenharia/tasks.md` (40+ tasks em 8 fases)
+- **Pendente do usuário:** nenhum — implementação ainda não iniciada
 
 ---
 
@@ -60,6 +72,23 @@ ScalioniEngenharia2.0/
 | `/servicos` | SSG — Residencial, Comercial, Consultoria, Regularização |
 | `/contato` | SSG — formulário + mapa |
 | `/admin/*` | CSR — painel admin protegido por JWT |
+
+---
+
+### Fluxo de Leads (Formulário de Contato)
+
+- **Público-alvo:** Pessoa física (residencial) + pequeno empresário (comercial)
+- **Campos:** Nome completo, E-mail, Telefone/WhatsApp, Mensagem
+- **Ação ao enviar:** (1) Salva `MensagemContato` no banco → (2) E-mail de confirmação ao cliente → (3) Notificação ao admin
+- **Painel admin:** listagem com badge "nova", marcar como lida, link WhatsApp pré-preenchido
+
+### Segurança de Pagamento — Mercado Pago
+
+- **Webhook `approved`:** Validar HMAC-SHA256 (`x-signature`) → double-check via `GET /v1/payments/{id}` → idempotência por `mp_payment_id` → gerar token UUID (72h) → e-mail com link → `status = "pago"`
+- **Webhook `rejected`/`cancelled`:** Marcar status + e-mail ao cliente com link para tentar novamente
+- **Outros status** (`in_process`, `pending`): apenas atualizar status, aguardar próxima notificação
+- **Download token:** UUID v4, 72h, reutilizável dentro do prazo (YAGNI para uso único)
+- **Design doc:** `openspec/changes/site-scalioniengenharia/design-leads-pagamento.md`
 
 ---
 
