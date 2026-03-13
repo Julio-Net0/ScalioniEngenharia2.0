@@ -1,17 +1,23 @@
 # Contexto da Sessão — Scalioniengenharia 2.0
-**Última atualização:** 2026-03-13
+**Última atualização:** 2026-03-13 13:44
 
 ---
 
 ## ⏸️ Estado atual (2026-03-13)
 
-- **Fase:** Design completo — pronto para iniciar implementação com `/opsx-apply`
-- **Documentos de design gerados:**
-  - `openspec/changes/site-scalioniengenharia/proposal.md`
-  - `openspec/changes/site-scalioniengenharia/design.md`
-  - `openspec/changes/site-scalioniengenharia/design-leads-pagamento.md` ← **novo**
-  - `openspec/changes/site-scalioniengenharia/tasks.md` (40+ tasks em 8 fases)
-- **Pendente do usuário:** nenhum — implementação ainda não iniciada
+- **Fase:** Design 100% completo — pronto para `/opsx-apply`
+- **Todos os specs OpenSpec criados:**
+
+| Arquivo | Status |
+|---|---|
+| `openspec/changes/site-scalioniengenharia/.openspec.yaml` | ✅ Criado |
+| `openspec/changes/site-scalioniengenharia/proposal.md` | ✅ Criado |
+| `openspec/changes/site-scalioniengenharia/design.md` | ✅ Criado |
+| `openspec/changes/site-scalioniengenharia/tasks.md` | ✅ 73 tasks em 8 fases |
+| `openspec/changes/site-scalioniengenharia/design-leads-pagamento.md` | ✅ Design detalhado |
+
+- **⚠️ Nota infra:** `openspec` CLI não instalado (npm indisponível no ambiente). O `/opsx-apply` funciona sem o CLI — lê os arquivos diretamente.
+- **Próximo passo:** dizer `/opsx-apply` para iniciar a implementação
 
 ---
 
