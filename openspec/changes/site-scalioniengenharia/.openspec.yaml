@@ -1,0 +1,14 @@
+schema: spec-driven
+name: site-scalioniengenharia
+artifacts:
+  proposal:
+    file: proposal.md
+    status: done
+  design:
+    file: design.md
+    status: done
+  tasks:
+    file: tasks.md
+    status: done
+applyRequires:
+  - tasks
