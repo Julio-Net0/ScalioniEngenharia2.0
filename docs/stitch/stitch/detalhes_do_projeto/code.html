@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e6b03d",
+                        "terracotta": "#a45d41",
+                        "silver": "#c0c0c0",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#161411",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "serif-bold": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .gold-underline {
+            position: relative;
+        }
+        .gold-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: #e6b03d;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-x-hidden">
+<header class="fixed top-0 w-full z-50 bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">architecture</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-100">Scalioni<span class="text-primary font-light">Engenharia</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#">Início</a>
+<a class="text-sm font-medium text-primary" href="#">Projetos</a>
+<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#">Serviços</a>
+<a class="text-sm font-medium hover:text-primary transition-colors text-slate-300" href="#">Contato</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+<button class="hidden md:block bg-primary text-background-dark px-6 py-2 rounded-lg font-bold text-sm tracking-wide">ORÇAMENTO</button>
+</div>
+</div>
+</header>
+<section class="relative h-screen w-full flex items-end">
+<div class="absolute inset-0 z-0">
+<img alt="Luxury modern architecture facade at night" class="w-full h-full object-cover" data-alt="Luxury modern architecture facade with warm lighting at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7S-wXZ3rLR4AaHv-58_6eN0GnKqcMnEKfs_OcZFbwvGXXU2bz3nSdIRVEZdeLLRoTEev061hK9faNq_pNfjgLLIiMTRfhpW3DaX9QQDphgudSm2orb-8zWP6LrObvrbtAK1AlfJSb9w1j1U1FejL7Ut0-TT34TAu9gRtlIAipDoljQ9tjprdhXgKChS_FKWBfEBcbzmLlYDJkvSIEr0TgKNlRaUi8eZ4oQUCPRkis3qKfUnOnyip19goA-xm3IRxYLXAIi1okt0s"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto w-full px-6 pb-20">
+<span class="inline-block bg-terracotta text-white text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 mb-6 rounded-sm">Residencial de Luxo</span>
+<h1 class="font-serif-bold text-5xl md:text-7xl lg:text-[64px] text-white leading-tight mb-4">Residência Scalioni <br/> &amp; Gropius</h1>
+<div class="flex items-center gap-4 text-silver">
+<span class="material-symbols-outlined">location_on</span>
+<p class="text-sm font-medium uppercase tracking-widest" data-location="Belo Horizonte, Brasil">Belo Horizonte, Brasil</p>
+</div>
+</div>
+</section>
+<div class="bg-background-dark border-b border-white/5">
+<div class="max-w-7xl mx-auto px-6 py-4 flex gap-2 items-center text-xs font-medium text-silver/60 uppercase tracking-widest">
+<a class="hover:text-primary" href="#">Início</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Projetos</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-silver">Residência Scalioni</span>
+</div>
+</div>
+<main class="max-w-7xl mx-auto px-6 py-20">
+<div class="flex flex-col lg:flex-row gap-16">
+<div class="lg:w-[65%]">
+<h2 class="font-serif-bold text-3xl mb-12 gold-underline text-white">Sobre o Projeto</h2>
+<div class="prose prose-invert max-w-none text-slate-300 space-y-6 leading-relaxed text-lg font-light">
+<p>
+                        A Residência Scalioni é uma celebração da arquitetura contemporânea e do maximalismo elegante. Localizada em um terreno com declive acentuado, o projeto buscou integrar a topografia original com volumes horizontais que parecem flutuar sobre a paisagem mineira.
+                    </p>
+<p>
+                        O uso de materiais nobres como o mármore travertino bruto, madeira nogueira e estruturas metálicas aparentes cria um contraste sofisticado. O interior foi planejado para maximizar a entrada de luz natural, utilizando pé-direito duplo nas áreas sociais e grandes panos de vidro que eliminam as barreiras entre interior e exterior.
+                    </p>
+</div>
+<div class="mt-16 overflow-x-auto flex gap-6 pb-6 no-scrollbar">
+<div class="min-w-[400px] h-[300px] rounded-xl overflow-hidden group">
+<img alt="Modern minimalist living room" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Modern minimalist living room with wood panels" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhFEQU7c3H8B2Y7i8JOo85xCavmF8ach0OFjnawucyGhS3QJv6C5H59Yn8Cvn9XGwOpheQGobvEkRk7pa3QK7cvJTiWfzzUSLwTACB0He9vAqf62kEmWUyrhIgQkwsUe31NtbrI3a9-zfdZnH-l5YGZiMpGAor5J43HYVu5sFdqSd7Fb3hzpsjuNFicV3Lr4tXu3Itq020HaQhlgwrmKduTmwBhi-CNoyBfAWACkhj-QMbLRvSueYRHU9y_EvOAW_QOK2jGd4jRS0"/>
+</div>
+<div class="min-w-[400px] h-[300px] rounded-xl overflow-hidden group">
+<img alt="Designer kitchen with marble island" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Designer kitchen with large black marble island" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyeWXNZfQSn9zYn87dBY_j4Pg4qy_HsdY1oHXQXJFMVVvSk_kncmq2rci_BbHPrqC08W__E7Y5y8tvDK16tBlH2wuLovHvbhzYV3ltlAiyCiaI_qdg5A3EV4Cf16WOOb4iIJrKXtQOXxDsEOVvySweNEeFpX4RaYTNkV52d3XnLpzWi_b9qfqQmD2t8aL9hd0vIpJUoljE9cn3hFUWeH22YP7fEqWFb25lpm_f8lNPVNrfmNlFgCq4hx2MdCoEHP0NUgWN7aSEobg"/>
+</div>
+<div class="min-w-[400px] h-[300px] rounded-xl overflow-hidden group">
+<img alt="Luxury master bedroom" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Luxury master bedroom with view to garden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXugQkSLriavHlSEpNRizUs4jwAEzG0zDAxLWTLyUwWvoGsgjq1KbvnlczU1O6l2_0Fu2VSAGORDNQbpdEA2VDH8EnbCORjH7AubktSDS3HXQhk5U4F0WcTEGDD0pq_laQ26t0tUtPv0kU2UitCHuY1rX6A5yP6-j-pIV6nyNwuy4VCxH2IUFGuJfuYbuZS5Nnbi4zIvb3CfPfV9ziGyt58rFI3wesYY_xR9ri5JQMQGxIjllZBqG9Dj1GHw-JTKd33oa3A-sYq9M"/>
+</div>
+</div>
+</div>
+<aside class="lg:w-[35%]">
+<div class="sticky top-32 bg-background-dark/40 border border-primary/30 p-8 rounded-xl backdrop-blur-sm">
+<h3 class="font-serif-bold text-xl mb-6 text-primary">Ficha Técnica</h3>
+<div class="space-y-0">
+<div class="flex justify-between py-4 border-b border-primary/20">
+<span class="text-silver/60 text-sm uppercase tracking-wider">Local</span>
+<span class="text-white font-medium">Belo Horizonte, MG</span>
+</div>
+<div class="flex justify-between py-4 border-b border-primary/20">
+<span class="text-silver/60 text-sm uppercase tracking-wider">Área Construída</span>
+<span class="text-white font-medium">850 m²</span>
+</div>
+<div class="flex justify-between py-4 border-b border-primary/20">
+<span class="text-silver/60 text-sm uppercase tracking-wider">Ano do Projeto</span>
+<span class="text-white font-medium">2023</span>
+</div>
+<div class="flex justify-between py-4 border-b border-primary/20">
+<span class="text-silver/60 text-sm uppercase tracking-wider">Arquitetura</span>
+<span class="text-white font-medium">Scalioni Arq+Eng</span>
+</div>
+<div class="flex justify-between py-4 border-b border-primary/20">
+<span class="text-silver/60 text-sm uppercase tracking-wider">Interiores</span>
+<span class="text-white font-medium">Estúdio Gropius</span>
+</div>
+<div class="flex justify-between py-4">
+<span class="text-silver/60 text-sm uppercase tracking-wider">Status</span>
+<span class="text-primary font-bold italic">Concluído</span>
+</div>
+</div>
+<button class="w-full mt-8 flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary border border-primary/40 py-3 rounded-lg transition-all font-bold text-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        BAIXAR PORTFÓLIO PDF
+                    </button>
+</div>
+</aside>
+</div>
+<section class="mt-32">
+<div class="flex items-center justify-between mb-12">
+<h2 class="font-serif-bold text-3xl text-white">Galeria de Imagens</h2>
+<div class="h-px bg-primary/20 flex-1 mx-10"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="aspect-[4/5] overflow-hidden rounded-lg">
+<img alt="Architectural details exterior" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Architectural details of stone wall and light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyFnyET8jk4aVxRvdlqff1ndAG7wXYl9hSB7uh6VRzzP7P8GIT1m4L9w8a1mRbarYAjQfZLhGCWV_6mGjF2ijdkxRhgoQbLz14xHjTDCMa445bNdu7FVPtVFoJuEQoevRFbGn_MykO7D88AUaMBAjJVOAQN0yg7jHDORbcjMksgqcZ_jnw_Ys-o4bh25m2DCRPR2gg2Lp0sk0cqvpuN3vAtCi0aTi5cC0nmcqiMu_RH4Zja4KD-YsdXcVfGkJniTwtBxzJDKJ6qqY"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden rounded-lg">
+<img alt="Pool area at night" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Infinity pool reflecting modern house lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDetCQJMd6keWZ6wsrk-rsbXQ0cnfJzHAORr5dKcwjPaveRDUhm9lic00S1DjayYzxibfAsk_dusF_ZcQ2XL_vTMFKixSaxX_O22jxKOKDLxA4upFLBO8JIpM3AcbjeLuJms8WLPCVK4-xrvV6yMtn4eSXMXorE232yJGnce2mNbCGT1JBXI1KlJ41X81x2SyQV58bDHaefgbLlWbofcevj3tQmRUdbgRpKtscNhJViqBgm5sJxYi4aMWzVHXLFMreDtudFyMygtNQ"/>
+</div>
+<div class="aspect-[4/5] overflow-hidden rounded-lg">
+<img alt="Luxury bathroom" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Luxury bathroom with black marble finishes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvBla6Lxt4sQrZ_pMAT7Y2pO_CXZL2oFvYf1y0h_LdCkmCMi9nu22UPIRVhf9ND0cs2Tf-CdRTZmwMGLaURMMYgDVKpvsVbmtlalX4NaOuPEZbAsW8GW-f3Kdv5Hh2K3WcF6aa58iAGYy-cOXDSkpa-xcQ9ROlaBbQ469L8hnyKUqEfkZhNB1vJCLU0JhRRs22b_mhYK26lDa6-_40p_n7pOfRC2V7zGMs4U-GiQmBtYFxuMwlsHW1En_3CG5JAwrJuwuBAG0HpeE"/>
+</div>
+<div class="aspect-[16/9] md:col-span-2 overflow-hidden rounded-lg">
+<img alt="Garden and facade view" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Wide angle shot of garden and main facade" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbNhQ7PYgxqv6B_MxHVQfiKguDXNBoGu_8WtAjqkASHAuMEIqx_FR_VLEcRIR7usQuu4xcwBSOwgwve4eyPxR8iAExmv2PXeCPHf3YPzewvNSWZK0utCvcqBM-ATvHMjAE8Vra6Hd2A6rp78MauC_OQLAMXDWKyLD0Abfd3f0b2lO-LwLX3Jv4s62hZ1TgDwUhJNAU0Gr5c7PNFhNoziVeo7U2N8bOzsTEXioflIwjrBDxvZyvTwOQwhafNzsUbt6yrlfDJ2PCNpc"/>
+</div>
+<div class="aspect-[16/9] md:col-span-1 overflow-hidden rounded-lg">
+<img alt="Staircase design" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Modern sculptural staircase in main hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRxQPP6ZPMunsKliOoFZSNfFEPBop4qjZvQ40K8uzYTJ3lrt75nMIRsFDip2yq3QEqDYbvCabJqTw0ebM5lzrKzphgVXS7225ciPHu1Pmm63EuC7xen8v4QgU4RlfEbjhrvjLkjaCW8rOnE8uOPgmVnmsATR1db9IbPbc_UZMpsz-VCL5BMIRX2hTlavCeJmh4G90LpKUAa7XUrYPLF2FC06gqmVBcVmuqfMKptVnYwQIJpBjedi0QNb1b6Rw11IQX3T7i2LBgwhQ"/>
+</div>
+</div>
+</section>
+<nav class="mt-32 border-t border-primary/20 pt-10 flex items-center justify-between">
+<a class="group flex flex-col gap-2" href="#">
+<span class="text-xs font-bold text-primary tracking-widest uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span> Anterior
+                </span>
+<span class="text-silver group-hover:text-white transition-colors text-lg font-serif-bold">Casa Lago Azul</span>
+</a>
+<div class="hidden md:flex gap-4">
+<span class="material-symbols-outlined text-primary/40">grid_view</span>
+</div>
+<a class="group flex flex-col gap-2 text-right" href="#">
+<span class="text-xs font-bold text-primary tracking-widest uppercase flex items-center justify-end gap-2">
+                    Próximo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</span>
+<span class="text-silver group-hover:text-white transition-colors text-lg font-serif-bold">Edifício Mirante</span>
+</a>
+</nav>
+</main>
+<footer class="bg-background-dark border-t border-primary/10 py-16 px-6 mt-20">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-3 opacity-50">
+<span class="material-symbols-outlined text-primary text-2xl">architecture</span>
+<h1 class="text-lg font-bold tracking-tight text-slate-100">Scalioni<span class="text-primary font-light">Engenharia</span></h1>
+</div>
+<div class="flex gap-8">
+<a class="text-silver hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">brand_family</span></a>
+<a class="text-silver hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share_reviews</span></a>
+<a class="text-silver hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">contact_support</span></a>
+</div>
+<p class="text-silver/40 text-[10px] uppercase tracking-[0.3em]">© 2024 Scalioni Engenharia. Todos os direitos reservados.</p>
+</div>
+</footer>
+</body></html>

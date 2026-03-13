@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e6b03d",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0a0a0a",
+                        "modal-dark": "#111111",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .modal-blur { backdrop-filter: blur(12px); }
+        .gold-gradient-text {
+            background: linear-gradient(to right, #e6b03d, #ffefcd, #e6b03d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e6b03d; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 font-display">
+<!-- Modal Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 modal-blur p-4">
+<!-- Modal Container -->
+<div class="relative w-full max-w-2xl bg-modal-dark border-2 border-primary/50 shadow-[0_0_50px_rgba(230,176,61,0.15)] rounded-xl overflow-hidden flex flex-col max-h-[90vh]">
+<!-- Gold Top Bar -->
+<div class="bg-primary px-6 py-3 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-background-dark font-bold">lock</span>
+<span class="text-background-dark font-bold uppercase tracking-widest text-xs">Checkout Seguro • Scalioni Engenharia</span>
+</div>
+<button class="text-background-dark/70 hover:text-background-dark transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Header & Steps Indicator -->
+<div class="p-8 border-b border-primary/10">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-primary/10 border border-primary/30 rounded-lg flex items-center justify-center">
+<svg class="text-primary size-6" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-2xl font-bold gold-gradient-text tracking-tight uppercase">Finalizar Consultoria</h2>
+</div>
+</div>
+<!-- Step Dots -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="size-8 rounded-full bg-primary flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Identificação</span>
+</div>
+<div class="h-px bg-primary/20 flex-1"></div>
+<div class="flex items-center gap-2 group cursor-pointer">
+<div class="size-8 rounded-full border-2 border-primary flex items-center justify-center text-primary font-bold text-sm">2</div>
+<span class="text-xs font-bold uppercase tracking-widest text-primary/60">Resumo</span>
+</div>
+<div class="h-px bg-primary/20 flex-1"></div>
+<div class="flex items-center gap-2 group opacity-40">
+<div class="size-8 rounded-full border-2 border-slate-600 flex items-center justify-center text-slate-400 font-bold text-sm">3</div>
+<span class="text-xs font-bold uppercase tracking-widest text-slate-500">Conclusão</span>
+</div>
+</div>
+</div>
+<!-- Content Area (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<!-- Section 1: Identificação -->
+<div class="space-y-6 mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-1.5 h-6 bg-primary"></span>
+<h3 class="text-lg font-bold text-slate-100 uppercase tracking-wider">Dados do Solicitante</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-[0.2em] text-primary/80 font-bold">Nome Completo</label>
+<input class="bg-black/40 border border-primary/20 rounded-lg h-14 px-4 text-slate-100 placeholder:text-slate-600 focus:ring-1 focus:ring-primary focus:border-primary transition-all uppercase text-sm" placeholder="EX: AURELIUS SCALIONI" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[10px] uppercase tracking-[0.2em] text-primary/80 font-bold">E-mail Corporativo</label>
+<input class="bg-black/40 border border-primary/20 rounded-lg h-14 px-4 text-slate-100 placeholder:text-slate-600 focus:ring-1 focus:ring-primary focus:border-primary transition-all uppercase text-sm" placeholder="CONTATO@EMPRESA.COM" type="email"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-[10px] uppercase tracking-[0.2em] text-primary/80 font-bold">CNPJ / CPF</label>
+<input class="bg-black/40 border border-primary/20 rounded-lg h-14 px-4 text-slate-100 placeholder:text-slate-600 focus:ring-1 focus:ring-primary focus:border-primary transition-all uppercase text-sm" placeholder="00.000.000/0001-00" type="text"/>
+</div>
+</div>
+</div>
+<!-- Section 2: Resumo do Pedido -->
+<div class="space-y-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-1.5 h-6 bg-primary"></span>
+<h3 class="text-lg font-bold text-slate-100 uppercase tracking-wider">Resumo da Consultoria</h3>
+</div>
+<!-- Item Thumbnail Card -->
+<div class="bg-primary/5 border border-primary/20 rounded-xl p-4 flex gap-4 items-center">
+<div class="size-20 bg-background-dark rounded-lg overflow-hidden border border-primary/20 flex-shrink-0">
+<img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" data-alt="Modern architectural glass skyscraper reflecting sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs4B5tie3L31s3JmOl60MhN9zKW1XfDZWZKH4Hg7jHb8k76KmmdsaA9ZXTVW4giS1Cc6ICLVALDQLV37sic1HVH9nroWJ7ZXgKtYPDq4VeSMRuHh8af6DuVsaFaOqloas6m9ywwDJOXgMzyJTltbe7HEO-bVQDHdIJEwdrzJx3uxQPAaXCk7QCTCd8JrgzoWsXKRbjIvSVn89HnnuGyC4ZjFWiAdLMSr4ZavWi6viffhvNf7muip-y3mD2OwfirnKTVx_PW7PSJK0"/>
+</div>
+<div class="flex-1">
+<p class="text-[10px] text-primary uppercase font-bold tracking-widest">Premium Service</p>
+<h4 class="text-lg font-bold text-white uppercase tracking-tighter leading-tight">Laudo de Engenharia Estrutural Luxo</h4>
+<p class="text-xs text-slate-400">Prazo estimado: 15 dias úteis</p>
+</div>
+<div class="text-right">
+<p class="text-xl font-bold text-primary">R$ 12.500</p>
+<p class="text-[10px] text-slate-500 uppercase">Valor Único</p>
+</div>
+</div>
+<!-- Payment Method Selection -->
+<div class="grid grid-cols-2 gap-4 pt-4">
+<div class="border-2 border-primary bg-primary/10 p-4 rounded-xl cursor-pointer relative">
+<div class="absolute top-3 right-3 text-primary">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+<span class="material-symbols-outlined text-primary mb-2">credit_card</span>
+<p class="text-xs font-bold uppercase tracking-widest text-white">Cartão de Crédito</p>
+<p class="text-[10px] text-primary/70">Até 12x sem juros</p>
+</div>
+<div class="border-2 border-primary/10 bg-black/40 p-4 rounded-xl cursor-pointer hover:border-primary/40 transition-all">
+<span class="material-symbols-outlined text-slate-500 mb-2">account_balance</span>
+<p class="text-xs font-bold uppercase tracking-widest text-slate-400">Transferência PIX</p>
+<p class="text-[10px] text-slate-500">Desconto de 5% à vista</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-8 bg-black/60 border-t border-primary/10">
+<div class="flex items-end justify-between mb-6">
+<div>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Investimento Total</p>
+<p class="text-3xl font-bold text-primary tracking-tighter">R$ 12.500,00</p>
+</div>
+<div class="flex flex-col items-end">
+<p class="text-[10px] text-slate-400 uppercase tracking-widest">Criptografia SSL 256-bit</p>
+<div class="flex gap-2 mt-1">
+<img class="h-3 opacity-50 grayscale" data-alt="Visa logo small white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK-K07QCQjx0iRDDpfl8zQmU35iy6VmGJSWvZdTbYCRtcfbWyn0WsclRlBmXzS3pa9ryw9TD4tXKFww_SszRmJsnpqCLlzzjkiYtAm267hqJV6Mu3OTZVZcehp6iriQOWrW8WP3rC47Lrw_xpLQd_Yp2V3QIRjF54KnKeXE4SE-zxZpQ5fi5hzmU4ojYoKL1ZWOlkCRAmzyT-2uuTk9HRgYfQPWJt4fZxQxclHye_MAivvPBlVpLGeXNCiRcMEdHpiz3mkWRzO2r4"/>
+<img class="h-3 opacity-50 grayscale" data-alt="Mastercard logo small white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1imzIBD6hNv7RIQQ3owmtjrHSrqZlNmf22a6eUgYmis626nkDv2CcvATl4CB2S0ma2hCbTG6AJGrVbQSr9_afwAjqdQLI7L4otoIegiuczM2VMOa-jGXD1N9MrnArbiLMri6EJf-nvc2mIUGyQ85OH5IT_Lm26kCAO4k11Gf6GWk3tq_kpB5oBch2yw9IS1nWTvHeRJNOzUww2sDUmvloQTYsDb3NHEnjVPPtRAi8Ly3fNfxjprXDeYk7i927IdKx99ooWKfi3YQ"/>
+</div>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex-1 bg-transparent border border-primary/40 hover:bg-primary/5 text-primary font-bold uppercase tracking-[0.2em] py-4 rounded-lg transition-all text-sm">
+                        Voltar
+                    </button>
+<button class="flex-[2] bg-primary hover:bg-primary/90 text-background-dark font-extrabold uppercase tracking-[0.2em] py-4 rounded-lg shadow-[0_4px_20px_rgba(230,176,61,0.3)] transition-all text-sm flex items-center justify-center gap-2">
+                        Próximo Passo
+                        <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>
