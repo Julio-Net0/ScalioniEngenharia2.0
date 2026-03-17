@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C9A55A",
+                        "primary-bright": "#E8C675",
+                        "terracotta": "#B5501B",
+                        "text-primary": "#F5F0E8",
+                        "text-secondary": "#A89F91",
+                        "background-main": "#0A0A0A",
+                        "card-bg": "#111111",
+                        "gold-border": "rgba(201,165,90,0.3)",
+                    },
+                    fontFamily: {
+                        "sans": ["Outfit", "sans-serif"],
+                        "display": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .gold-underline {
+            position: relative;
+        }
+        .gold-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background-color: #C9A55A;
+        }
+        .luxury-gradient {
+            background: linear-gradient(to top, #0A0A0A 0%, rgba(10, 10, 10, 0.4) 50%, transparent 100%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #111111;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C9A55A;
+        }
+    </style>
+</head>
+<body class="bg-background-main font-sans text-text-primary overflow-x-hidden selection:bg-primary selection:text-background-main">
+<header class="fixed top-0 w-full z-50 bg-background-main/90 backdrop-blur-xl border-b border-white/5 px-6 py-5">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl font-light">architecture</span>
+<h1 class="text-xl font-bold tracking-[0.1em] text-text-primary uppercase">Scalioni<span class="text-primary font-light italic">Engenharia</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-xs font-bold tracking-[0.2em] hover:text-primary transition-colors text-text-secondary uppercase" href="#">Início</a>
+<a class="text-xs font-bold tracking-[0.2em] text-primary uppercase" href="#">Projetos</a>
+<a class="text-xs font-bold tracking-[0.2em] hover:text-primary transition-colors text-text-secondary uppercase" href="#">Serviços</a>
+<a class="text-xs font-bold tracking-[0.2em] hover:text-primary transition-colors text-text-secondary uppercase" href="#">Contato</a>
+</nav>
+<div class="flex items-center gap-6">
+<button class="text-text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">share</span>
+</button>
+<button class="hidden md:block border border-primary text-primary px-8 py-2.5 hover:bg-primary hover:text-background-main transition-all font-bold text-[11px] tracking-[0.2em]">ORÇAMENTO</button>
+</div>
+</div>
+</header>
+<section class="relative h-[90vh] w-full flex items-end">
+<div class="absolute inset-0 z-0">
+<img alt="Residência Scalioni Premium Facade" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcMmaDJR9dZnfWn7n6FajRvHie996a90Mn_NZ2RkzhS4PCz3Gn9kqrW57-e0OxK4GFg91u55bdFLr2RHETcdGl3--fbN8GJ9NaxI-ClOXDN2RYUMrP35xrvZ-aW877-V1FEXJ9LXRi1fLZPI6RChsGXEUu0Z9Sb-rVgDjIc-Q7O015szcRcXNDIIn857ouh9KIF-JBAXiEqx3vhClc_vwNaDGflTi3qkRYSUQKtDZFsPt_2--cJErV2UIheejhYQ4j-0R2XBMZ_Q"/>
+<div class="absolute inset-0 luxury-gradient"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto w-full px-6 pb-24">
+<span class="inline-block bg-terracotta text-white text-[11px] font-bold uppercase tracking-[0.3em] px-4 py-1.5 mb-8">Residencial de Luxo</span>
+<h1 class="font-display text-5xl md:text-7xl lg:text-8xl text-text-primary leading-[1.1] mb-6 max-w-4xl">Residência Scalioni Premium</h1>
+<div class="flex items-center gap-3 text-primary-bright">
+<span class="material-symbols-outlined text-lg">location_on</span>
+<p class="text-sm font-medium uppercase tracking-[0.2em]">São Paulo, Brasil</p>
+</div>
+</div>
+</section>
+<div class="bg-background-main border-b border-white/5">
+<div class="max-w-7xl mx-auto px-6 py-6 flex gap-3 items-center text-[10px] font-bold text-terracotta uppercase tracking-[0.25em]">
+<a class="hover:text-primary-bright transition-colors" href="#">Início</a>
+<span class="text-primary/30">/</span>
+<a class="hover:text-primary-bright transition-colors" href="#">Projetos</a>
+<span class="text-primary/30">/</span>
+<span class="text-primary">Residência Scalioni Premium</span>
+</div>
+</div>
+<main class="max-w-7xl mx-auto px-6 py-24">
+<div class="flex flex-col lg:flex-row gap-20">
+<div class="lg:w-[62%]">
+<h2 class="font-display text-3xl md:text-4xl mb-16 gold-underline text-text-primary italic">Sobre o Projeto</h2>
+<div class="text-text-secondary space-y-8 leading-relaxed text-lg font-light">
+<p>
+                        A Residência Scalioni Premium é o ápice da sofisticação contemporânea em São Paulo. O projeto foi concebido para um cliente que buscava um refúgio urbano onde o minimalismo se encontra com o luxo absoluto. Localizada em um dos bairros mais exclusivos da capital, a residência utiliza uma paleta de materiais sóbrios e texturas ricas para criar uma atmosfera de serenidade.
+                    </p>
+<p>
+                        A integração entre os espaços sociais e as áreas externas é o coração da proposta arquitetônica. Grandes painéis de vidro deslizantes permitem que a sala de estar se transforme em uma varanda contínua, conectando o interior ao jardim escultural e à piscina com borda infinita. Cada detalhe, do layout à iluminação zenital, foi pensado para valorizar a experiência do morar.
+                    </p>
+</div>
+<div class="mt-20 flex flex-col sm:flex-row gap-8">
+<div class="flex-1 aspect-[4/3] bg-card-bg border border-gold-border overflow-hidden">
+<img alt="Interior luxo 1" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0LDmm8zdKfJYml6aMTcT9JaDb-dX8ZFc-FgiOy1zAHbyWbAXdXaDyW9VZPqbLLLJbVITB7g3R0DAshzbGpB7cYi8UWzr8P-t4u03XxVFKsE6IDITB1qPZkNl3dHYfjsDtp-5WkQ_XV0jVQo794XWmbykB_331Xom-8_U-gAUSznIScaiKW9DMTFYxYad45D7tmrcaPDuCyk49_kqcnJcMXMdoQkzp9ndInRmul_byJ-wCalqu4RvE_9A4PxyiCAgov5TtBV8H4A"/>
+</div>
+<div class="flex-1 aspect-[4/3] bg-card-bg border border-gold-border overflow-hidden">
+<img alt="Interior luxo 2" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUxv59GseScpaOBNCcxw5dJ68G0g-HVMfw2BGl2nk_9oUglKDDlvnpWnievA23zPMjHvMwWrVcH3Me4eHQ2M_6zOqcBUSwbcaSBzX2xxKwQKGYi89PjGmRPIFVZ_8HsqqwbLakOKH9rpJiblnP7gXRtZ60dbZQHFGNFs_DNMaAVOTQGMcJF1w_8YGXIpb-3APsVkkNxtL0DiCYvJVhuHCkz1PNoivrUrsfmhrk3RJES4nAQExwSWoBeEf9xNfrtXcZAQo_798Slg"/>
+</div>
+</div>
+</div>
+<aside class="lg:w-[38%]">
+<div class="sticky top-32 bg-card-bg border border-gold-border p-10 shadow-2xl">
+<h3 class="font-display text-2xl mb-8 text-primary italic border-b border-gold-border pb-6">Ficha Técnica</h3>
+<div class="space-y-0">
+<div class="flex justify-between py-5 border-b border-white/5">
+<span class="text-text-secondary text-[10px] font-bold uppercase tracking-[0.2em]">Local</span>
+<span class="text-text-primary font-medium text-sm">São Paulo, SP</span>
+</div>
+<div class="flex justify-between py-5 border-b border-white/5">
+<span class="text-text-secondary text-[10px] font-bold uppercase tracking-[0.2em]">Área Construída</span>
+<span class="text-text-primary font-medium text-sm">850 m²</span>
+</div>
+<div class="flex justify-between py-5 border-b border-white/5">
+<span class="text-text-secondary text-[10px] font-bold uppercase tracking-[0.2em]">Ano do Projeto</span>
+<span class="text-text-primary font-medium text-sm">2023</span>
+</div>
+<div class="flex justify-between py-5 border-b border-white/5">
+<span class="text-text-secondary text-[10px] font-bold uppercase tracking-[0.2em]">Tipologia</span>
+<span class="text-text-primary font-medium text-sm">Residencial de Luxo</span>
+</div>
+<div class="flex justify-between py-5">
+<span class="text-text-secondary text-[10px] font-bold uppercase tracking-[0.2em]">Status</span>
+<span class="text-primary font-bold italic tracking-wide text-sm">Concluído</span>
+</div>
+</div>
+<button class="w-full mt-12 bg-primary hover:bg-primary-bright text-background-main py-4 transition-all font-bold text-[11px] tracking-[0.25em] flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        BAIXAR PORTFÓLIO PDF
+                    </button>
+</div>
+</aside>
+</div>
+<section class="mt-40">
+<div class="flex items-center gap-10 mb-16">
+<h2 class="font-display text-3xl md:text-4xl text-text-primary italic shrink-0">Galeria de Imagens</h2>
+<div class="h-[1px] bg-gold-border flex-1"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-2 md:row-span-2 aspect-square overflow-hidden bg-card-bg border border-gold-border">
+<img alt="Projeto Externo Amplo" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJzaMMJCJjIigDLQaQVDr_US60v0uBL-09wt_XM0Gg_Tcjc4wXqawqnrjZElcGo49yv39Sr9JU9afI4neirI_K39bn61-a6mO-pmKcpNhpx_afLAyIgUUJNipHe7MaOiaOP_t18jCA0ZsY1FiePwWfsjgsycEM9sazG-oZsYl_B11wDYsFdAJlem1sH0nr_5HsPYr5K-LWeffBQKgrAOYsYIPKfLLBBxm0mAVE0XANiA3GEc7s1UAYJLKwbHVTq-VL_5GBgRSXXA"/>
+</div>
+<div class="aspect-square overflow-hidden bg-card-bg border border-gold-border">
+<img alt="Detalhe de Interior" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzD9LpOcg6jVjCa0ej9rBq4I6HFygq4_f3CAq_5Nw3HQBKT0YyooKQHxeYTcxEbEHdDO6g3u2hOABPpVwdK9sMkdZkeHeJs1NPVclN0io8PWPmkPv3H2XSELfVg2-b5cpjwKu-j0Rf4_28SUe0OsQq2LEgBL1eTtKFbHoBcTsvytU7wCO1-5y8uoLKvmDoHkGXjGqtXtb1jrq1tOxQmJvwC4aJq3-ZRuD5dtSVWbqb5FFmxV6loxZffEkeud9vHOAS2qSmO12FoQ"/>
+</div>
+<div class="aspect-square overflow-hidden bg-card-bg border border-gold-border">
+<img alt="Suíte Master" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj1h1lzgZBnPms-1l_joJdLJfHF74R2zpwHtAUE7N_N_gjAcXx3hF_uxGwrEN0nYhd5LXCTj5gz9iM2utgFl-_vTDFNVKGXnDJpSKSGilaNAuWQ5lQuYNrC10W6U4URcUMTxecYc7HAuJ1RH1XAzUm6oA1EataixCmdHgVCGti8TxSDM8MFpToSt9LadzRbyIWqPOhbMIzTJFAc2MSFjpgW9oybVs498eED4dWvz_MvrjcGQOr1YklPPkmqXWGC5Xso-SsK1CYBQ"/>
+</div>
+<div class="aspect-square overflow-hidden bg-card-bg border border-gold-border">
+<img alt="Piscina Noturna" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWWMvpYUFkR7vOKu_0PMkHazGse_J_pgAxuhjtieXRwwGlyQtUXRs4lP4Ph8mCetvMXMDZqrr-di8496Si6Hm1yJZiCKuoP7UHrDkNIQhuaf4A4UsQ0-oVEoCDuCQbdOZ3LCzYn5OF30h-YofcR3irjB6H_ZaQWi9C_543Ni6TOlas2Kso3tb_Nbf5pXJ3gsv2GcskM7n2azo2s7p-FcQkgXkBdGURUEFc_Sw3Vv2Dlb6rTk2Gm4GMtZ3wUx9IUFR-N1NFaSWBHQ"/>
+</div>
+<div class="aspect-square overflow-hidden bg-card-bg border border-gold-border">
+<img alt="Cozinha Gourmet" class="w-full h-full object-cover hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHd-qaTKIi-g9OXMgQXvehV4V96OMr_qeuf2CJCkVm0lIgGn_g4eu13ENV_bYSsmhikGtIQ0ld8tolGt0Nn53gKGMztWe-Ce4riRBt02TBTDK3iFIUFk9pZAGuNEjMfqbXrgipLXKZx9zKP339r9iqd5MjZMXS-Ugahd3f808hAF5JLSHXVjRQIjL-yBhTTaKJ7NCDIurieLVmjL388tRX0BAJCB2NGwB1mAdnzhUMg4i2lLjCntof46GpMm0Eu93Rg_2dKoaHRw"/>
+</div>
+</div>
+</section>
+<nav class="mt-40 pt-16 border-t border-white/5 flex items-center justify-between">
+<a class="group flex flex-col gap-3 max-w-[40%]" href="#">
+<span class="text-[10px] font-bold text-primary tracking-[0.3em] uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">west</span> Anterior
+                </span>
+<span class="text-text-secondary group-hover:text-primary transition-colors text-lg font-display italic">Casa Lago Azul</span>
+</a>
+<a class="text-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[32px]">grid_view</span>
+</a>
+<a class="group flex flex-col gap-3 text-right max-w-[40%]" href="#">
+<span class="text-[10px] font-bold text-primary tracking-[0.3em] uppercase flex items-center justify-end gap-2">
+                    Próximo <span class="material-symbols-outlined text-[14px]">east</span>
+</span>
+<span class="text-text-secondary group-hover:text-primary transition-colors text-lg font-display italic">Edifício Mirante</span>
+</a>
+</nav>
+</main>
+<footer class="bg-background-main border-t border-white/5 py-24 px-6 mt-20">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl font-light">architecture</span>
+<h1 class="text-xl font-bold tracking-[0.1em] text-text-primary uppercase">Scalioni<span class="text-primary font-light italic">Engenharia</span></h1>
+</div>
+<p class="max-w-xs text-text-secondary text-sm leading-relaxed">Excelência técnica e estética em cada traço. Transformando visões em monumentos de luxo.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-20">
+<div class="flex flex-col gap-6">
+<h4 class="text-[10px] font-bold text-primary tracking-[0.3em] uppercase">Redes</h4>
+<div class="flex flex-col gap-3 text-sm text-text-secondary">
+<a class="hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-primary transition-colors" href="#">Pinterest</a>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-[10px] font-bold text-primary tracking-[0.3em] uppercase">Contato</h4>
+<div class="flex flex-col gap-3 text-sm text-text-secondary">
+<span>São Paulo, SP</span>
+<span>+55 (11) 9999-9999</span>
+<a class="hover:text-primary transition-colors" href="mailto:contato@scalioni.com">contato@scalioni.com</a>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-text-secondary/40 text-[9px] uppercase tracking-[0.3em]">© 2024 Scalioni Engenharia. Todos os direitos reservados.</p>
+<div class="flex gap-8 text-[9px] font-bold text-text-secondary/60 uppercase tracking-[0.2em]">
+<a class="hover:text-primary transition-colors" href="#">Privacidade</a>
+<a class="hover:text-primary transition-colors" href="#">Termos</a>
+</div>
+</div>
+</footer>
+</body></html>

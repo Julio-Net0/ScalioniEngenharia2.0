@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScalioniEngenharia - Residência Aurum Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C9A55A",
+                        "terracotta": "#B5501B",
+                        "background-dark": "#0A0A0A",
+                        "surface-dark": "#141414",
+                        "text-light": "#F5F0E8",
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0rem", "lg": "0.125rem", "xl": "0.25rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        
+        .gold-border-glow {
+            border: 1px solid rgba(201, 165, 90, 0.2);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C9A55A;
+        }
+        .bg-gold-gradient {
+            background: #C9A55A;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-text-light antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 border-b border-primary/10 bg-background-dark/90 backdrop-blur-md px-6 lg:px-20 py-5">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+<h1 class="text-xl font-bold tracking-widest uppercase font-display">Scalioni<span class="text-text-light">Engenharia</span></h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">Coleções</a>
+<a class="text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">Projetos</a>
+<a class="text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">Sobre</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex bg-surface-dark border border-primary/10 rounded-none px-4 py-2 items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs w-48 placeholder:text-slate-600" placeholder="Buscar projetos..." type="text"/>
+</div>
+<button class="relative p-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-terracotta rounded-full"></span>
+</button>
+<div class="w-10 h-10 border border-primary/20 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCA6fIz-moPhrcd_Rflyl9ecH2i8UnvKQxrFoCOn_x1-0YihdrU05jbQnUeOlHk7k-ZLxIYBoQ4KycS-Uzg9uBCc7idqdAO67D7rlQzaeKcISI6FugZjfaO9MqX2BrHUDAr-K0pM8xeNHpp249jrUY2csRIV_QetrJumdPZRUOviU3zWndsiYQM4b02LlzGSqUW1RdaVmHJDJJh_wOnI_RDTAZ-7bp4S3Gf6JqNEe4iI9NnoGoxr45t7Yq7He6ee7rIzoief5BFHg')"></div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 lg:px-20 py-16">
+<div class="flex flex-col lg:flex-row gap-16">
+<!-- Left Column: Gallery & Content (60%) -->
+<div class="w-full lg:w-[60%] flex flex-col gap-12">
+<!-- Gallery Section -->
+<section class="flex flex-col gap-6">
+<div class="aspect-[16/10] w-full overflow-hidden bg-surface-dark border border-primary/10">
+<img alt="Residência Aurum - Fachada Frontal" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfeip_Bt1RoWbJAtiyPzYw1dn4s4nd9khMDCQ4aAer8xLlf3C5mj27bQWaokbC0sPM3C3waIeXUrm4LpefEX3iQt2VQF6V0BSyqymouDbejPHRJhbKQ7lJReQWoQiV3ICb7RoUq4lg6K5hhfHt_48ZidYNPZ7lMHno4ZsCr39_1z8A3Ylr2ywGOXBXZiu8qgt0V-NxAksnooOLn3Oxxy7_GsvFNAZTkYGYtYDYgJD8DEsPKgR_OCkQBaAbjB6kEjIRhX9xuWcMpA"/>
+</div>
+<div class="grid grid-cols-4 gap-4">
+<div class="aspect-square border border-primary overflow-hidden cursor-pointer">
+<img alt="Fachada Lateral" class="w-full h-full object-cover opacity-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkJ6oRTlOFViil6AhURpQxJIC6K8B2tnacwCJANhexp2IDqa28OnAhl44k7r7mDiy3LNhZaoxMu2vDxE8Y7HuCUBHFsBbmL65aMG-TzO2WlU-wEd0q0wwqchh6OsQRlfqSfFT9NkKVRep0e01p2pLjaz2OUFXHt__QszkkxyK7RkdtOClYg38dxSp8KNseUVo9T5he9DRrxQq4E5KqugpDn5FdNXFeqt8ZUHYkDBqkVvCSjBaqH_kqiDs98QcZF87PB8xn-nzx0Q"/>
+</div>
+<div class="aspect-square border border-primary/20 overflow-hidden cursor-pointer hover:border-primary/50 transition-colors">
+<img alt="Planta Técnica" class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5PugLEeE0LSLkc2YdAZExXEDHiblw6I_6FFe8h_jXvITl_S5zWN3szccVnLIcQOQYtvVum2Bh74rdCZByBy2rwxBg_xSgTtw2GLOeYIHUeEhROTFgwbRQOCuT8zRiXXWkQKXq3hSk2khHsq1dDTBRmOSZLC5qQiWrDIcmg4xylaPte9xDEgv3RXXIy40PbWbvuIETEO6j7x9P_8nRd5ch1_SMt0rRucHae2bb7pt6nT1SvcT8LtcuBEOwUCv0qg3rBwBoiUeiyw"/>
+</div>
+<div class="aspect-square border border-primary/20 overflow-hidden cursor-pointer hover:border-primary/50 transition-colors">
+<img alt="Interior Living" class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP7xQKOZfslvMPC-zUycS4YLMwfGjtJAHnL_oYveo3JlFyVe4jzvougiD39l5X3KqXoddqoM_995xDrLltKTrt4aRdbLqKdPoxKE78UzrVl-oGThLh4jXt5AFQrLN4B-p5ir1LxL_JZNwmSDhNjvsPPolrT-iZqEP3UX52MvtCOJ3bHemNPEirqf02W8YHOi3fSOXFeKI1JUCNnIjPhTasfGNF_vPfCX7HIFW1dQ6H2_zv3i2RkIko5_IqNC8UIcfNdHhpfxma8w"/>
+</div>
+<div class="aspect-square border border-primary/20 overflow-hidden cursor-pointer hover:border-primary/50 transition-colors">
+<img alt="Área de Lazer" class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeSXfjUs4yYbBJAs6TczGP61Q6WQquD-P5MfPlmT8muOtqjfsZKEEOn-XwXtJCQxvje4L2LuQJ35E4z7c0PIxjIQd6vH6zkYKiuNDCd_UK7wdkWTbKlZSETXADCtYUNoqJ93e1vQVd539rXk9b9NW5i7NidfL83gOgc8Oad-kuZq5oZT3yB6JV2AhmY_VgslVw0WhL7-KJorYSm4Vt8pTgIem1kvsaSPMo-pKj6bWSMvW1eBPNSXGlqB5v1PisOdZWCME9MGbRfQ"/>
+</div>
+</div>
+</section>
+<!-- Description Section -->
+<section class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<h2 class="text-4xl font-serif text-primary">Sobre este Projeto</h2>
+<div class="h-[2px] w-24 bg-primary"></div>
+</div>
+<p class="text-xl leading-relaxed text-text-light/80 font-light">
+                    A <span class="text-primary font-medium italic">Residência Aurum</span> é a síntese do luxo arquitetônico contemporâneo. Com 420m² de área construída, este projeto foi desenvolvido sob o conceito de "Maximalismo Minimalista", onde cada detalhe estrutural serve tanto à estética quanto à performance. Uma obra-prima da engenharia que redefine o morar de alto padrão.
+                </p>
+</section>
+<!-- Specs Table -->
+<section class="flex flex-col gap-8">
+<h3 class="text-2xl font-serif text-text-light flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">architecture</span>
+                    Especificações Técnicas
+                </h3>
+<div class="overflow-hidden border border-primary/20 bg-surface-dark">
+<table class="w-full text-left border-collapse">
+<tbody class="divide-y divide-primary/10">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-8 py-5 text-primary text-xs font-bold uppercase tracking-[0.2em] w-1/3">Área Total</td>
+<td class="px-8 py-5 text-text-light text-lg">420 m²</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-8 py-5 text-primary text-xs font-bold uppercase tracking-[0.2em]">Número de Suítes</td>
+<td class="px-8 py-5 text-text-light text-lg">4 suítes / 1 master</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-8 py-5 text-primary text-xs font-bold uppercase tracking-[0.2em]">Vagas na Garagem</td>
+<td class="px-8 py-5 text-text-light text-lg">3 vagas cobertas</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-8 py-5 text-primary text-xs font-bold uppercase tracking-[0.2em]">Terreno Mínimo</td>
+<td class="px-8 py-5 text-text-light text-lg">20m x 25m / 500m²</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-8 py-5 text-primary text-xs font-bold uppercase tracking-[0.2em]">Pavimentos</td>
+<td class="px-8 py-5 text-text-light text-lg">2 pavimentos</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-8 py-5 text-primary text-xs font-bold uppercase tracking-[0.2em]">Padrão</td>
+<td class="px-8 py-5 text-text-light text-lg">Alto Padrão NBR 12721</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="flex flex-col gap-8">
+<h3 class="text-2xl font-serif text-text-light">Dúvidas Frequentes</h3>
+<div class="flex flex-col gap-4">
+<div class="bg-surface-dark border border-primary/10 p-6 group cursor-pointer transition-all hover:border-primary/30">
+<div class="flex items-center justify-between">
+<span class="font-medium text-lg">Como receberei os arquivos do projeto?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<p class="mt-4 text-sm text-text-light/60 hidden group-hover:block leading-relaxed">
+                            Imediatamente após a confirmação do pagamento, você receberá um link seguro para download do pacote completo, incluindo PDFs assinados e arquivos DWG editáveis.
+                        </p>
+</div>
+<div class="bg-surface-dark border border-primary/10 p-6 group cursor-pointer transition-all hover:border-primary/30">
+<div class="flex items-center justify-between">
+<span class="font-medium text-lg">O projeto pode ser adaptado ao meu terreno?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<p class="mt-4 text-sm text-text-light/60 hidden group-hover:block leading-relaxed">
+                            Sim, oferecemos uma consultoria inicial de 1 hora para avaliar adaptações topográficas. Mudanças estruturais maiores podem ser orçadas à parte com nossa equipe.
+                        </p>
+</div>
+<div class="bg-surface-dark border border-primary/10 p-6 group cursor-pointer transition-all hover:border-primary/30">
+<div class="flex items-center justify-between">
+<span class="font-medium text-lg">O projeto é válido para aprovação na prefeitura?</span>
+<span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">expand_more</span>
+</div>
+<p class="mt-4 text-sm text-text-light/60 hidden group-hover:block leading-relaxed">
+                            Sim, todas as plantas seguem rigorosamente as normas NBR e vêm acompanhadas do Memorial Descritivo necessário para o processo de licenciamento e Habite-se.
+                        </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Purchase Card (40%) -->
+<div class="w-full lg:w-[40%]">
+<div class="sticky top-32 bg-surface-dark p-10 gold-border-glow flex flex-col gap-10">
+<div class="flex flex-col gap-4">
+<span class="bg-terracotta text-white text-[10px] font-bold uppercase tracking-[0.3em] px-3 py-1 w-fit">EDIÇÃO LIMITADA</span>
+<h1 class="text-5xl font-serif text-text-light leading-tight">Residência Aurum</h1>
+<div class="flex items-baseline gap-2">
+<span class="text-primary font-serif text-4xl">R$ 2.450,00</span>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-xs font-bold text-primary uppercase tracking-[0.2em]">INCLUÍDO NO PACOTE:</h4>
+<ul class="flex flex-col gap-4">
+<li class="flex items-start gap-4 text-sm text-text-light/80">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+<span>Projeto Arquitetônico Completo em PDF</span>
+</li>
+<li class="flex items-start gap-4 text-sm text-text-light/80">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+<span>Plantas Baixas em AutoCAD (DWG)</span>
+</li>
+<li class="flex items-start gap-4 text-sm text-text-light/80">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+<span>Memorial Descritivo</span>
+</li>
+<li class="flex items-start gap-4 text-sm text-text-light/80">
+<span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+<span>Compatível com habite-se (NBR)</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-col gap-4 pt-4">
+<button class="bg-gold-gradient w-full py-6 text-background-dark font-bold text-sm tracking-[0.2em] hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-3">
+                        COMPRAR AGORA
+                        <span class="material-symbols-outlined">trending_flat</span>
+</button>
+<button class="w-full py-5 border border-primary text-primary font-bold text-xs tracking-[0.2em] hover:bg-primary/10 transition-colors">
+                        SOLICITAR ORÇAMENTO CORPORATIVO
+                    </button>
+</div>
+<div class="flex items-center justify-between pt-8 border-t border-primary/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary/60 text-lg">verified_user</span>
+<span class="text-[10px] text-text-light/40 font-bold uppercase tracking-widest">Criptografia SSL</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="flex gap-0.5">
+<span class="material-symbols-outlined text-primary text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-xs fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-xs fill-1">star</span>
+</div>
+<span class="text-[10px] text-text-light/40 ml-2 font-bold uppercase">4.9 (34 avaliações)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-24 border-t border-primary/10 bg-surface-dark py-16 px-6 lg:px-20">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+<h2 class="text-xl font-bold tracking-widest uppercase font-display">Scalioni<span class="text-text-light">Engenharia</span></h2>
+</div>
+<p class="text-sm text-text-light/50 leading-relaxed max-w-xs font-light">
+                Elevando o padrão da arquitetura digital através de engenharia de precisão e design de alta performance.
+            </p>
+</div>
+<div class="flex flex-col gap-6">
+<h3 class="text-primary font-bold uppercase tracking-[0.3em] text-[10px]">Navegação</h3>
+<nav class="flex flex-col gap-3">
+<a class="text-sm text-text-light/60 hover:text-primary transition-colors font-medium" href="#">Portfólio</a>
+<a class="text-sm text-text-light/60 hover:text-primary transition-colors font-medium" href="#">Serviços</a>
+<a class="text-sm text-text-light/60 hover:text-primary transition-colors font-medium" href="#">Carreiras</a>
+</nav>
+</div>
+<div class="flex flex-col gap-6">
+<h3 class="text-primary font-bold uppercase tracking-[0.3em] text-[10px]">Newsletter Luxo</h3>
+<div class="flex">
+<input class="bg-background-dark border border-primary/20 text-sm px-4 py-3 focus:ring-primary w-full outline-none text-text-light" placeholder="Seu melhor e-mail" type="email"/>
+<button class="bg-primary text-background-dark px-5 flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-10 border-t border-primary/5 text-center text-[9px] text-text-light/30 uppercase tracking-[0.4em]">
+        © 2024 SCALIONI ENGENHARIA ARQUITETÔNICA. TODOS OS DIREITOS RESERVADOS.
+    </div>
+</footer>
+</body></html>

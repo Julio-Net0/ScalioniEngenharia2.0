@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e6b03d",
+                        "terracotta": "#B5501B",
+                        "silver": "#A89F91",
+                        "background-dark": "#0a0a0a",
+                        "neutral-dark": "#111111",
+                    },
+                    fontFamily: {
+                        "sans": ["Outfit", "sans-serif"],
+                        "display": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .duotone-gold {
+            filter: grayscale(100%) contrast(120%) brightness(0.6);
+            background-color: #000;
+        }
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        @media (max-width: 1024px) {
+            .masonry-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 640px) {
+            .masonry-grid { grid-template-columns: 1fr; }
+        }
+        
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        .project-card .overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(230, 176, 61, 0.3) 100%);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .project-card:hover .overlay {
+            opacity: 1;
+        }
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+        
+        .gold-line {
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #e6b03d, transparent);
+            height: 200px;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-sans text-slate-100 selection:bg-primary selection:text-background-dark">
+<div class="relative flex flex-col min-h-screen">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-white/5 bg-background-dark/90 backdrop-blur-xl px-6 md:px-12 py-5">
+<div class="max-w-screen-2xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">architecture</span>
+<h2 class="text-xl font-bold tracking-tighter uppercase">Scalioni<span class="text-primary font-light">Engenharia</span></h2>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">Início</a>
+<a class="text-xs font-semibold uppercase tracking-widest text-primary border-b border-primary/40 pb-1" href="#">Portfólio</a>
+<a class="text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">Sobre</a>
+<a class="text-xs font-semibold uppercase tracking-widest hover:text-primary transition-colors" href="#">Contato</a>
+</nav>
+<button class="bg-primary text-background-dark px-8 py-2.5 rounded-sm font-bold text-xs hover:brightness-110 transition-all uppercase tracking-[0.2em]">
+                Orçamento
+            </button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative h-[65vh] w-full overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 duotone-gold bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_OJ7xIywX1p9jDGTPSdGBeBBLTlNy5qgF6KHSIPHDYAoA8uyyAB8iYoqhstwOP5XVVKUrukOLgObQkNacUDrbQ8Vv_VGuV7jWldrr2E8XghkqVsGopWlCdVMhVIjfUkYL0VJYh3bHUZsi0DY1IhTCweQP_KBundFHyXKFTj6PE5itNRPXBw07XwY-dLjLtwXwTRNJuheF2i5tKEU3fKu4VAAGFJgedtjhhB6KurgD4MHIDyP0a2_54zCyMXjD4ouW8CWx3zzHNtY');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-background-dark/60"></div>
+<div class="relative z-10 text-center space-y-6">
+<h1 class="font-display text-6xl md:text-[7rem] leading-none text-white tracking-tight">Portfólio Completo</h1>
+<p class="text-primary tracking-[0.6em] uppercase text-xs md:text-sm font-bold">EXCELÊNCIA EM LUXURY CONSTRUCTION</p>
+</div>
+</section>
+<!-- Category Filters -->
+<div class="sticky top-[89px] z-40 bg-background-dark/95 border-b border-primary/10 py-6 px-6">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-3">
+<button class="px-8 py-2.5 rounded-full bg-primary text-background-dark text-[10px] font-black uppercase tracking-widest shadow-[0_0_20px_rgba(230,176,61,0.2)]">TODOS</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 text-slate-300 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/5 hover:text-primary transition-all">RESIDENCIAL LUXO</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 text-slate-300 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/5 hover:text-primary transition-all">CORPORATIVO</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 text-slate-300 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/5 hover:text-primary transition-all">INTERIORES</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 text-slate-300 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/5 hover:text-primary transition-all">RESTAURAÇÃO</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 text-slate-300 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/5 hover:text-primary transition-all">URBANISMO</button>
+</div>
+</div>
+<!-- Main Content Area with Sidebar -->
+<main class="max-w-[1800px] mx-auto w-full px-6 md:px-12 py-20 flex flex-col lg:flex-row gap-16">
+<!-- Sidebar Stats -->
+<aside class="lg:w-32 flex flex-col items-center shrink-0">
+<div class="gold-line mb-12"></div>
+<div class="flex flex-col gap-16 items-center">
+<div class="text-center group">
+<p class="text-primary text-4xl font-display group-hover:scale-110 transition-transform">25+</p>
+<p class="text-[9px] text-silver uppercase font-bold tracking-[0.3em] mt-1">Anos</p>
+</div>
+<div class="text-center group">
+<p class="text-primary text-4xl font-display group-hover:scale-110 transition-transform">400</p>
+<p class="text-[9px] text-silver uppercase font-bold tracking-[0.3em] mt-1">Obras</p>
+</div>
+<div class="text-center group">
+<p class="text-primary text-4xl font-display group-hover:scale-110 transition-transform">15</p>
+<p class="text-[9px] text-silver uppercase font-bold tracking-[0.3em] mt-1">Prêmios</p>
+</div>
+</div>
+<div class="gold-line mt-12"></div>
+</aside>
+<!-- Project Grid -->
+<div class="flex-1">
+<div class="masonry-grid">
+<!-- Project Card 1 -->
+<div class="project-card relative aspect-[3/4] overflow-hidden group">
+<img alt="Mansão Alvorada" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKZZlyl1aApsIROFcPH0kXWoX9_7W6fSSWnaDyK8yf1gSi5wz3OzAnI1_y0PmNp5qHtB4NwbDdqWL4wNmuJDEPY7bvk98ruptctCSIec8iZKzXbzpjcD6_Gd0oLNyOPP_euevSVNXBkrMG4kUMuc4GwZA6DtA71qknSklW2-CzGqg68t9ZuJ1JtKa-Qpwu5SZHonIKkMZxc9PUT3EvxUNflNJYqymiDxRe-82-DiPhKhqx4gVaBjlFGxIbKO7U9nQSbDrDlyqbH54"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+<div class="overlay absolute inset-0"></div>
+<div class="absolute top-6 left-6 z-20">
+<span class="px-4 py-1.5 bg-terracotta text-white text-[9px] font-black uppercase tracking-widest rounded-sm">RESIDENCIAL LUXO</span>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full z-20 project-info translate-y-4 transition-all duration-500">
+<h3 class="text-2xl font-display text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Mansão Alvorada</h3>
+<p class="text-silver text-[10px] font-bold uppercase tracking-widest">2023 · SÃO PAULO</p>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="project-card relative aspect-[3/4] overflow-hidden group">
+<img alt="Edifício Platinum" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4s_d6fHZTynQYxn4ZPnTLCsKxmmMTfX0o_WpXnbab4sSnUtSpdHCGRSVhJ-6NklY7YThw8I2sD_yojdm5WwtYM2px6LQ9LwTp2b19ZtaGamKDWwxfmWh3a-18xWXzt30u0mI2AV8nnT02d-MsAw1EP-RiyhqrdswBz7x17F7RKS3qrWo8NLLfGBQNcnzg1T1kIaprcIxk2iviSzORONxCk14WWidbtYaQr10zcDLg1XH1jCAXLQBUeGASUNzrLS0TqURzzkxuNyE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+<div class="overlay absolute inset-0"></div>
+<div class="absolute top-6 left-6 z-20">
+<span class="px-4 py-1.5 bg-terracotta text-white text-[9px] font-black uppercase tracking-widest rounded-sm">CORPORATIVO</span>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full z-20 project-info translate-y-4 transition-all duration-500">
+<h3 class="text-2xl font-display text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Edifício Platinum</h3>
+<p class="text-silver text-[10px] font-bold uppercase tracking-widest">2022 · CURITIBA</p>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="project-card relative aspect-[3/4] overflow-hidden group">
+<img alt="Loft Industrial IV" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTdi_Zyc49ftJVPOKTiXpXQwtusMUPFx3jQQSl2zWyJh9nccQJb_JiaIR1_hC1EnKdJzZos8-VdsjbZEXOqquDXjRjMVr3MQ5dltFDCJGaR_MQ1YFPSuGJI49iq0VkNAQhFSN0ubZakUyfJPlq_w4XHirndNNk9JUC9F8bppUkvKtql6rJcnRn1MWqdpc-DUswkNYxGem5NBL_jkydkDAclpzuv_QsHN1EcEDPWDW-KsiiiEqhcGBUSu1oMdm89-fofZqWVyrU-_4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+<div class="overlay absolute inset-0"></div>
+<div class="absolute top-6 left-6 z-20">
+<span class="px-4 py-1.5 bg-terracotta text-white text-[9px] font-black uppercase tracking-widest rounded-sm">INTERIORES</span>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full z-20 project-info translate-y-4 transition-all duration-500">
+<h3 class="text-2xl font-display text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Loft Industrial IV</h3>
+<p class="text-silver text-[10px] font-bold uppercase tracking-widest">2024 · RIO DE JANEIRO</p>
+</div>
+</div>
+<!-- Project Card 4 -->
+<div class="project-card relative aspect-[3/4] overflow-hidden group">
+<img alt="Villa Toscana" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSfpAXM9tHCejL9rB0ZFF-D6P-2clDJYH2qAClVaCLkD5SQdW6i7kb-S1HzmIvgcUaNUJXqIPcd_Fe1H1Z6p1axnFNMWs1OIf98o7Sn3RdOjAVL-YZzaBs5HROIzOjYzxSmtXz_CMOWz8vCqlP8_bnZmoMbe9rugUsetp3i9vfiXs8NvoCUNDXWBgALUWWxUYZpAX7V3muC9nZoRYUh4CS9SQvPnBaqEbkzMefBteDykhGh1xz1TMYfPfwOkuphHttdGdJYOd3E8c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+<div class="overlay absolute inset-0"></div>
+<div class="absolute top-6 left-6 z-20">
+<span class="px-4 py-1.5 bg-terracotta text-white text-[9px] font-black uppercase tracking-widest rounded-sm">RESIDENCIAL LUXO</span>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full z-20 project-info translate-y-4 transition-all duration-500">
+<h3 class="text-2xl font-display text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Villa Toscana</h3>
+<p class="text-silver text-[10px] font-bold uppercase tracking-widest">2021 · GRAMADO</p>
+</div>
+</div>
+<!-- Project Card 5 -->
+<div class="project-card relative aspect-[3/4] overflow-hidden group">
+<img alt="Residência Safira" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIZk6f7A5hqdZ0Mpi2pyIrnvT2RN1Bj73JUkDqD_j2ulmyRNM7EvZbOrCOGOU2rte4fQQYwsE2nrmKN3QCTG03kQORp8unmzm0RS-A6gKXyIyH-t-PgCplpV0T9_yFzLKlqSLPTaxyCVlwpW0YD591S-WbHXOWodNw7pk89XVXNYaS5FYJKzxk-6-bCjmWYkp8mFYnWbDwoiVyG_1oZmhS7mlY2qBWWMx3Nn1FtoYlWfvR1FLiIF-DsXu7A9x0KIuDTkme642qSGI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+<div class="overlay absolute inset-0"></div>
+<div class="absolute top-6 left-6 z-20">
+<span class="px-4 py-1.5 bg-terracotta text-white text-[9px] font-black uppercase tracking-widest rounded-sm">INTERIORES</span>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full z-20 project-info translate-y-4 transition-all duration-500">
+<h3 class="text-2xl font-display text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Residência Safira</h3>
+<p class="text-silver text-[10px] font-bold uppercase tracking-widest">2022 · BELO HORIZONTE</p>
+</div>
+</div>
+<!-- Project Card 6 -->
+<div class="project-card relative aspect-[3/4] overflow-hidden group">
+<img alt="Centro Empresarial" class="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRtfBC0O7wUB7g5AF-1HFdcF-gH4NYSFLQMR_VWKktCEWUcxo-gDySC6Ap1uw3dnCoXpSsorUuyn-BS2tgpPXrbAbLh_NGu5ZBkkrwkUh_kK0k26BpAG2SwffEVFy3MGI0l16Xskiv5sxLDWPpH9Bt2i7z3-zlvd-JBucWORB-3gQhNBFe5SK-r4Dz2Kd4NU6lgS-6ArIJlGQ_JaTz4KsUpLCtzXYsRslV0Nz5-VEXf5i53qVaz99o3JyQIpihXzekZkgLoZtNFVc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+<div class="overlay absolute inset-0"></div>
+<div class="absolute top-6 left-6 z-20">
+<span class="px-4 py-1.5 bg-terracotta text-white text-[9px] font-black uppercase tracking-widest rounded-sm">URBANISMO</span>
+</div>
+<div class="absolute bottom-0 left-0 p-8 w-full z-20 project-info translate-y-4 transition-all duration-500">
+<h3 class="text-2xl font-display text-white mb-2 opacity-0 group-hover:opacity-100 transition-opacity">Centro Empresarial</h3>
+<p class="text-silver text-[10px] font-bold uppercase tracking-widest">2023 · BRASÍLIA</p>
+</div>
+</div>
+</div>
+<!-- Load More Button -->
+<div class="mt-24 text-center">
+<button class="px-16 py-5 border border-primary/40 text-primary text-[11px] font-bold uppercase tracking-[0.4em] hover:bg-primary/10 hover:border-primary transition-all duration-300">
+                    Carregar Mais Projetos
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black border-t border-primary/10 py-16 px-6">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex items-center gap-3 opacity-80">
+<span class="material-symbols-outlined text-primary text-2xl">architecture</span>
+<h2 class="text-lg font-bold tracking-tighter uppercase">Scalioni<span class="text-primary font-light">Engenharia</span></h2>
+</div>
+<div class="text-silver text-[9px] uppercase tracking-[0.3em] text-center">
+                © 2024 SCALIONI ENGENHARIA DE PRECISÃO. TODOS OS DIREITOS RESERVADOS.
+            </div>
+<div class="flex gap-8">
+<a class="text-primary/60 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-primary/60 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+<a class="text-primary/60 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share_location</span></a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

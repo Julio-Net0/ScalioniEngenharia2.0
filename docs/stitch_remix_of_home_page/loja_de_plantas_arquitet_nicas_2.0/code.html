@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C9A55A",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0a0a0a",
+                        "gold-dark": "#a67c00",
+                        "luxury-gray": "#141414",
+                        "terracotta": "#9b4d33"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .blueprint-pattern {
+            background-color: #0a0a0a;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(201, 165, 90, 0.08) 0%, transparent 70%),
+                linear-gradient(rgba(201, 165, 90, 0.05) 1px, transparent 1px), 
+                linear-gradient(90deg, rgba(201, 165, 90, 0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 40px 40px, 40px 40px;
+        }
+        .marble-texture {
+            background-image: linear-gradient(to right, rgba(10, 10, 10, 0.95), rgba(40, 30, 10, 0.85)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuBqkgkdRsNr_T17sZub0jVsF4Jx8_x-kKiPlklpLUtr2NcduNNG-sf32Kdoibnf2D-HT1qkCKgAZAZFksDazmE2cX1bLR9n6QKJ6xT3bksklC1UorA-nwxBmJcK9y1VERKAwA094xQI55wimuqq1-sZ-53cyVvYnyvjYmdGVzcAr7P_1xYAlUDtIxE2yGWwx4vmekSrMrdRS8P89pX0xGRYY4jxHPQIBVk0z6P6TxqVGe9g9BV1FJwPtqZrHnOTYA_p9_7N8Qe2XF0);
+            background-blend-mode: overlay;
+            background-size: cover;
+        }
+        .gold-gradient-bg {
+            background: radial-gradient(circle at center, #2a1f0a 0%, #0a0a0a 100%);
+        }
+        .guarantee-gradient {
+            background: linear-gradient(135deg, #1a150a 0%, #2d2412 50%, #1a150a 100%);
+            position: relative;
+        }
+        .guarantee-gradient::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/filter%3E%3C/svg%3E");
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        .card-hover:hover {
+            box-shadow: 0 10px 40px rgba(201, 165, 90, 0.15);
+            transform: translateY(-8px);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .buy-button-slide {
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        .card-container:hover .buy-button-slide {
+            transform: translateY(0);
+        }
+        .gold-border {
+            border: 1px solid rgba(201, 165, 90, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-100 selection:bg-primary selection:text-background-dark">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-primary/20 bg-background-dark/90 backdrop-blur-md px-6 py-4 lg:px-20">
+<div class="flex items-center gap-12">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">architecture</span>
+<h2 class="font-serif text-2xl font-black tracking-tighter text-white uppercase italic">Scalioni</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-xs font-bold uppercase tracking-widest text-primary" href="#">Plantas</a>
+<a class="text-xs font-bold uppercase tracking-widest text-white hover:text-primary transition-colors" href="#">Projetos</a>
+<a class="text-xs font-bold uppercase tracking-widest text-white hover:text-primary transition-colors" href="#">Sobre</a>
+<a class="text-xs font-bold uppercase tracking-widest text-white hover:text-primary transition-colors" href="#">Contato</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="p-2 text-white hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="absolute top-1 right-1 h-2 w-2 rounded-full bg-primary shadow-[0_0_8px_rgba(201,165,90,0.8)]"></span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="blueprint-pattern relative flex h-[60vh] w-full items-center justify-center overflow-hidden border-b border-primary/30">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background-dark/50 to-background-dark"></div>
+<div class="relative z-10 text-center px-4">
+<h1 class="font-serif text-7xl md:text-[90px] font-bold leading-tight tracking-tight mb-6">
+<span class="text-white">Plantas</span> <span class="text-primary italic">Prontas</span>
+</h1>
+<p class="mx-auto max-w-3xl text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-slate-300 leading-relaxed">
+                    ARQUITETURA DE LUXO E ENGENHARIA DE ALTA PERFORMANCE PARA SEU PRÓXIMO MARCO
+                </p>
+<div class="mt-12 h-px w-32 mx-auto bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+</div>
+</section>
+<!-- Features Bar -->
+<section class="bg-luxury-gray border-y border-primary/10 py-10">
+<div class="mx-auto max-w-7xl px-6">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="flex flex-col items-center text-center gap-4 group">
+<div class="p-3 rounded-full border border-primary/20 group-hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">cloud_download</span>
+</div>
+<h3 class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary">DOWNLOAD IMEDIATO</h3>
+</div>
+<div class="flex flex-col items-center text-center gap-4 group">
+<div class="p-3 rounded-full border border-primary/20 group-hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">shield</span>
+</div>
+<h3 class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary">SEGURANÇA TOTAL</h3>
+</div>
+<div class="flex flex-col items-center text-center gap-4 group">
+<div class="p-3 rounded-full border border-primary/20 group-hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">headset_mic</span>
+</div>
+<h3 class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary">SUPORTE PREMIUM</h3>
+</div>
+<div class="flex flex-col items-center text-center gap-4 group">
+<div class="p-3 rounded-full border border-primary/20 group-hover:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl">grade</span>
+</div>
+<h3 class="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary">DESIGN ASSINADO</h3>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters -->
+<div class="sticky top-[73px] z-40 bg-background-dark/95 backdrop-blur-md border-b border-primary/10 py-6 overflow-x-auto no-scrollbar">
+<div class="flex justify-center gap-4 px-6 min-w-max">
+<button class="px-8 py-2.5 rounded-full bg-primary text-background-dark text-[10px] font-black uppercase tracking-widest shadow-lg shadow-primary/20">TODOS</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 bg-transparent text-slate-400 hover:border-primary hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all">ATÉ 150M²</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 bg-transparent text-slate-400 hover:border-primary hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all">150M²-300M²</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 bg-transparent text-slate-400 hover:border-primary hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all">300M²-500M²</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 bg-transparent text-slate-400 hover:border-primary hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all">MANSÕES +500M²</button>
+<button class="px-8 py-2.5 rounded-full border border-primary/20 bg-transparent text-slate-400 hover:border-primary hover:text-white text-[10px] font-bold uppercase tracking-widest transition-all">COMERCIAIS</button>
+</div>
+</div>
+<!-- Product Grid -->
+<main class="mx-auto max-w-7xl px-6 py-20">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+<!-- Card Item 1 -->
+<div class="card-container group relative flex flex-col overflow-hidden bg-luxury-gray rounded-xl card-hover border-l-2 border-primary/40">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Residência Aurum modern luxury architecture" class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSp0DE12w6RuM8Glo8zM5Gf3LdhLG7lZgFlQru4QLxCtLKuWJK4-qFVAlhgurXHOQ66Lj2GIDMTkTLQyUvmh0W6zrjhFfqsVj9YuklzkEHy0XhSJReQ9Vni_uyGfgMRt_1OjZqi3HMnrKu_9mj-smVEbq9AVCyC9crrhWeVXIls4DJkvCu2bluOkLbXYQ2EUGrVGasce0dHT-IqAP33CETdQ7U1UMiLPBDR7mhAuBHk5IuGVQOs3wQWLap-B9-sTYhMoVl4j-f9-U"/>
+<div class="absolute top-4 left-4 bg-terracotta px-4 py-1 text-[9px] font-black tracking-[0.2em] text-white uppercase shadow-lg">EXCLUSIVO</div>
+</div>
+<div class="p-8 flex flex-col gap-5">
+<h3 class="font-serif text-3xl font-semibold text-white group-hover:text-primary transition-colors">Residência Aurum</h3>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-white/5">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">square_foot</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">420m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">bed</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">4 Suítes</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">directions_car</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">3 Vagas</span>
+</div>
+</div>
+<div class="text-3xl font-bold text-primary italic">R$ 2.490,00</div>
+</div>
+<button class="buy-button-slide absolute bottom-0 left-0 w-full bg-primary py-5 text-background-dark font-black tracking-widest uppercase text-xs shadow-[0_-4px_20px_rgba(201,165,90,0.4)]">
+                        ADQUIRIR PROJETO PDF
+                    </button>
+</div>
+<!-- Card Item 2 -->
+<div class="card-container group relative flex flex-col overflow-hidden bg-luxury-gray rounded-xl card-hover border-l-2 border-primary/40">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Villa Concrete modernist architecture" class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBKwx74cS9BTIL-wc_x9jq1yfO5GpzOpFqd8zhKEw4SqElsUmZ1JGbT2qpFQhT5YqSk70Cr-AnbMbFoO3noD1m6JERh8lMRv-w8ScAceJ56b2GW2ey17110Jqdr7n8EN8anzRWaXJQ983yoRAzo3dmTWwA2XAlOa6CKSKWVhj857yguokfGjXZrrpP9ltRYRVpTViyDCq6EKp47ScllaA7dP5DCC-c_Y8hsywTYbqjW2ikxvho3mjvKRzz829IOAokTugnVKNaTQ0"/>
+<div class="absolute top-4 left-4 bg-terracotta px-4 py-1 text-[9px] font-black tracking-[0.2em] text-white uppercase shadow-lg">LANÇAMENTO</div>
+</div>
+<div class="p-8 flex flex-col gap-5">
+<h3 class="font-serif text-3xl font-semibold text-white group-hover:text-primary transition-colors">Villa Concrete</h3>
+<div class="grid grid-cols-3 gap-2 py-4 border-y border-white/5">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">square_foot</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">310m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">bed</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">3 Suítes</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">directions_car</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">2 Vagas</span>
+</div>
+</div>
+<div class="text-3xl font-bold text-primary italic">R$ 1.850,00</div>
+</div>
+<button class="buy-button-slide absolute bottom-0 left-0 w-full bg-primary py-5 text-background-dark font-black tracking-widest uppercase text-xs">
+                        ADQUIRIR PROJETO PDF
+                    </button>
+</div>
+<!-- Card Item 3 -->
+<div class="card-container group relative flex flex-col overflow-hidden bg-luxury-gray rounded-xl card-hover border-l-2 border-primary/40">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Edifício Platinum corporate design" class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7l64F2EzHRdcxsB-rGF5YFYb4P1aRDokbmo35CgwZGc8h_5FLAZTYiHI4WmcN_Q_9DZuuqQcRnMzG6UdlNDmNPrsr_szqDBhqsNq0XC7DiUVXOoKKr3PClqFgNJgJxurLhLHNepZ_bs9nVGCc-TGC6PIZg4pTzivu3Rq-cSBg4OqFqvyXK0qivuKbzTQUfAnD71ZH2H7CyG61f0RjL5fMZS13hqjwkgio5AfIpsTa-rNkCuSuYcxuvtjGLqqHk8ytnw0u91E27sc"/>
+</div>
+<div class="p-8 flex flex-col gap-5">
+<h3 class="font-serif text-3xl font-semibold text-white group-hover:text-primary transition-colors">Edifício Platinum</h3>
+<div class="grid grid-cols-2 gap-2 py-4 border-y border-white/5">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">square_foot</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">860m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">business</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">Comercial</span>
+</div>
+</div>
+<div class="text-3xl font-bold text-primary italic">R$ 4.200,00</div>
+</div>
+<button class="buy-button-slide absolute bottom-0 left-0 w-full bg-primary py-5 text-background-dark font-black tracking-widest uppercase text-xs">
+                        ADQUIRIR PROJETO PDF
+                    </button>
+</div>
+<!-- Card Item 4 -->
+<div class="card-container group relative flex flex-col overflow-hidden bg-luxury-gray rounded-xl card-hover border-l-2 border-primary/40">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Loft Industrial Sky interior architecture" class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC85gRAS5idTEytwU2WxLDvWG6hO_ECuDf-vj7A0MN-TjSd1Esn-sL_Jv8ePSLJj-owbsLpn1_YmR157_PW4n2VGJNKD48LQB2yHlYFaD2vuf0pb7bmtXiM3OaLLkDwPSpiYgnUGUCxFygg-JrRtgmqepuO0domeiLH3-niMhmwBlPodDQUTJ14Cp5As-nzNKLkQbLJb9fkOuS9_GVbfvtN5RCqyqwvTLcb4hAG1QUCGgcoIUdXyqLW48YCw5lmIIiODLhueF9pkdA"/>
+</div>
+<div class="p-8 flex flex-col gap-5">
+<h3 class="font-serif text-3xl font-semibold text-white group-hover:text-primary transition-colors">Loft Industrial Sky</h3>
+<div class="grid grid-cols-2 gap-2 py-4 border-y border-white/5">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">square_foot</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">190m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">bed</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">2 Suítes</span>
+</div>
+</div>
+<div class="text-3xl font-bold text-primary italic">R$ 1.200,00</div>
+</div>
+<button class="buy-button-slide absolute bottom-0 left-0 w-full bg-primary py-5 text-background-dark font-black tracking-widest uppercase text-xs">
+                        ADQUIRIR PROJETO PDF
+                    </button>
+</div>
+<!-- Card Item 5 -->
+<div class="card-container group relative flex flex-col overflow-hidden bg-luxury-gray rounded-xl card-hover border-l-2 border-primary/40">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Mansão Horizon modern mansion design" class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGD_roSNoWSaQVBNqmGkFHuFquqxBzkDEB1PSrAPT1QWfTLZXzD_59rL6ZdjouXY4_EJs1nBBoW2DKfIk2li-fgzS0qlrFcIhQD1qGWXDI18ll8E520BA7b4g65jJcZymm3KTLamaEKw8Prd4IOjvD8Fp8dwKiT7bPDHtF7tI9BsHORHD0sD4mftgqX75UMSniEFIXf3nTBATPdlYMaS9ZQzHci7rpnnNUCN1Db0FkOplQTKiDqi278VEs_eVdzqr0INqAXDRZCwQ"/>
+</div>
+<div class="p-8 flex flex-col gap-5">
+<h3 class="font-serif text-3xl font-semibold text-white group-hover:text-primary transition-colors">Mansão Horizon</h3>
+<div class="grid grid-cols-2 gap-2 py-4 border-y border-white/5">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">square_foot</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">1200m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">bed</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">6 Suítes</span>
+</div>
+</div>
+<div class="text-3xl font-bold text-primary italic">R$ 8.900,00</div>
+</div>
+<button class="buy-button-slide absolute bottom-0 left-0 w-full bg-primary py-5 text-background-dark font-black tracking-widest uppercase text-xs">
+                        ADQUIRIR PROJETO PDF
+                    </button>
+</div>
+<!-- Card Item 6 -->
+<div class="card-container group relative flex flex-col overflow-hidden bg-luxury-gray rounded-xl card-hover border-l-2 border-primary/40">
+<div class="relative aspect-[4/3] overflow-hidden">
+<img alt="Forest Refuge cozy luxury cottage" class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwGda6IEZlcjaxLLa9QcKeTHtKSNzG9Dno05xuFjcQnAG_Rho5qn7ZMUmZWDXT7z8iZD_e5jfxuj7v8aIilFxH5_W7cjcyAbtnz8_tcTCW7UXhJa_a3-Crq6wzpXb_z-dg0u247eCYGteYM3AuYyWbDP2dUHJEpUBlHCpl4y_AYH5-mwM0x45zHYXwOgnzQ0TECF29pM_xwiU43ZbkR0FykcM3iZJ477puExulZ7OCGmK7dUQHXjNdcBN_3I1w9cyrRvi6Cabvb-I"/>
+</div>
+<div class="p-8 flex flex-col gap-5">
+<h3 class="font-serif text-3xl font-semibold text-white group-hover:text-primary transition-colors">Forest Refuge</h3>
+<div class="grid grid-cols-2 gap-2 py-4 border-y border-white/5">
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">square_foot</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">240m²</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-primary text-lg">bed</span>
+<span class="text-[10px] text-slate-400 font-bold uppercase">3 Suítes</span>
+</div>
+</div>
+<div class="text-3xl font-bold text-primary italic">R$ 1.550,00</div>
+</div>
+<button class="buy-button-slide absolute bottom-0 left-0 w-full bg-primary py-5 text-background-dark font-black tracking-widest uppercase text-xs">
+                        ADQUIRIR PROJETO PDF
+                    </button>
+</div>
+</div>
+</main>
+<!-- Guarantee Section -->
+<section class="guarantee-gradient relative py-32 px-6 overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(201,165,90,0.1),transparent_70%)]"></div>
+<div class="relative z-10 mx-auto max-w-4xl text-center flex flex-col items-center gap-10">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+<span class="material-symbols-outlined text-primary text-[100px] relative z-10">verified_user</span>
+</div>
+<div class="flex flex-col gap-6">
+<h2 class="font-serif text-5xl font-bold text-white tracking-tight">Garantia Scalioni de Engenharia</h2>
+<p class="text-slate-300 font-light text-xl leading-relaxed italic max-w-3xl">
+                        "Cada detalhe de nossas plantas é revisado por um time de engenheiros seniores. Garantimos compatibilidade total e precisão técnica para que sua obra transcorra com a perfeição que seu investimento exige."
+                    </p>
+</div>
+<div class="h-[2px] w-24 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-background-dark border-t border-primary/20 pt-20 pb-10 px-6 lg:px-20">
+<div class="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-4 gap-16">
+<div class="col-span-1 flex flex-col gap-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl">architecture</span>
+<h2 class="font-serif text-3xl font-black tracking-tighter text-white uppercase italic">Scalioni</h2>
+</div>
+<p class="text-sm text-slate-400 leading-relaxed font-medium">Excelência em cada traço. O futuro do seu empreendimento começa aqui.</p>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-xs font-black uppercase tracking-[0.3em] text-primary">Explorar</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-sm text-slate-400 hover:text-white hover:translate-x-1 transition-all" href="#">Catálogo de Plantas</a>
+<a class="text-sm text-slate-400 hover:text-white hover:translate-x-1 transition-all" href="#">Projetos Customizados</a>
+<a class="text-sm text-slate-400 hover:text-white hover:translate-x-1 transition-all" href="#">Portfólio</a>
+</nav>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-xs font-black uppercase tracking-[0.3em] text-primary">Institucional</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-sm text-slate-400 hover:text-white hover:translate-x-1 transition-all" href="#">Sobre Nós</a>
+<a class="text-sm text-slate-400 hover:text-white hover:translate-x-1 transition-all" href="#">Termos de Uso</a>
+<a class="text-sm text-slate-400 hover:text-white hover:translate-x-1 transition-all" href="#">Privacidade</a>
+</nav>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-xs font-black uppercase tracking-[0.3em] text-primary">Newsletter</h4>
+<div class="flex flex-col gap-4">
+<p class="text-[11px] text-slate-500 uppercase tracking-widest">Receba projetos exclusivos</p>
+<div class="flex items-center border-b border-primary/30 py-2 focus-within:border-primary transition-colors">
+<input class="bg-transparent border-none text-white text-sm focus:ring-0 px-0 w-full placeholder:text-slate-700" placeholder="Seu melhor e-mail" type="email"/>
+<button class="text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">arrow_right_alt</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mx-auto max-w-7xl mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+<p class="text-[9px] font-bold uppercase tracking-[0.4em] text-slate-600">© 2024 SCALIONI ENGENHARIA. TODOS OS DIREITOS RESERVADOS.</p>
+<div class="flex gap-10">
+<a class="text-slate-600 hover:text-primary transition-colors italic text-xs font-bold tracking-widest" href="#">Instagram</a>
+<a class="text-slate-600 hover:text-primary transition-colors italic text-xs font-bold tracking-widest" href="#">LinkedIn</a>
+<a class="text-slate-600 hover:text-primary transition-colors italic text-xs font-bold tracking-widest" href="#">Pinterest</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

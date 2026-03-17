@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout Seguro | ScalioniEngenharia</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&amp;family=Playfair+Display:wght@700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'luxury-gold': '#C9A55A',
+            'luxury-black': '#111111',
+            'input-black': '#0A0A0A',
+            'luxury-white': '#F5F0E8',
+            'luxury-silver': '#A1A1A1',
+          },
+          fontFamily: {
+            playfair: ['"Playfair Display"', 'serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    /* Subtle gold border glow for the modal */
+    .modal-gold-border {
+      border: 1px solid #C9A55A;
+      box-shadow: 0 0 25px rgba(201, 165, 90, 0.15);
+    }
+    /* Custom focus styles for inputs */
+    .field-focus-gold:focus {
+      border-color: #C9A55A !important;
+      ring-color: #C9A55A !important;
+      outline: none;
+    }
+    /* Custom scrollbar for long forms */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #111111;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C9A55A;
+    }
+  </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen p-4">
+<!-- BEGIN: CheckoutOverlay -->
+<div class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4" id="checkout-overlay">
+<!-- BEGIN: CheckoutModalCard -->
+<main class="bg-luxury-black modal-gold-border w-full max-w-lg rounded-sm overflow-hidden flex flex-col relative" data-purpose="checkout-modal-container">
+<!-- BEGIN: ModalHeader -->
+<header class="p-6 border-b border-luxury-gold/20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<!-- Gold Lock Icon -->
+<svg class="w-5 h-5 text-luxury-gold" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<h2 class="font-playfair text-luxury-gold tracking-widest text-sm font-bold">CHECKOUT SEGURO · SCALIONIENGENHARIA</h2>
+</div>
+<!-- Close Button -->
+<button class="text-luxury-gold hover:text-luxury-white transition-colors duration-200">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</header>
+<!-- END: ModalHeader -->
+<!-- BEGIN: ProductSummary -->
+<section class="p-6 bg-gradient-to-r from-luxury-black to-[#1a1a1a] flex items-center gap-4">
+<!-- Luxury Modern House Thumbnail -->
+<div class="w-20 h-20 bg-gray-800 flex-shrink-0">
+<img alt="Residência Aurum Render" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTEaunqHJ-PGJayeyEfRuhtgmyCbUhyDwyTmqjjtjTaD3qWMBIbk6uEzN1bSfgcB6o2XPtwPDYxIBNFnaIaPs542klV5YTTRV5EL-TnZMr3TIQPLKO7J9acGBgYQv2CPZNBVZAw40ihaUFmWq1UU_IRaeimgoobm_mNqyR4rOcZfgGvqB6iJArmWbI7bCiF7pAZCdngWHg8Ddqh89CClSvHO3tRILuakZvDpFT7rNBPdckPIVN6i-Ix_WXpVWk0kZK9tUtUY7EbA"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-playfair text-luxury-white text-xl">Residência Aurum</h3>
+<p class="font-outfit text-luxury-gold font-bold text-lg">R$ 2.490,00</p>
+</div>
+</section>
+<!-- END: ProductSummary -->
+<!-- BEGIN: CheckoutForm -->
+<form class="p-6 space-y-5" onsubmit="return false;">
+<!-- Name Field -->
+<div class="space-y-2">
+<label class="block font-outfit text-[10px] tracking-widest text-luxury-gold font-bold uppercase" for="full-name">NOME COMPLETO</label>
+<input class="w-full bg-input-black border border-white/10 text-luxury-white font-outfit px-4 py-3 rounded-none field-focus-gold transition-all" id="full-name" placeholder="Seu nome completo" type="text"/>
+</div>
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block font-outfit text-[10px] tracking-widest text-luxury-gold font-bold uppercase" for="email">E-MAIL</label>
+<input class="w-full bg-input-black border border-white/10 text-luxury-white font-outfit px-4 py-3 rounded-none field-focus-gold transition-all" id="email" placeholder="seu@email.com" type="email"/>
+</div>
+<!-- Phone Field -->
+<div class="space-y-2">
+<label class="block font-outfit text-[10px] tracking-widest text-luxury-gold font-bold uppercase" for="phone">TELEFONE / WHATSAPP</label>
+<input class="w-full bg-input-black border border-white/10 text-luxury-white font-outfit px-4 py-3 rounded-none field-focus-gold transition-all" id="phone" placeholder="(11) 99999-9999" type="tel"/>
+</div>
+<!-- Download Note -->
+<p class="text-luxury-silver font-outfit text-[11px] leading-relaxed py-2">
+          O link de download será enviado para seu e-mail em até 5 minutos após o pagamento.
+        </p>
+<!-- Main CTA Button -->
+<button class="w-full bg-luxury-gold hover:bg-[#b8944a] active:scale-[0.98] text-input-black font-outfit font-bold py-4 px-6 uppercase tracking-wider transition-all duration-300 flex justify-center items-center gap-2 group" type="submit">
+          PAGAR COM MERCADO PAGO 
+          <span class="group-hover:translate-x-1 transition-transform">→</span>
+</button>
+</form>
+<!-- END: CheckoutForm -->
+<!-- BEGIN: ModalFooter -->
+<footer class="p-6 bg-input-black/50 border-t border-white/5 space-y-4">
+<!-- Payment Methods -->
+<div class="flex justify-center items-center gap-4 opacity-70 grayscale hover:grayscale-0 transition-all">
+<!-- PIX placeholder -->
+<img alt="PIX" class="h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMqieprVDjSdfWLlhKv5jb2lOcsCtPx5ACGxxedYP_YWONVpbi8i7_3M1dmt5NnD13T4U3_aVxTWxFYWjZIQQMxRqLHM0XbDnt8N6snEG51p0nL-1JyxseZKAnbxtiQaTugv-Oo4us4pL5F7mxCvl8DE2r7pJREoZbYFycP67GrDDkpvvDpd4RnYwVYbYePoA2qA6TdGIoc57tl_IKSiOUHj_zTeLz9sMp0nP5dLVzH_IPz_g1DY5QC7jKn0K6Cj-nWiSYvgA90g"/>
+<!-- VISA placeholder -->
+<img alt="Visa" class="h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1-0vLGvgYiMrPHcc4qu3zlIJGDxJCs-yaCXOGdW1lE1RfUL6WklKIULbULLgtu9hjnt2D2_Is6foJZA6N0tPYFn1fDdUggxdwVJVya1L8sUP_sYUH90qw3NCyFf60Oncxr24tFNfg2K0NNR4d5GB7ipZBIVsElVP8ocC4mgV7XItA9pQmViQaDCwcoT2DPa39BXdBW4MYogjaXxMAoC37Ywvof9jplaH6Kqq0K3a09SUBa0LPJ_XvrK6YjTYyBbnQBmODyVLAlw"/>
+<!-- Mastercard placeholder -->
+<img alt="Mastercard" class="h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzLQ3UXQ604JNb0gabI5rhwyFVSmQ7A_0IXVHS8ijALENCUBSJHS0GVlkLVUSmHEcQkYCvxO55mf1kchKvI29X4Rb_wjkeZcMLeqvxOTUNCbuqERQiRLeA_Qj9RYmofzUoHb6qi86--wo6VTwxdJ695XVkucd1KI_CUGBhxPHaxnnDnwx0nW_jM7P5kX_-FR05H7hxiT8lM8Yc6jWiebT4aHZgGdhD1ilzX1AzR5S-yyRTnDvJu5XFclJUwcFwJWLh_dDmqMzx3Q"/>
+<!-- Boleto placeholder -->
+<img alt="Boleto" class="h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApUNQ7QRrL-LCAc5naNU_f40r2YwKOx5p9x5oELKpc_wPWGEpqBAL5Z3sl-DGYAKWqbkl2og6ygFbhY8JVtmBU2KhwgnvlLLcOUUp1hKB-9Ut_c07BB3CPKJJt4jhvzdy1XMe4vy3iYF8468zSkzM4SwaLWX--g4meFUvA0GSbfBk4WzAT82sqwUbLL7x3hwxdsi19moBdXpiNL5OeTXvdHM3i2bLVxotH2ynO62ZhXkq6vzCzi-lt3xbZnwJa7-76nQQ83LX2sA"/>
+</div>
+<!-- Security Badge -->
+<div class="text-center">
+<p class="font-outfit text-[10px] text-luxury-silver uppercase tracking-widest">
+            Criptografia SSL 256-bit · Pagamento processado pelo Mercado Pago
+          </p>
+</div>
+</footer>
+<!-- END: ModalFooter -->
+</main>
+<!-- END: CheckoutModalCard -->
+</div>
+<!-- END: CheckoutOverlay -->
+</body></html>

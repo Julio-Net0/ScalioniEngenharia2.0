@@ -2,33 +2,60 @@ schema: spec-driven
 
 context: |
   Projeto: Site institucional + e-commerce para escritório de engenharia (Scalioniengenharia 2.0)
-  
-  Stack:
-    Backend: Python 3.12, FastAPI, Uvicorn, SQLAlchemy, Alembic, Pydantic v2, Pytest
-    Frontend: Node.js, TypeScript, Next.js 15 (App Router), React, TailwindCSS, Shadcn/UI, Vitest
-    Banco de dados: PostgreSQL 16
+
+  Stack OBRIGATÓRIA (NUNCA usar alternativas):
+    Backend:
+      - Python 3.12 com tipagem estrita (mypy ou Pyright)
+      - FastAPI com tipagem estrita via Pydantic v2 (NUNCA usar dicionários sem schema)
+      - SQLAlchemy 2.0 async (asyncpg) para PostgreSQL 16 (NUNCA usar SQLAlchemy 1.x)
+      - Alembic para migrações versionadas (NUNCA usar CREATE TABLE manual)
+      - Pytest para testes unitários e de integração
+    Frontend:
+      - TypeScript OBRIGATÓRIO em todos os arquivos .tsx e .ts (NUNCA criar .jsx ou .js)
+      - Next.js 15 com App Router (NUNCA usar Pages Router)
+      - TailwindCSS para estilização (NUNCA CSS modules, NUNCA styled-components)
+      - Componentes EXCLUSIVAMENTE de shadcn/ui (NUNCA criar componentes UI do zero com Tailwind puro)
+      - Ícones EXCLUSIVAMENTE de Lucide React (NUNCA usar emojis como ícones)
+      - Tipos de API gerados via openapi-typescript a partir do OpenAPI do FastAPI
+    Banco: PostgreSQL 16
     Storage: Volume Docker (dev) / MinIO (prod)
-    Pagamento: Mercado Pago SDK Python
-    Email: SMTP / SendGrid
-    Infra: Docker + Docker Compose + GitHub Actions
-  
-  Arquitetura: Monorepo com Clean Architecture no backend
-    - backend/ → FastAPI (domain, application, infrastructure, interfaces)
-    - frontend/ → Next.js (site público em SSG/ISR + painel /admin em CSR)
-  
-  Convenções:
-    - Commits convencionais (feat, fix, docs, test, chore)
-    - Tipos TypeScript gerados via openapi-typescript do OpenAPI do FastAPI
-    - Migrações versionadas com Alembic
-    - Testes unitários e de integração obrigatórios
-    - Docker Compose para dev local
-    - GitHub Actions para CI/CD (testes em PR, deploy em push para main)
+    Pagamento: Mercado Pago SDK Python (NUNCA integrar direto via HTTP sem SDK)
+    Email: SMTP ou SendGrid (configurável via env)
+    Infra: Docker + Docker Compose (OBRIGATÓRIO — NUNCA rodar sem containerização)
+
+  Proibições absolutas:
+    - NUNCA hardcodar secrets, tokens ou passwords no código
+    - NUNCA criar arquivos .env com secrets no repositório (use .env.example como modelo)
+    - NUNCA usar emojis como substituto de ícones na UI
+    - NUNCA criar componentes Tailwind puro — sempre shadcn/ui primeiro
+    - NUNCA expor stack trace ou detalhes internos em respostas de erro de produção
+    - NUNCA usar JavaScript puro no frontend — TypeScript obrigatório
+
+  Arquitetura:
+    - Monorepo: backend/ (Clean Architecture) + frontend/ (Next.js App Router)
+    - backend/: domain/ → application/ → infrastructure/ → interfaces/
+    - frontend/: app/ (rotas) → components/ (shadcn+custom) → lib/ (utils, api client)
+
+  Commits: feat, fix, docs, test, chore (Conventional Commits)
 
 rules:
   proposal:
     - Máximo 400 palavras
     - Incluir seção Non-goals
+  design:
+    - Incluir DDL das tabelas (CREATE TABLE com FK, índices, constraints)
+    - Mapear explicitamente quais componentes shadcn/ui usar em cada feature
+    - Definir Server Component vs Client Component para cada arquivo relevante
+    - Incluir topologia Docker completa
+    - Incluir contratos TypeSafe (SQLAlchemy model → Pydantic schema)
+  specs:
+    - Usar linguagem RFC 2119: MUST, SHALL, SHOULD, MUST NOT, MAY
+    - Incluir cenários Dado/Quando/Então para fluxos críticos
+    - Documentar caminhos de erro além do caminho feliz
+    - Especificar comportamento quando dependências externas (banco, MP, e-mail) estão indisponíveis
   tasks:
     - Tasks atômicas, máximo 2 horas cada
     - Agrupar por camada: banco → backend → frontend → infra
     - Incluir testes como task separada para cada feature
+    - Cada task de teste DEVE incluir critério de aceitação específico
+    - Tasks de UI DEVEM nomear o componente shadcn/ui a utilizar

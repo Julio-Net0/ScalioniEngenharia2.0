@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scalioni Engenharia 2.0 | Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C9A55A",
+                        "accent": "#B5501B",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0A0A0A",
+                        "card-dark": "#111111",
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+        .serif-header {
+            font-family: 'Playfair Display', serif;
+        }
+        .gold-border {
+            border: 1px solid rgba(201, 165, 90, 0.2);
+        }
+        .gold-border-active {
+            border: 1px solid rgba(201, 165, 90, 1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="w-72 bg-card-dark border-r border-primary/10 flex flex-col fixed h-full">
+<div class="p-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark font-bold">architecture</span>
+</div>
+<div>
+<h1 class="serif-header text-primary text-lg font-bold leading-tight tracking-wider">SCALIONI</h1>
+<p class="text-[10px] uppercase tracking-[0.3em] text-slate-400 font-medium">Engenharia</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-primary/10 text-primary gold-border-active transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold tracking-wide">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-400 hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm font-medium tracking-wide">Pedidos</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-400 hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="text-sm font-medium tracking-wide">Projetos</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-400 hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-sm font-medium tracking-wide">Plantas Prontas</span>
+</a>
+<a class="flex items-center justify-between px-4 py-3 rounded-lg text-slate-400 hover:bg-white/5 hover:text-primary transition-all" href="#">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined">mail</span>
+<span class="text-sm font-medium tracking-wide">Mensagens</span>
+</div>
+<span class="bg-accent text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-400 hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium tracking-wide">Usuários</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-slate-400 hover:bg-white/5 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium tracking-wide">Configurações</span>
+</a>
+</nav>
+<div class="p-6 border-t border-white/5">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-white/5 gold-border">
+<img alt="Marco Scalioni" class="w-10 h-10 rounded-lg object-cover" data-alt="Avatar of Marco Scalioni Admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ_7wILoY79WSrHaGk505ZhjyDVFo51xCJtkcuFZs5w-eRTSUIkulJhYRic_Txib1OyV38UkEiADQN0SKvhfGRaLOKEKlzm3UaCbv606GJSVyHGxgFGcwGmu9RRfvt3qY1sF5jcZAG7vYFrVBFaiey6th6tFzIOTI-eRHfOMlWuNl6UJ-XT3-Qdn6--nDpAXZTzF8aesvXyr_OG40P-yOu1-5oW0biIn7jFLuG6cDp00A46ihh-MVaOS7vFbwEi2PM6b8SjcSong"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-slate-100 truncate">Marco Scalioni</p>
+<p class="text-[11px] text-primary uppercase font-bold tracking-tighter">Administrador</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-72 flex-1 p-8">
+<!-- Header Section -->
+<header class="mb-10 flex justify-between items-end">
+<div>
+<h2 class="serif-header text-4xl font-bold text-slate-100 mb-2">Painel de Controle</h2>
+<p class="text-slate-400 tracking-wide uppercase text-xs font-semibold">Visão Geral da Scalioni Engenharia</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-white/5 text-slate-300 px-4 py-2 rounded-lg text-sm font-bold border border-white/10 hover:border-primary/50 transition-colors">Exportar Relatório</button>
+<button class="bg-primary text-background-dark px-6 py-2 rounded-lg text-sm font-black uppercase tracking-widest hover:brightness-110 transition-all">Novo Projeto</button>
+</div>
+</header>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- KPI 1 -->
+<div class="bg-card-dark p-6 rounded-xl gold-border hover:border-primary/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Total Pedidos</p>
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">shopping_cart</span>
+</div>
+<h3 class="serif-header text-4xl font-bold text-slate-100">47</h3>
+<p class="text-emerald-500 text-[11px] font-bold mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +12% este mês
+                    </p>
+</div>
+<!-- KPI 2 -->
+<div class="bg-card-dark p-6 rounded-xl gold-border hover:border-primary/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Pedidos Pagos</p>
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">check_circle</span>
+</div>
+<h3 class="serif-header text-4xl font-bold text-slate-100">39</h3>
+<div class="w-full bg-white/5 h-1.5 rounded-full mt-4">
+<div class="bg-primary h-full rounded-full" style="width: 83%"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-card-dark p-6 rounded-xl gold-border hover:border-primary/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Mensagens Novas</p>
+<div class="relative">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
+<span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent rounded-full border-2 border-card-dark"></span>
+</div>
+</div>
+<h3 class="serif-header text-4xl font-bold text-slate-100">03</h3>
+<p class="text-accent text-[11px] font-bold mt-2">Requer atenção imediata</p>
+</div>
+<!-- KPI 4 -->
+<div class="bg-card-dark p-6 rounded-xl gold-border hover:border-primary/40 transition-all group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Plantas Ativas</p>
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">description</span>
+</div>
+<h3 class="serif-header text-4xl font-bold text-slate-100">12</h3>
+<p class="text-slate-500 text-[11px] font-bold mt-2 tracking-tighter">8 Residenciais | 4 Comerciais</p>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-10">
+<!-- Table: Últimos Pedidos -->
+<div class="bg-card-dark rounded-xl gold-border overflow-hidden">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<h3 class="serif-header text-xl font-bold text-primary tracking-wide">Últimos Pedidos</h3>
+<button class="text-primary text-xs font-bold hover:underline">Ver Histórico Completo</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white/5 text-slate-400 text-[10px] uppercase font-black tracking-widest">
+<th class="px-6 py-4">ID</th>
+<th class="px-6 py-4">Cliente</th>
+<th class="px-6 py-4">Planta</th>
+<th class="px-6 py-4">Valor</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Data</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-5 text-sm font-bold text-slate-300">#001</td>
+<td class="px-6 py-5 text-sm text-slate-300">Ana Silva</td>
+<td class="px-6 py-5 text-sm italic text-slate-400">Residência Aurum</td>
+<td class="px-6 py-5 text-sm font-bold text-primary">R$ 2.490,00</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-emerald-500/10 text-emerald-500 rounded text-[10px] font-black uppercase tracking-widest">Pago</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-400">17/03/2024</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-5 text-sm font-bold text-slate-300">#002</td>
+<td class="px-6 py-5 text-sm text-slate-300">Carlos Eduardo</td>
+<td class="px-6 py-5 text-sm italic text-slate-400">Loft Industrial Sky</td>
+<td class="px-6 py-5 text-sm font-bold text-primary">R$ 4.800,00</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/10 text-primary rounded text-[10px] font-black uppercase tracking-widest">Pendente</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-400">18/03/2024</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-5 text-sm font-bold text-slate-300">#003</td>
+<td class="px-6 py-5 text-sm text-slate-300">Marina Vasconcelos</td>
+<td class="px-6 py-5 text-sm italic text-slate-400">Casa de Campo Terra</td>
+<td class="px-6 py-5 text-sm font-bold text-primary">R$ 1.950,00</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-accent/10 text-accent rounded text-[10px] font-black uppercase tracking-widest">Rejeitado</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-400">18/03/2024</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Table: Mensagens Recentes -->
+<div class="bg-card-dark rounded-xl gold-border overflow-hidden">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<h3 class="serif-header text-xl font-bold text-primary tracking-wide">Mensagens Recentes</h3>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-accent"></span>
+<span class="text-xs text-slate-400 font-medium">3 não lidas</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white/5 text-slate-400 text-[10px] uppercase font-black tracking-widest">
+<th class="px-6 py-4">Nome</th>
+<th class="px-6 py-4">E-mail</th>
+<th class="px-6 py-4">Assunto</th>
+<th class="px-6 py-4">Data</th>
+<th class="px-6 py-4 text-right">Ação</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-5 flex items-center gap-3">
+<span class="px-2 py-0.5 bg-accent text-white text-[9px] font-black rounded">NOVA</span>
+<span class="text-sm font-bold text-slate-200">Roberto Antunes</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-400">roberto@email.com.br</td>
+<td class="px-6 py-5 text-sm text-slate-300">Orçamento Residência Aurum</td>
+<td class="px-6 py-5 text-sm text-slate-400">Hoje, 09:45</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-primary text-xl hover:scale-110 transition-transform">open_in_new</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group">
+<td class="px-6 py-5 flex items-center gap-3">
+<span class="px-2 py-0.5 bg-accent text-white text-[9px] font-black rounded">NOVA</span>
+<span class="text-sm font-bold text-slate-200">Julia Schmidt</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-400">julia.arch@schmidt.de</td>
+<td class="px-6 py-5 text-sm text-slate-300">Parceria Projetos 2024</td>
+<td class="px-6 py-5 text-sm text-slate-400">Ontem, 16:20</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-primary text-xl hover:scale-110 transition-transform">open_in_new</button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors group opacity-60">
+<td class="px-6 py-5 flex items-center gap-3 pl-16">
+<span class="text-sm font-bold text-slate-200">Lucas Mendes</span>
+</td>
+<td class="px-6 py-5 text-sm text-slate-400">lucas@mendeseng.com</td>
+<td class="px-6 py-5 text-sm text-slate-300">Dúvida Técnica Planta #012</td>
+<td class="px-6 py-5 text-sm text-slate-400">15/03, 11:15</td>
+<td class="px-6 py-5 text-right">
+<button class="material-symbols-outlined text-primary text-xl hover:scale-110 transition-transform">open_in_new</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 flex justify-center border-t border-white/5">
+<button class="text-background-dark bg-primary px-8 py-2 rounded-lg text-xs font-black uppercase tracking-widest hover:brightness-110 transition-all">Ver Todas as Mensagens</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
