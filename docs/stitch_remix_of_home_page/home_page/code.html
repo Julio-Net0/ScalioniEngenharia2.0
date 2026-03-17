@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Outfit:wght@300;400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C9A55A", // Gold
+                        "accent-terracotta": "#B5501B",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#0A0A0A",
+                        "card-dark": "#111111",
+                        "info-dark": "#1A1A1A",
+                    },
+                    fontFamily: {
+                        "display": ["Playfair Display", "serif"],
+                        "sans": ["Outfit", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0A0A0A;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<nav class="border-b border-primary/10 px-6 py-4 flex items-center justify-between bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+</div>
+<h2 class="text-white text-xl font-display font-bold tracking-tight">ScalioniEngenharia <span class="text-primary">2.0</span></h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="size-10 rounded-full border border-primary/30 overflow-hidden bg-info-dark flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/60">person</span>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center px-4 py-12">
+<div class="max-w-2xl w-full bg-card-dark border border-primary/20 rounded-xl shadow-2xl p-8 md:p-12 relative overflow-hidden">
+<!-- Decorative Accent -->
+<div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-accent-terracotta to-primary/20"></div>
+<div class="flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="mb-8">
+<span class="material-symbols-outlined text-[80px] text-primary leading-none" style="font-variation-settings: 'FILL' 1, 'wght' 200;">
+                        check_circle
+                    </span>
+</div>
+<h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-3">Pagamento Confirmado!</h1>
+<p class="text-emerald-400/90 text-lg font-light mb-10">Seu pedido foi processado com sucesso.</p>
+<!-- Info Box -->
+<div class="w-full bg-info-dark border border-primary/30 rounded-lg p-6 mb-10 text-left space-y-4">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">home_work</span>
+<div>
+<p class="text-primary/60 text-xs uppercase tracking-widest font-semibold">Produto</p>
+<p class="text-white text-lg font-medium">Residência Aurum</p>
+</div>
+</div>
+<div class="h-px bg-primary/10 w-full"></div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">mail</span>
+<div>
+<p class="text-primary/60 text-xs uppercase tracking-widest font-semibold">Entrega Digital</p>
+<p class="text-slate-300">Link de download enviado para: <span class="text-white font-medium">seu@email.com</span></p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-accent-terracotta mt-1">timer</span>
+<div>
+<p class="text-slate-300">Válido por <span class="text-white font-medium">72 horas</span></p>
+</div>
+</div>
+</div>
+<!-- Instructions -->
+<div class="mb-10 max-w-md">
+<p class="text-slate-400 text-sm leading-relaxed">
+                        Por favor, verifique sua caixa de entrada. Se não encontrar o e-mail em alguns minutos, verifique sua pasta de <span class="text-primary/80">spam ou lixo eletrônico</span>.
+                    </p>
+</div>
+<!-- Buttons -->
+<div class="flex flex-col sm:flex-row gap-4 w-full">
+<a class="flex-1 bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 px-8 rounded-lg transition-all duration-300 text-center tracking-wide uppercase text-sm" href="#">
+                        Ir para a Loja
+                    </a>
+<a class="flex-1 border border-primary text-primary hover:bg-primary/10 font-bold py-4 px-8 rounded-lg transition-all duration-300 text-center tracking-wide uppercase text-sm" href="#">
+                        Página Inicial
+                    </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="py-10 border-t border-primary/10 px-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-60">
+<span class="material-symbols-outlined text-primary">architecture</span>
+<p class="text-xs uppercase tracking-[0.2em] font-medium">© 2024 ScalioniEngenharia. Todos os direitos reservados.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-xs uppercase tracking-widest text-primary/60 hover:text-primary transition-colors" href="#">Termos de Uso</a>
+<a class="text-xs uppercase tracking-widest text-primary/60 hover:text-primary transition-colors" href="#">Privacidade</a>
+<a class="text-xs uppercase tracking-widest text-primary/60 hover:text-primary transition-colors" href="#">Suporte</a>
+</div>
+</div>
+</footer>
+</body></html>
