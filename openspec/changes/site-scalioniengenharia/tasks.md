@@ -21,7 +21,7 @@
 - [ ] `task-007` Criar `backend/infrastructure/database/models.py` — models: Projeto, Planta, Pedido, AdminUser, MensagemContato
 - [ ] `task-008` Inicializar Alembic — `alembic init` + `alembic.ini` + `env.py` configurado
 - [ ] `task-009` Criar migration inicial — tabelas completas com índices e constraints
-- [ ] `task-010` Teste: verificar que migration roda e rollback funciona
+- [ ] `task-010` Teste: verificar que migration roda limpa (`alembic upgrade head`), downgrade retorna ao estado anterior (`alembic downgrade -1`) e que todas as constraints (FK, CHECK, UNIQUE) estão presentes no schema
 
 ---
 
@@ -40,12 +40,12 @@
 - [ ] `task-016` Criar schemas Pydantic para Projeto (create, update, response)
 - [ ] `task-017` Criar repositório `ProjectRepository` (SQLAlchemy)
 - [ ] `task-018` Criar router `/api/projetos` — GET lista, GET slug, POST, PUT, DELETE (admin)
-- [ ] `task-019` Teste: CRUD de projetos (pytest + banco em memória / SQLite)
+- [ ] `task-019` Teste (critérios): GET `/api/projetos` retorna `200` com lista; POST sem `slug` retorna `422`; GET por slug inexistente retorna `404`; DELETE sem JWT retorna `401`; POST com slug duplicado retorna `422`
 - [ ] `task-020` Criar schemas Pydantic para Planta (create, update, response)
 - [ ] `task-021` Criar repositório `PlantaRepository` (SQLAlchemy)
 - [ ] `task-022` Criar router `/api/plantas` — GET lista, GET slug, POST, PUT, DELETE (admin)
 - [ ] `task-023` Criar endpoint `POST /api/upload` — armazenar arquivo no volume/MinIO, retornar path
-- [ ] `task-024` Teste: CRUD de plantas + upload de arquivo
+- [ ] `task-024` Teste (critérios): POST planta com `preco=-1` retorna `422`; GET planta inativa via `/api/plantas` não aparece na listagem pública; upload retorna path válido; DELETE planta com pedido ativo retorna `409` (RESTRICT FK)
 
 ---
 
@@ -59,7 +59,7 @@
 - [ ] `task-030` Lógica `approved`: gerar `download_token` UUID (72h) + e-mail ao cliente
 - [ ] `task-031` Lógica `rejected`/`cancelled`: atualizar status + e-mail ao cliente (link tentar novamente)
 - [ ] `task-032` Criar `GET /api/download/{token}` — validar token + expiração + retornar arquivo
-- [ ] `task-033` Teste: simular webhook `approved`, `rejected`, token expirado, duplo disparo
+- [ ] `task-033` Teste (critérios): webhook com HMAC inválido → `401`; webhook `approved` processado 2x → apenas 1 e-mail enviado (idempotência); token expirado → `410`; token de pedido `pendente` → `403`; double-check MP retorna `pending` quando webhook diz `approved` → status atualizado para `in_process`, não `pago`
 
 ---
 
@@ -74,16 +74,16 @@
 - [ ] `task-040` Criar `PATCH /api/admin/mensagens/{id}/lida` — marcar como lida
 - [ ] `task-041` Criar `GET /api/admin/pedidos` + `GET /api/admin/pedidos/{id}` — listar e detalhar
 - [ ] `task-042` Criar `POST /api/admin/pedidos/{id}/reenviar-email` — reenviar e-mail de download
-- [ ] `task-043` Teste: fluxo completo de lead (contato → e-mail cliente → e-mail admin)
-- [ ] `task-044` Teste: autenticação JWT (token válido, expirado, inválido)
+- [ ] `task-043` Teste (critérios): POST `/api/contato` com e-mail inválido → `422`; com mensagem >2000 chars → `422`; válido → `201` + MensagemContato salva no banco + 2 e-mails enfileirados; SMTP offline → `201` (banco salvo, erro logado)
+- [ ] `task-044` Teste (critérios): POST `/api/admin/login` com senha errada → `401`; com credenciais corretas → `200` + JWT; rota protegida sem token → `401`; com token expirado → `401 "Token expirado"`; com token de outra assinatura → `401`
 
 ---
 
 ## Fase 6 — Frontend: Setup e Site Público
 
-- [ ] `task-045` Inicializar Next.js 15 App Router + TailwindCSS + Shadcn/UI + configuração TypeScript
+- [ ] `task-045` Inicializar Next.js 15 App Router + TailwindCSS + Shadcn/UI + TypeScript strict; instalar `lucide-react`; configurar `tsconfig.json` com `"strict": true` e `"noImplicitAny": true`; adicionar `public/logo.svg` placeholder
 - [ ] `task-046` Configurar `openapi-typescript` para gerar tipos a partir do OpenAPI do FastAPI
-- [ ] `task-047` Criar design system — tokens de cor (`#0A0A0A`, `#C9A55A`), tipografia, componentes base
+- [ ] `task-047` Criar design system — tokens de cor (`--background: #0A0A0A`, `--accent: #C9A55A`) no Tailwind config; instalar e configurar shadcn/ui (`Button`, `Card`, `Form`, `Input`, `Textarea`, `Dialog`, `AlertDialog`, `Alert`, `Badge`, `Table`, `Skeleton`, `Carousel`, `Sheet`, `Tabs`, `Progress`, `Toaster`)
 - [ ] `task-048` Criar layout raiz — Navbar flutuante + footer + botão WhatsApp flutuante
 - [ ] `task-049` Criar página `/` — hero full-screen, portfólio destaque, CTA loja, serviços, formulário de contato
 - [ ] `task-050` Criar página `/portfolio` — grade masonry com hover overlay dourado (SSG)
@@ -94,7 +94,7 @@
 - [ ] `task-055` Criar página `/servicos` — Residencial, Comercial, Consultoria, Regularização (SSG)
 - [ ] `task-056` Criar página `/contato` — formulário + mapa embed (SSG)
 - [ ] `task-057` Criar página de sucesso/erro de pagamento (retorno do MP)
-- [ ] `task-058` Teste: Vitest para formulário de contato (validação, submit, feedback ao usuário)
+- [ ] `task-058` Teste Vitest (critérios): campo e-mail vazio → `<FormMessage>` visível antes de qualquer fetch; submit com dados válidos → botão desabilitado + `<Loader2 animate-spin>` visível; API retorna `201` → `<Alert variant=default>` com sucesso + form resetado; API retorna `500` → `<Alert variant=destructive>` + botão reabilitado + dados preservados
 
 ---
 
@@ -108,7 +108,7 @@
 - [ ] `task-064` Criar `/admin/pedidos` — listagem com status, filtros, detalhe + reenvio de e-mail
 - [ ] `task-065` Criar `/admin/mensagens` — listagem com badge "nova", marcar como lida, link WhatsApp
 - [ ] `task-066` Criar `/admin/usuarios` — listar e criar AdminUsers
-- [ ] `task-067` Teste: Vitest para painel admin (redirect sem JWT, listagem de mensagens)
+- [ ] `task-067` Teste Vitest (critérios): acesso a `/admin/projetos` sem JWT → middleware redireciona para `/admin/login`; expiração de JWT durante listagem → intercepta `401` da API e redireciona com mensagem; clique em "Excluir" → `<AlertDialog>` abre antes de qualquer DELETE; confirmação da exclusão → `useToast` exibe confirmação
 
 ---
 
