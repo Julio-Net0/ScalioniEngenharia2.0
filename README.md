@@ -1,88 +1,50 @@
-# Scalioni Engenharia 2.0
+# Scalioni Engenharia 2.0 (Foco Backend & TDD)
 
-Site institucional + e-commerce para a **Scalioni Engenharia** — portfólio de projetos, loja de plantas prontas e geração de leads para projetos personalizados.
+Backend robusto para o escritório **Scalioni Engenharia**. Inclui portfólio, loja de plantas, webhook do Mercado Pago e painel administrativo, desenvolvido com metodologia TDD puro.
 
 ## Stack
-
-| Camada | Tecnologia |
-|---|---|
-| Backend | Python 3.12, FastAPI, SQLAlchemy, Alembic, Pydantic v2 |
-| Frontend | Next.js 15 (App Router), TypeScript, TailwindCSS, Shadcn/UI |
-| Banco | PostgreSQL 16 |
-| Pagamento | Mercado Pago |
-| Infra | Docker + Docker Compose + GitHub Actions |
+- **Backend:** Python 3.12, FastAPI, SQLAlchemy 2.0, Alembic, Pytest, Slowapi (Rate Limit).
+- **Banco:** PostgreSQL 16.
+- **Pagamento:** Integração com Mercado Pago (Webhook + HMAC validation + double-check).
 
 ## Pré-requisitos
+- Docker e Docker Compose instalados.
 
-- [Docker](https://docs.docker.com/get-docker/) e Docker Compose
-- [Git](https://git-scm.com/)
+## Como rodar localmente (Modo TDD/Isolado)
 
-## Setup rápido (desenvolvimento)
+1. **Configurar Ambiente:**
+   ```bash
+   cp .env.example .env
+   # Edite .env (DATABASE_URL, SECRET_KEY, MP_ACCESS_TOKEN, etc.)
+   ```
 
-```bash
-# 1. Clone o repositório
-git clone https://github.com/seu-usuario/ScalioniEngenharia2.0.git
-cd ScalioniEngenharia2.0
+2. **Subir Containers:**
+   ```bash
+   docker compose up -d --build
+   ```
 
-# 2. Configure as variáveis de ambiente
-cp .env.example .env
-# Edite o .env com suas credenciais (Mercado Pago, SMTP, etc.)
+3. **Migrations e Seed:**
+   ```bash
+   docker compose exec backend alembic upgrade head
+   docker compose exec backend python -m backend.scripts.seed
+   ```
 
-# 3. Suba os containers
-docker compose up --build
+## Como rodar testes (Pytest)
 
-# 4. Execute as migrações do banco
-docker compose exec backend alembic upgrade head
-
-# 5. Crie o primeiro admin
-docker compose exec backend python -m scripts.create_admin
-```
-
-- **Backend:** http://localhost:8000
-- **Docs API:** http://localhost:8000/docs
-- **Frontend:** http://localhost:3000
-
-## Estrutura do projeto
-
-```
-├── backend/            # FastAPI com Clean Architecture
-│   ├── domain/         # Entidades e regras de negócio
-│   ├── application/    # Use cases
-│   ├── infrastructure/ # Banco, storage, APIs externas
-│   ├── interfaces/     # Routers FastAPI e schemas Pydantic
-│   └── tests/
-├── frontend/           # Next.js 15 (site público + /admin)
-├── docker-compose.yml
-└── .github/workflows/  # CI/CD
-```
-
-## Comandos úteis
+Os testes devem ser executados dentro do container para garantir a estrutura de módulos correta:
 
 ```bash
-# Backend: rodar testes
 docker compose exec backend pytest
-
-# Backend: criar nova migração
-docker compose exec backend alembic revision --autogenerate -m "descricao"
-
-# Frontend: instalar dependências
-docker compose exec frontend npm install
-
-# Frontend: rodar testes
-docker compose exec frontend npm run test
-
-# Reconstruir containers após mudanças no Dockerfile
-docker compose up --build
 ```
 
-## Variáveis de ambiente
+Ou especificando um teste:
+```bash
+docker compose exec backend pytest backend/tests/test_projetos.py
+```
 
-Veja `.env.example` para a lista completa. As principais:
-
-| Variável | Descrição |
-|---|---|
-| `DATABASE_URL` | Connection string PostgreSQL |
-| `SECRET_KEY` | Chave JWT (gere com `openssl rand -hex 32`) |
-| `MERCADOPAGO_ACCESS_TOKEN` | Token da sua conta MP |
-| `SMTP_*` | Credenciais de e-mail |
-| `WHATSAPP_NUMBER` | Número no formato DDI+DDD+número |
+## Segurança Implementada
+- **Rate Limit:** Proteção contra abusos no login de admin, webhook e formulário de contato via `slowapi`.
+- **Validação de Webhook:** Assinatura HMAC-SHA256 em todas as notificações do Mercado Pago.
+- **Idempotência:** Verificação de pagamentos processados para evitar duplicidade.
+- **Double-check:** Consulta direta à API do Mercado Pago antes de liberar downloads.
+- **JWT:** Tokens assinados com expiração configurável para rotas administrativas.
