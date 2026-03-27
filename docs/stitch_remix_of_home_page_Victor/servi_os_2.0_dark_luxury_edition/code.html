@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#C9A55A",
+                        "primary-light": "#E8C675",
+                        "accent": "#B5501B",
+                        "bg-deep": "#0A0A0A",
+                        "bg-card": "#111111",
+                        "bg-elevated": "#1A1A1A",
+                        "text-light": "#F5F0E8",
+                        "text-muted": "#A89F91",
+                    },
+                    fontFamily: {
+                        "sans": ["Outfit", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .gold-border-gradient {
+            border-image: linear-gradient(to bottom, #C9A55A, #B5501B) 1
+        }
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #E8C675 0%, #C9A55A 50%, #B5501B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+        .maximalist-texture {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAu9qLm0v38YxzrUQkzf9FT0o32OPrmzJxbVdV_Bz4Jf4Pqt3M69Ot3xPggLV6Tp5do8TOV_0LkWzof7undzvvaR7zLvh0yYGPxXbDRU-K-gUFMKm5ZSdegpGkSygEcNuAkUWvIvLP-rsb-UctD38oU8iXL4-nn6jsTWHa9RepKW002t35873urGsRpTwljZTgdcic5WSfu49C2-8_eMFm6R9d_CMfQi3onGktcqYWQotkhZx04uLQ-bmT6QrY0sqCgKkZ6bySh_w);
+            background-blend-mode: overlay;
+        }
+        .service-card-hover:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+            color: #E8C675
+        }
+        .decorative-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C9A55A, transparent)
+        }
+        .hero-gradient {
+            background: linear-gradient(to top, #0A0A0A 0%, rgba(10, 10, 10, 0.4) 50%, rgba(10, 10, 10, 0.2) 100%)
+        }
+    </style>
+</head>
+<body class="bg-bg-deep font-sans text-text-light selection:bg-primary selection:text-bg-deep maximalist-texture">
+<header class="fixed top-0 w-full z-50 bg-bg-deep/90 backdrop-blur-xl border-b border-primary/20">
+<div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl">architecture</span>
+<h2 class="text-2xl font-bold tracking-[0.2em] uppercase font-serif">Scalioni<span class="text-primary italic">Engenharia</span></h2>
+</div>
+<nav class="hidden lg:flex items-center gap-12">
+<a class="text-xs font-medium uppercase tracking-widest hover:text-primary transition-colors" href="#">Início</a>
+<a class="text-xs font-medium uppercase tracking-widest text-primary" href="#">Serviços</a>
+<a class="text-xs font-medium uppercase tracking-widest hover:text-primary transition-colors" href="#">Projetos</a>
+<a class="text-xs font-medium uppercase tracking-widest hover:text-primary transition-colors" href="#">Sobre</a>
+<button class="bg-primary text-bg-deep px-8 py-3 font-bold text-xs hover:bg-primary-light transition-all uppercase tracking-[0.2em]">
+                    Orçamento
+                </button>
+</nav>
+</div>
+</header>
+<!-- HERO SECTION -->
+<section class="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center scale-105" data-alt="Dramatic high-end architectural interior" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBcyshL5prwcBoit4Lf1vERgdaQEsQjjswv8RzwnKfZm8qA8LcvEF-OObOukewHoaJLOSDRxdCqwx-lo0ZsuCpuJsDwWVr0oXoixZQ7mnIrOH-OQt_IuU2JsUWCFXZrwMk5yqZyuOGI7zngoL7F_vdmwcBvEO0O8Va-_abbWXOtK5vBhd75II1_CxZAdeZhdP92lyQp7fiTPMjKefCIovbH91TdNYM073URiVi8ZxKI9rtvp3rAzgoEF2HwrBUnxJQ5H8dYDK4JhA');"></div>
+<div class="absolute inset-0 hero-gradient"></div>
+<div class="relative z-10 text-center px-4 max-w-5xl">
+<h1 class="font-serif text-7xl md:text-9xl text-text-light leading-none mb-8 drop-shadow-2xl font-bold">
+                Nossos <span class="text-gradient-gold italic">Serviços</span>
+</h1>
+<div class="decorative-line w-32 mx-auto mb-8"></div>
+<p class="text-sm md:text-base font-medium tracking-[0.4em] uppercase text-primary">
+                Excelência e luxo em cada detalhe da construção civil
+            </p>
+</div>
+</section>
+<!-- SERVICES SECTIONS -->
+<section class="py-32 bg-bg-deep">
+<!-- Service 1 -->
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center mb-32">
+<div class="relative service-card-hover">
+<span class="material-symbols-outlined absolute -top-12 -left-12 text-[160px] text-primary/5 service-icon transition-transform duration-700 pointer-events-none">architecture</span>
+<div class="space-y-8 relative z-10">
+<span class="text-primary-light font-bold text-sm tracking-[0.3em] uppercase block">01 / Arquitetura</span>
+<h3 class="text-5xl font-serif font-bold">Projetos Arquitetônicos</h3>
+<p class="text-text-muted text-lg leading-relaxed max-w-lg">
+                        Criamos espaços que transcendem o convencional. Projetos residenciais e comerciais que unem sofisticação estética ao máximo rigor técnico, resultando em marcos da arquitetura contemporânea.
+                    </p>
+<button class="border border-primary text-primary px-10 py-4 font-bold text-sm tracking-widest hover:bg-primary hover:text-bg-deep transition-all group flex items-center gap-3">
+                        SAIBA MAIS
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="relative aspect-[4/5] overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" data-alt="Luxury architectural project" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChjyiZSawP36UQUUGqtsEgtT8X7XWCqLiq-PruAQP1UR6HWnkyRp-R6y71ZfNnOqvQ2u8OLFgrCNJFsMny69AcbzG69Oaax08EnbvjqWjHXht2WA2Vg_vq9XKMSFzcWVQLNNDkK6G2t1ZQ1rRtwUl5mBKZIfV5t6qeD_pFQ1ST4hYFyci6AetR8o-nQxFwFDzf3NG-B1EjibdrWWArwTJ4aTHXG_EETalQNuDFQtb-GyHA9KU29VYivB_fm_gSueDeTXH2-In2hA"/>
+<div class="absolute inset-0 border-[20px] border-bg-deep/20 pointer-events-none"></div>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="bg-bg-card py-32">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1 relative aspect-[4/5] overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" data-alt="High-end interior design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYrQ2dClWrFkZGbtcKa2hnTHQUuOHlHSokOZIZZBAShHmLAncEoEk6obv93NKoEFSujveIxPbNQj-5l4QwdHr_2BWNc_B3Tw05-yCvciZc1S_7-v8mBOnJvpXxJCzPlnvu6q7-rygnubw53gZJBa_WLDDdMg6bZ4liIPa02nehXNKNKUOz7XuqKHa-igjQcYg4-TPAD5YZSFEQ8sFPSY3aAW-eb0vkw-3RFraXxlLNLgmY0cVPlTW3fdt6qb46_qMUKHc-cHJKbQ"/>
+<div class="absolute inset-0 border-[20px] border-bg-card/20 pointer-events-none"></div>
+</div>
+<div class="order-1 md:order-2 relative service-card-hover text-right flex flex-col items-end">
+<span class="material-symbols-outlined absolute -top-12 -right-12 text-[160px] text-primary/5 service-icon transition-transform duration-700 pointer-events-none">chair</span>
+<div class="space-y-8 relative z-10">
+<span class="text-primary-light font-bold text-sm tracking-[0.3em] uppercase block">02 / Interiores</span>
+<h3 class="text-5xl font-serif font-bold">Design de Interiores</h3>
+<p class="text-text-muted text-lg leading-relaxed max-w-lg ml-auto">
+                            Curadoria de materiais nobres, iluminação cênica e mobiliário exclusivo. Transformamos ambientes em experiências sensoriais de alto luxo, refletindo a essência de quem os habita.
+                        </p>
+<button class="border border-primary text-primary px-10 py-4 font-bold text-sm tracking-widest hover:bg-primary hover:text-bg-deep transition-all group flex items-center gap-3 ml-auto">
+                            SAIBA MAIS
+                            <span class="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="py-32">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<div class="relative service-card-hover">
+<span class="material-symbols-outlined absolute -top-12 -left-12 text-[160px] text-primary/5 service-icon transition-transform duration-700 pointer-events-none">engineering</span>
+<div class="space-y-8 relative z-10">
+<span class="text-primary-light font-bold text-sm tracking-[0.3em] uppercase block">03 / Gestão</span>
+<h3 class="text-5xl font-serif font-bold">Gestão de Obras</h3>
+<p class="text-text-muted text-lg leading-relaxed max-w-lg">
+                            Acompanhamento integral com foco em cronogramas rigorosos e controle de qualidade absoluto. Sua obra entregue com a perfeição técnica que o mercado de luxo exige.
+                        </p>
+<button class="border border-primary text-primary px-10 py-4 font-bold text-sm tracking-widest hover:bg-primary hover:text-bg-deep transition-all group flex items-center gap-3">
+                            SAIBA MAIS
+                            <span class="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="relative aspect-[4/5] overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" data-alt="Construction management site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIfJU2Rh2XcSi8xhi9VSgBUdOOG9tzJdzCtIfpPMXSj-ZRV6XymbHlsZ7nYHLfPA-7aPExNXGnKO1qvirtPxjcyE_Ep_7bfrgS8Fi1JXchbG-ACIKk16CNPUIFXgSwGH_X1xaImjWtKdlG_BZ8Y8aScN0fTw0-m12sX-3zF6Uxg3VOmY9_PgrmvNRVHJoGT_1wZefhi0LBCWmza-ZfkA4GhVJ_t5xG-v5zqO7SfMJ8dJSjnzcnlRBYx5bIqQ6fjGmcVgfFqFajig"/>
+<div class="absolute inset-0 border-[20px] border-bg-deep/20 pointer-events-none"></div>
+</div>
+</div>
+</div>
+<!-- Service 4 -->
+<div class="bg-bg-card py-32">
+<div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<div class="order-2 md:order-1 relative aspect-[4/5] overflow-hidden group">
+<img class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" data-alt="Legal compliance documentation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKB9o8_4M2qR7S7qhNNCfIGOFp_L6xxtYROzhkVa9dvdQxSKMFJvHWm0R2Yib6e-nBydr_XhUKiKstD9UsLsDEcJL_Y1qHHupvQx4yP0_FlUUAl15m_e9zSWWN_m58G6nW7c3rZyQm3DkOcULQocpuXlZxtrKO4Vf0EjjNk6dGjewROpEMCaffPJSSPSYAorSo1SDAQPoPd-Vpd1pBbL7u4cTq5rhU_uHeIjRiPjCg5DQU-2Y36Pk0QxY9IEDgn-TydbRu1TQV4Q"/>
+<div class="absolute inset-0 border-[20px] border-bg-card/20 pointer-events-none"></div>
+</div>
+<div class="order-1 md:order-2 relative service-card-hover text-right flex flex-col items-end">
+<span class="material-symbols-outlined absolute -top-12 -right-12 text-[160px] text-primary/5 service-icon transition-transform duration-700 pointer-events-none">description</span>
+<div class="space-y-8 relative z-10">
+<span class="text-primary-light font-bold text-sm tracking-[0.3em] uppercase block">04 / Consultoria</span>
+<h3 class="text-5xl font-serif font-bold">Regularização e Laudos</h3>
+<p class="text-text-muted text-lg leading-relaxed max-w-lg ml-auto">
+                            Processos de regularização de edificações, laudos técnicos e consultoria especializada para garantir a total conformidade legal e segurança do seu patrimônio imobiliário.
+                        </p>
+<button class="border border-primary text-primary px-10 py-4 font-bold text-sm tracking-widest hover:bg-primary hover:text-bg-deep transition-all group flex items-center gap-3 ml-auto">
+                            SAIBA MAIS
+                            <span class="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WORKFLOW SECTION -->
+<section class="py-32 bg-bg-deep relative overflow-hidden border-t border-primary/10">
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="text-center mb-24">
+<h2 class="text-5xl md:text-6xl font-serif font-bold mb-6">O Fluxo da <span class="text-primary italic">Perfeição</span></h2>
+<div class="decorative-line w-48 mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+<!-- Step 01 -->
+<div class="group text-center">
+<div class="w-20 h-20 rounded-full border border-primary/40 flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+<span class="text-primary group-hover:text-bg-deep font-bold text-xl">01</span>
+</div>
+<h4 class="font-bold text-lg mb-3 tracking-widest uppercase">Briefing</h4>
+<p class="text-xs text-text-muted leading-relaxed px-4">Alinhamento estratégico de expectativas e desejos exclusivos.</p>
+</div>
+<!-- Step 02 -->
+<div class="group text-center">
+<div class="w-20 h-20 rounded-full border border-primary/40 flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+<span class="text-primary group-hover:text-bg-deep font-bold text-xl">02</span>
+</div>
+<h4 class="font-bold text-lg mb-3 tracking-widest uppercase">Conceito</h4>
+<p class="text-xs text-text-muted leading-relaxed px-4">Estudo preliminar artístico e visualização foto-realista 3D.</p>
+</div>
+<!-- Step 03 -->
+<div class="group text-center">
+<div class="w-20 h-20 rounded-full border border-primary/40 flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+<span class="text-primary group-hover:text-bg-deep font-bold text-xl">03</span>
+</div>
+<h4 class="font-bold text-lg mb-3 tracking-widest uppercase">Projeto</h4>
+<p class="text-xs text-text-muted leading-relaxed px-4">Detalhamento técnico executivo com rigor milimétrico.</p>
+</div>
+<!-- Step 04 -->
+<div class="group text-center">
+<div class="w-20 h-20 rounded-full border border-primary/40 flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+<span class="text-primary group-hover:text-bg-deep font-bold text-xl">04</span>
+</div>
+<h4 class="font-bold text-lg mb-3 tracking-widest uppercase">Planejamento</h4>
+<p class="text-xs text-text-muted leading-relaxed px-4">Cronograma físico-financeiro e logística de alto padrão.</p>
+</div>
+<!-- Step 05 -->
+<div class="group text-center">
+<div class="w-20 h-20 rounded-full border border-primary/40 flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:border-primary transition-all duration-500">
+<span class="text-primary group-hover:text-bg-deep font-bold text-xl">05</span>
+</div>
+<h4 class="font-bold text-lg mb-3 tracking-widest uppercase">Execução</h4>
+<p class="text-xs text-text-muted leading-relaxed px-4">Construção e gestão rigorosa até a entrega das chaves.</p>
+</div>
+</div>
+</div>
+<!-- Decorative bg icon -->
+<span class="material-symbols-outlined absolute -bottom-32 -right-32 text-[600px] text-primary/5 select-none pointer-events-none">diamond</span>
+</section>
+<!-- TESTIMONIALS -->
+<section class="py-32 bg-bg-card">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center mb-24">
+<h2 class="text-5xl font-serif font-bold mb-6">Reconhecimento <span class="text-gradient-gold">Premium</span></h2>
+<div class="decorative-line w-48 mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<div class="bg-bg-deep p-12 border border-primary/20 hover:border-primary/60 transition-colors group">
+<span class="text-primary text-6xl font-serif leading-none block mb-6">“</span>
+<div class="flex gap-1 mb-8">
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+</div>
+<p class="text-text-muted italic text-lg mb-10 leading-relaxed">"A atenção aos detalhes da Scalioni superou todas as nossas expectativas. Nossa casa não é apenas uma construção, é uma obra de arte viva."</p>
+<div class="flex items-center gap-5 pt-10 border-t border-primary/10">
+<img class="w-14 h-14 rounded-full grayscale group-hover:grayscale-0 transition-all border border-primary/30" data-alt="Ricardo Alencar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTpVm5wu8lvCaoGBffPaaZF9yH6KFgpdMKnT-M5ZaeHhQuHip_kvoK4nWlmVQmT6iyaXnA-Oul63Vwewt8qC2ePxxiIIlxFK5ygCv5hjMl33AgWbSm3vQvLRSv06SQke7V2RbNjxias26fiL1sIYktXlu9t4nuGMl5DmZyeE5m6pxDJcpymsN0zNSkP2RKI2TbbhEhPimf_kX9JxHA6f8rHu2TKiL6dtkHClhXQTsgCE7SRe47nbOdcv_0UWNgAwYGUCEgxlOzMlo"/>
+<div>
+<p class="font-bold tracking-widest text-sm uppercase">Ricardo Alencar</p>
+<p class="text-[10px] text-primary uppercase tracking-[0.2em] mt-1">CEO - Global Tech</p>
+</div>
+</div>
+</div>
+<div class="bg-bg-deep p-12 border border-primary/20 hover:border-primary/60 transition-colors group">
+<span class="text-primary text-6xl font-serif leading-none block mb-6">“</span>
+<div class="flex gap-1 mb-8">
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+</div>
+<p class="text-text-muted italic text-lg mb-10 leading-relaxed">"Pontualidade e rigor técnico impecáveis. Encontramos na Scalioni a parceria ideal para nossos empreendimentos de altíssimo luxo."</p>
+<div class="flex items-center gap-5 pt-10 border-t border-primary/10">
+<img class="w-14 h-14 rounded-full grayscale group-hover:grayscale-0 transition-all border border-primary/30" data-alt="Beatriz Vasconcelos" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6qn8ArrlltCLvdeJHLCeycbWw73yyh9tovRRJVAom9eRSOTTGccgn9HqmRvhQQnZkCuoLQYs5n0V1EnkQ6-3ecyMwYZF-t8hfakS-D_KBdkeV1XST6jeCxlGlCIl8i40wnRKRcMfpXsBN-ZlmtLeFRfs0txNHirEgRRKWFfZFvA93rHNoVs9Q5xBCNWFtG8zhj8S8TykxunD0J82mOnxG-uSkphQhiaJcC1WgFtzq5JU47pKTLQHLwMWwfv4ugjifztcrnOgSNMI"/>
+<div>
+<p class="font-bold tracking-widest text-sm uppercase">Beatriz Vasconcelos</p>
+<p class="text-[10px] text-primary uppercase tracking-[0.2em] mt-1">Incorporadora V&amp;B</p>
+</div>
+</div>
+</div>
+<div class="bg-bg-deep p-12 border border-primary/20 hover:border-primary/60 transition-colors group">
+<span class="text-primary text-6xl font-serif leading-none block mb-6">“</span>
+<div class="flex gap-1 mb-8">
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+<span class="material-symbols-outlined text-primary text-sm fill-1">star</span>
+</div>
+<p class="text-text-muted italic text-lg mb-10 leading-relaxed">"O design de interiores transformou nossa sede em um ambiente de prestígio que reflete perfeitamente a solidez do nosso escritório."</p>
+<div class="flex items-center gap-5 pt-10 border-t border-primary/10">
+<img class="w-14 h-14 rounded-full grayscale group-hover:grayscale-0 transition-all border border-primary/30" data-alt="Marcos Silveira" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw-IUSKV51si4ZBA8TrnsH6jX7YQhmEEyDM-JlbGMmGYxyvsd3hPquAcK0fTcG_YxNW4vE0sCf9xHKqWAGeFzwLpg4u7bu-Cc7hgU3kcqWe8i-8YwY3BSwAwBAaLoPChPuRvtUgXcxD9mlpmeqmVYCsc0jgTIEL3QSWRE4DD7XXQIASM95zWA6B7oT3t03lvdZwOv8tlYr6BE9cokxBTa9YbKoGv66lXX1-v9Ay6XuRH-2wdcgn3u6OywhIvrAJTkt-RBbPolEDkM"/>
+<div>
+<p class="font-bold tracking-widest text-sm uppercase">Marcos Silveira</p>
+<p class="text-[10px] text-primary uppercase tracking-[0.2em] mt-1">Advocacia Silveira</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL CTA -->
+<section class="py-32 px-6 bg-bg-deep">
+<div class="max-w-6xl mx-auto bg-bg-card border-y border-primary/30 py-24 px-12 md:px-24 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 blur-[150px] -mr-48 -mt-48 rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 blur-[150px] -ml-48 -mb-48 rounded-full"></div>
+<div class="relative z-10">
+<h2 class="text-5xl md:text-7xl font-serif font-bold mb-10">Pronto para materializar seu <span class="text-primary italic">legado</span>?</h2>
+<p class="text-xl text-text-muted mb-16 max-w-2xl mx-auto leading-relaxed">
+                    Nossa equipe de especialistas está pronta para planejar e executar sua próxima grande conquista com exclusividade.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+<button class="bg-[#C9A55A] text-bg-deep px-12 py-5 font-bold text-sm hover:bg-[#E8C675] shadow-[0_15px_30px_rgba(201,165,90,0.2)] transition-all uppercase tracking-[0.3em]">
+                        SOLICITAR ORÇAMENTO
+                    </button>
+<button class="border border-primary text-primary px-12 py-5 font-bold text-sm hover:bg-white/5 transition-all uppercase tracking-[0.3em]">
+                        Falar com Consultor
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="bg-bg-deep py-20 border-t border-primary/10">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">architecture</span>
+<h2 class="text-xl font-bold tracking-[0.3em] uppercase font-serif">Scalioni<span class="text-primary italic">Engenharia</span></h2>
+</div>
+<p class="text-[10px] text-text-muted tracking-widest uppercase">Arquitetura de Luxo &amp; Gestão de Alta Performance © 2024</p>
+</div>
+<div class="flex gap-12">
+<a class="text-xs uppercase tracking-[0.2em] text-text-muted hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="text-xs uppercase tracking-[0.2em] text-text-muted hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="text-xs uppercase tracking-[0.2em] text-text-muted hover:text-primary transition-colors" href="#">WhatsApp</a>
+</div>
+</div>
+</footer>
+</body></html>
