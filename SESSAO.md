@@ -1,14 +1,39 @@
 # Contexto da Sessão — Scalioniengenharia 2.0
-**Última atualização:** 2026-03-17 18:09
+**Última atualização:** 2026-04-07 17:52
 
 ---
 
 ## ⏸️ Estado atual
 
-- **Fase:** OpenSpec 100% hardening concluído — aguardando exportação das telas Stitch antes de `/opsx-apply`
-- **Bloqueio atual:** Usuário precisa atualizar/criar as 17 telas no **Stitch AI** usando `STITCH_UPDATE_PROMPTS.md` e exportar os arquivos para `docs/stitch/stitch/`
+- **Fase:** Backend 100% funcional e testado — Docker rodando, migrations aplicadas, banco populado com seed, testes passando 24/24
+- **Próximo passo:** Frontend (Next.js 15) ou continuar com `/opsx-apply` quando telas Stitch estiverem prontas
 
 ---
+
+## ✅ O que foi feito nesta sessão (2026-04-07)
+
+| O que | Resultado |
+|---|---|
+| `docker compose up -d --build` | Subiu PostgreSQL + Backend |
+| Testes unitários via Docker | 21/24 passando inicialmente |
+| Corrigido `conftest.py` | Adicionada fixture `apply_migrations` (scope=session) que roda `alembic upgrade head` antes de todos os testes e `downgrade base` ao final |
+| Todos os testes | **24/24 passando** ✅ |
+| Adicionado pgAdmin ao `docker-compose.yml` | Acessível em http://localhost:5050 |
+| `alembic upgrade head` | Tabelas criadas no banco |
+| `python -m backend.scripts.seed` | Banco populado com admin + 2 projetos + 2 plantas |
+| Corrigido `requirements.txt` | Adicionado `bcrypt<4.0` (incompatibilidade com passlib) |
+
+### Credenciais do sistema
+
+| Serviço | URL | Usuário | Senha |
+|---|---|---|---|
+| Swagger API | http://localhost:8000/docs | — | — |
+| pgAdmin | http://localhost:5050 | admin@scalioni.com | admin |
+| Admin API | POST /api/admin/login | admin@scalioni.com | admin123 |
+| PostgreSQL | localhost:5432 | scalioni | senha-segura |
+
+---
+
 
 ## O que foi decidido (Brainstorming + Design)
 
