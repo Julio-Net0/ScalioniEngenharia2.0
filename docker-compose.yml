@@ -44,3 +44,5 @@ services:
 volumes:
   postgres_data:
   uploads_data:
+
+#docker compose up -d --build
