@@ -1,10 +1,20 @@
 import pytest
 import asyncio
+import subprocess
 from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from backend.main import app
 from backend.infrastructure.database.session import get_db
 from backend.core.config import settings
+
+
+@pytest.fixture(scope="session", autouse=True)
+def apply_migrations():
+    """Aplica as migrations antes de todos os testes e reverte ao final."""
+    subprocess.run(["alembic", "upgrade", "head"], check=True, cwd="/app/backend")
+    yield
+    subprocess.run(["alembic", "downgrade", "base"], check=True, cwd="/app/backend")
+
 
 @pytest.fixture
 def event_loop():
@@ -35,7 +45,7 @@ async def db(engine):
 async def client(db):
     async def override_get_db():
         yield db
-    
+
     app.dependency_overrides[get_db] = override_get_db
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         yield ac
