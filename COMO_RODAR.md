@@ -9,7 +9,7 @@
 ## 1. Primeira vez (setup completo)
 
 ```bash
-# 1. Copiar variáveis de ambiente (já feito se .env existir)
+# 1. Copiar variáveis de ambiente
 cp .env.example .env
 
 # 2. Subir todos os containers
