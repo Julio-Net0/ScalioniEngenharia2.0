@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScalioniEngenharia 2.0 | Admin Users</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@100..900&amp;family=Noto+Serif:wght@100..900&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-tint": "#e8c173",
+                    "surface-container-highest": "#353534",
+                    "surface-dim": "#131313",
+                    "tertiary-fixed-dim": "#ffb1c0",
+                    "on-primary-fixed": "#261a00",
+                    "on-primary-container": "#523b00",
+                    "on-surface": "#e5e2e1",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-secondary-fixed-variant": "#7c2e00",
+                    "secondary": "#ffb596",
+                    "on-primary-fixed-variant": "#5c4300",
+                    "tertiary": "#ffb1c0",
+                    "surface-variant": "#353534",
+                    "on-surface-variant": "#d1c5b3",
+                    "secondary-container": "#933800",
+                    "tertiary-fixed": "#ffd9df",
+                    "surface-bright": "#3a3939",
+                    "inverse-primary": "#775a16",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#ffdea0",
+                    "primary-container": "#c9a55a",
+                    "on-error-container": "#ffdad6",
+                    "tertiary-container": "#f18ca2",
+                    "primary-fixed-dim": "#e8c173",
+                    "on-tertiary-fixed-variant": "#792c41",
+                    "on-secondary": "#581e00",
+                    "on-secondary-fixed": "#360f00",
+                    "on-secondary-container": "#ffba9c",
+                    "outline": "#998f7f",
+                    "primary": "#e8c173",
+                    "on-error": "#690005",
+                    "on-primary": "#402d00",
+                    "error-container": "#93000a",
+                    "surface-container-high": "#2a2a2a",
+                    "on-tertiary-fixed": "#3f0017",
+                    "inverse-surface": "#e5e2e1",
+                    "background": "#131313",
+                    "outline-variant": "#4d4638",
+                    "on-tertiary": "#5c152b",
+                    "secondary-fixed-dim": "#ffb596",
+                    "secondary-fixed": "#ffdbcd",
+                    "surface-container": "#201f1f",
+                    "surface": "#131313",
+                    "on-background": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "surface-container-low": "#1c1b1b",
+                    "on-tertiary-container": "#6f2339"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Playfair Display", "Noto Serif"],
+                    "body": ["Outfit", "Manrope"],
+                    "label": ["Outfit", "Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    background-image: radial-gradient(circle at 50% 50%, rgba(201, 165, 90, 0.03) 0%, transparent 70%), url(https://lh3.googleusercontent.com/aida-public/AB6AXuDyBF5sOw2BVPhDJIsm2qkR0l2HZklsj3E0jt2O1LSKa1l1VHs7jQb3S2V002-HGQuqJ7ep7N6Ncxkrnyff8oWd6MP-TSuguy6qDJSjCZDV5VsAEOiiu5nMAhfLSUO9AIScm6osijDHeRt7Ipov6TTODOuVdBYv6EBkZO-xbXYefuL8JYQYXuR1kKcfXNy88X_G6LMq3gtSyCX4Sp7mT05IKb1RdDDaO-fKBhEc1v4zuJDaNdEvOqezPZD0bTzWigI1mzNTA8V7zA);
+    color: #F5F0E8;
+    font-family: "Outfit", sans-serif
+    }
+.marble-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCoUpOHU4oEzoIlvnBMwb1mVwvVJkIFPvxIc6z3Tz36KosVAKM88HJdCvEHCBZXv0T_JOjNd513QFBRVRTRqBGhUqUOkwAOa1JSauN1bI2a39-B5WKcG3tUF4ahErQnEq1sX8pfu9mM9IAQuIxvd3hLa0X8AdHlBpbGa5J9xp-xeXYQ0oc4OX3L0hDtAHVy5c6buYpbSkcD1ODW0AxP3M_I4678jEv8Nv2jwtG8Lt97C7zQOzqwreACywDQLWFvT5Vr6tzH-I6i5A);
+    z-index: 999
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }
+.custom-toggle-on {
+    background-color: #1A3A2A
+    }
+.custom-toggle-off {
+    background-color: #333
+    }</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+<div class="marble-overlay"></div>
+<!-- SIDEBAR NAV MONOLITH -->
+<aside class="flex flex-col h-screen w-64 z-50 overflow-y-auto bg-[#111111] dark:bg-[#111111] fixed left-0 top-0 border-r-0 shadow-[40px_0_40px_-20px_rgba(181,80,27,0.05)]">
+<div class="p-8 pb-12">
+<h1 class="text-xl font-serif tracking-widest text-[#F5F0E8] leading-none mb-1">ARCHITECTURAL</h1>
+<p class="text-[11px] tracking-[0.3rem] uppercase text-[#C9A55A] font-light">MONOLITH</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-4 text-[#A89F91] border-l-4 border-transparent py-4 px-6 hover:text-[#C9A55A] hover:bg-[#1A1A1A] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-[#A89F91] border-l-4 border-transparent py-4 px-6 hover:text-[#C9A55A] hover:bg-[#1A1A1A] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="inventory_2">inventory_2</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Pedidos</span>
+</a>
+<a class="flex items-center gap-4 text-[#A89F91] border-l-4 border-transparent py-4 px-6 hover:text-[#C9A55A] hover:bg-[#1A1A1A] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="architecture">architecture</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Projetos</span>
+</a>
+<a class="flex items-center gap-4 text-[#A89F91] border-l-4 border-transparent py-4 px-6 hover:text-[#C9A55A] hover:bg-[#1A1A1A] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="layers">layers</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Plantas Prontas</span>
+</a>
+<a class="flex items-center gap-4 text-[#A89F91] border-l-4 border-transparent py-4 px-6 hover:text-[#C9A55A] hover:bg-[#1A1A1A] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Mensagens</span>
+</a>
+<!-- Active State: Usuários -->
+<a class="flex items-center gap-4 text-[#F5F0E8] border-l-4 border-[#C9A55A] bg-gradient-to-r from-[#C9A55A]/10 to-transparent py-4 px-6 brightness-125" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="group">group</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase font-bold">Usuários</span>
+</a>
+<a class="flex items-center gap-4 text-[#A89F91] border-l-4 border-transparent py-4 px-6 hover:text-[#C9A55A] hover:bg-[#1A1A1A] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto p-6 border-t border-white/5">
+<a class="flex items-center gap-4 text-[#A89F91] hover:text-[#C9A55A] transition-all" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+<span class="text-[11px] tracking-[0.1rem] uppercase">Perfil</span>
+</a>
+</div>
+</aside>
+<!-- TOP BAR -->
+<header class="flex justify-between items-center h-16 px-8 ml-64 bg-[#1A1A1A]/90 backdrop-blur-xl sticky top-0 z-40">
+<div class="flex items-center">
+<span class="text-lg font-serif italic text-[#C9A55A]">MONOLITH ADMIN</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[#A89F91] text-lg" data-icon="search">search</span>
+<input class="bg-[#0A0A0A] border-none text-[12px] py-1.5 pl-10 pr-4 w-64 focus:ring-1 focus:ring-[#C9A55A]/30 text-[#F5F0E8] placeholder-[#555]" placeholder="Pesquisar..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-[#A89F91]">
+<button class="hover:text-[#C9A55A] transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="hover:text-[#C9A55A] transition-colors"><span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span></button>
+<div class="w-8 h-8 bg-[#222] border border-[#C9A55A]/20 flex items-center justify-center">
+<span class="text-[10px] font-bold text-[#C9A55A]">MS</span>
+</div>
+</div>
+</div>
+</header>
+<!-- MAIN CONTENT AREA -->
+<main class="ml-64 p-12 min-h-screen relative">
+<!-- HEADER SECTION -->
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="text-5xl font-semibold tracking-tight text-[#F5F0E8] font-body uppercase leading-none mb-4">USUÁRIOS ADMIN</h2>
+<p class="text-[#A89F91] font-light text-lg">Controle de acesso ao painel administrativo</p>
+</div>
+<button class="bg-[#C9A55A] text-[#0A0A0A] px-8 py-4 font-bold uppercase tracking-widest text-[12px] hover:bg-[#E8C675] transition-all scale-100 active:scale-95 shadow-[0_10px_20px_-5px_rgba(201,165,90,0.3)] flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                NOVO USUÁRIO
+            </button>
+</div>
+<!-- TABLE SECTION -->
+<div class="bg-[#111111] p-1 shadow-2xl relative">
+<div class="absolute inset-0 border border-[#C9A55A]/10 pointer-events-none"></div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-[#C9A55A]/10">
+<th class="py-6 px-8 text-[11px] tracking-[0.2rem] uppercase font-bold text-[#C9A55A]">NOME</th>
+<th class="py-6 px-8 text-[11px] tracking-[0.2rem] uppercase font-bold text-[#C9A55A]">E-MAIL</th>
+<th class="py-6 px-8 text-[11px] tracking-[0.2rem] uppercase font-bold text-[#C9A55A]">NÍVEL</th>
+<th class="py-6 px-8 text-[11px] tracking-[0.2rem] uppercase font-bold text-[#C9A55A]">ATIVO</th>
+<th class="py-6 px-8 text-[11px] tracking-[0.2rem] uppercase font-bold text-[#C9A55A]">CRIADO EM</th>
+<th class="py-6 px-8 text-[11px] tracking-[0.2rem] uppercase font-bold text-[#C9A55A] text-right">AÇÕES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#C9A55A]/5">
+<!-- Row 1 -->
+<tr class="group hover:bg-[#1A1A1A] transition-colors">
+<td class="py-6 px-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-[#C9A55A] text-[#0A0A0A] flex items-center justify-center font-bold text-lg">M</div>
+<span class="font-medium text-[#F5F0E8] text-sm">Marco Scalioni</span>
+</div>
+</td>
+<td class="py-6 px-8 text-sm text-[#A89F91]">marco@scalioniengenharia.com.br</td>
+<td class="py-6 px-8">
+<span class="px-3 py-1 bg-[#C9A55A] text-[#0A0A0A] text-[10px] font-bold tracking-widest uppercase">ADMIN</span>
+</td>
+<td class="py-6 px-8">
+<!-- Toggle ON -->
+<div class="w-10 h-5 rounded-full p-1 custom-toggle-on flex items-center justify-end">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</div>
+</td>
+<td class="py-6 px-8 text-sm text-[#A89F91]">01/01/2024</td>
+<td class="py-6 px-8">
+<div class="flex items-center justify-end gap-4 text-[#A89F91]">
+<button class="hover:text-[#C9A55A] transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span></button>
+<button class="opacity-30 cursor-not-allowed"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-[#1A1A1A] transition-colors">
+<td class="py-6 px-8">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 border border-[#C9A55A]/30 text-[#C9A55A] flex items-center justify-center font-bold text-lg">F</div>
+<span class="font-medium text-[#F5F0E8] text-sm">Felipe Costa</span>
+</div>
+</td>
+<td class="py-6 px-8 text-sm text-[#A89F91]">felipe@scalioniengenharia.com.br</td>
+<td class="py-6 px-8">
+<span class="px-3 py-1 border border-[#C9A55A] text-[#C9A55A] text-[10px] font-bold tracking-widest uppercase">EDITOR</span>
+</td>
+<td class="py-6 px-8">
+<!-- Toggle ON -->
+<div class="w-10 h-5 rounded-full p-1 custom-toggle-on flex items-center justify-end">
+<div class="w-3 h-3 bg-white rounded-full"></div>
+</div>
+</td>
+<td class="py-6 px-8 text-sm text-[#A89F91]">15/02/2024</td>
+<td class="py-6 px-8">
+<div class="flex items-center justify-end gap-4 text-[#A89F91]">
+<button class="hover:text-[#C9A55A] transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="edit">edit</span></button>
+<button class="hover:text-[#7B2D42] transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="delete">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- FOOTER WARNING -->
+<div class="mt-12 flex items-center gap-3 text-[#555] font-light">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+<p class="text-[13px] italic">Mínimo de 1 usuário ativo é necessário para manter o acesso ao painel.</p>
+</div>
+<!-- BACKGROUND ACCENT IMAGES (Bleed-off elements) -->
+<div class="fixed bottom-[-100px] right-[-100px] w-[500px] h-[500px] opacity-10 blur-3xl rounded-full bg-[#C9A55A] pointer-events-none"></div>
+<div class="mt-24 grid grid-cols-3 gap-8 opacity-40">
+<div class="h-[200px] bg-[#111] overflow-hidden grayscale contrast-125">
+<img class="w-full h-full object-cover" data-alt="High-contrast black and white architectural detail of a modern skyscraper with sharp angles and dramatic shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUvkli9dV-Iv2EVGSKg8dSropiU_QQ0I3OK63ohxJvFrttuFNOP5UOYBMBwErf0phz6lR2Q5Yga52siyS8m3_l0-1YwgdlEO2gDn0DLR12xwU6vCH-SoWmDCqLBq_5jU9SQ7ZUGzyDsbH6Hvjd6XR0tmRHCkGmUaUOEViOd_eJkOxLcxJxmWH0wHgDhOtfpUNOeMjJ_1y1R4OKXAxF2FnM7GSA3yU7ol-7JnGRcAi3dcQF5_P6_Q29xvBmRQkqNCKgvqFCgLRGYw"/>
+</div>
+<div class="h-[200px] bg-[#111] overflow-hidden grayscale contrast-125">
+<img class="w-full h-full object-cover" data-alt="Abstract interior of a Brutalist building with raw concrete textures and rhythmic window patterns in dark monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNtfTEuDmNionspq-IqEwJShUsKbN2Q2AmHt2z7zYkBC5iF4ysawwT_MBr9_HVtizbuhKtuSRTHZRR5WguiH9ogovJSx_A1V_P5uyRRqJt3BoXdCo24f_YgSZLcRCtnh5_496mtrkVPFm4nsNY5VWl2Z7bf-BuciGO8AkZ98zcnSPu6lvmaL50C9nY85fKLVpcPDosa9igShJcGg7JNw1ufWbn47quBW4QxpTL8ZaYGNQ-Sz-O1zr8qK-cXQeIEvt3c2PRt6gbbw"/>
+</div>
+<div class="h-[200px] bg-[#111] overflow-hidden grayscale contrast-125">
+<img class="w-full h-full object-cover" data-alt="Sleek dark office corridor with minimalist lighting and reflective surfaces creating an atmosphere of luxury and secrecy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbI0JuDKRPJJZbqXYZ5rRx6NqPaArgfcxnRZEkOq7BA26Ocm-myQe2Qmb5hMG81CfP5Ep4LyBB31dpTA2K9p0or-AHi_8lgN5ApHKt1SNydtrIgcQyi60wfsMZWbPmc0k-oMi94O3BOsHEI3D7AcUYQtfoy1Xjp7xaH2gEs-P92Vx0ze1QypTrDFBCUYnnAjXYJeKtCdDgRz8LctcogzzmMGVAJOkf6Ddun0B3RpdRgRTM-q3twN6vI_tMOC0PGG5ZYJtBIUbp0w"/>
+</div>
+</div>
+</main>
+</body></html>

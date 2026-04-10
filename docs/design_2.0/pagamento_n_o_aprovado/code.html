@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pagamento não aprovado | SCALIONIENGENHARIA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Outfit:wght@400;500;600&amp;family=Manrope:wght@400;500;600&amp;family=Noto+Serif:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e5e2e1",
+                    "primary-container": "#c9a55a",
+                    "secondary-fixed": "#ffdbcd",
+                    "tertiary-fixed-dim": "#e4c372",
+                    "on-background": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "on-primary-container": "#523b00",
+                    "on-secondary": "#581e00",
+                    "on-tertiary-container": "#4f3c00",
+                    "on-primary-fixed": "#261a00",
+                    "on-secondary-container": "#ffba9c",
+                    "on-error": "#690005",
+                    "on-primary-fixed-variant": "#5c4300",
+                    "surface": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "on-secondary-fixed-variant": "#7c2e00",
+                    "on-tertiary-fixed": "#251a00",
+                    "on-tertiary": "#3e2e00",
+                    "tertiary-fixed": "#ffdf96",
+                    "tertiary-container": "#c6a659",
+                    "surface-bright": "#3a3939",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container": "#201f1f",
+                    "surface-variant": "#353534",
+                    "secondary": "#ffb596",
+                    "outline-variant": "#4d4638",
+                    "on-surface-variant": "#d1c5b3",
+                    "primary": "#e8c173",
+                    "surface-dim": "#131313",
+                    "on-surface": "#e5e2e1",
+                    "background": "#131313",
+                    "tertiary": "#e4c372",
+                    "primary-fixed": "#ffdea0",
+                    "secondary-fixed-dim": "#ffb596",
+                    "on-secondary-fixed": "#360f00",
+                    "on-primary": "#402d00",
+                    "outline": "#998f7f",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary-fixed-variant": "#5a4400",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "primary-fixed-dim": "#e8c173",
+                    "surface-tint": "#e8c173",
+                    "secondary-container": "#933800",
+                    "inverse-primary": "#775a16"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Playfair Display", "serif"],
+                    "body": ["Outfit", "sans-serif"],
+                    "label": ["Outfit", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    background-image: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 1) 100%), url(https://lh3.googleusercontent.com/aida-public/AB6AXuDjnfMvcr4KVAcOyiN8H_qCnxlt8gkvm9kHDpOBjK5jhLvYBZGnhl6WpcO5S1iSzjoLplwrq7oUhoNHVZuzos18ThE66B4OGO9fGSpGcJK3ivw0to0Oy3Io1cKEA3BEPDgMT6NlzIM_wl_LTi3_-vwexI2sB_kLV7suovTIwuvZT7-VPTAXU_H9eFhz_QXdPJ5m1ii0txRV_VRV0lnaRciQQP4qhSCMxzWjib_sfi0nupqIhFBlIv1l5LC8NppGUiPZ9h3BvpDuAQ)
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24
+    }
+.glow-error {
+    filter: drop-shadow(0 0 15px rgba(123, 45, 66, 0.4))
+    }</style>
+</head>
+<body class="min-h-screen flex flex-col font-body text-on-surface selection:bg-primary/30">
+<!-- TopNavBar Simulation (Transactional Suppression Active) -->
+<header class="fixed top-0 w-full z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-[#C9A55A]/15 flex justify-between items-center px-8 md:px-12 py-6">
+<div class="text-2xl font-bold text-[#C9A55A] tracking-tighter uppercase font-headline">
+            SCALIONIENGENHARIA
+        </div>
+<div class="hidden md:flex items-center gap-4">
+<span class="text-[0.65rem] uppercase tracking-widest text-[#F5F0E8]/40">Secured by Mercado Pago</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 relative overflow-hidden">
+<!-- Background Aesthetic Element -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" data-alt="Abstract architectural background with deep shadows and sharp stone textures in dark marble aesthetic" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuARRdaWuMeq7d0FQU8LvfBqp3h-GTOJWasUhZBMQaawoBLN-3BEtiYj0OqROGhKwMc-M3E6xn7cRKSa0nvKoKAPiasoBrWrEzoNtmemC4yhk68oPcHTXwDsCE8t1xHUacbcRrOZN6cf0HIIt0Ind-J_Ee7n3ZU8xdCeHTXJjW7dx8GGsRIH2Q8VpUtCQ492pu9t8GyNyfDC0WxRuh5hkBMl7HbQZsyNpu1gbvzgqpTGFXlg6CcdgQrv2tVTOQd6RUmJjgPXKI4jtQ'); background-size: cover; background-position: center;">
+</div>
+<!-- Central Rejection Card -->
+<section class="relative z-10 w-full max-w-[600px] bg-[#111111] border border-[#7B2D42] p-8 md:p-12 shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
+<div class="flex flex-col items-center text-center">
+<!-- Large Error Icon -->
+<div class="mb-8 glow-error">
+<span class="material-symbols-outlined text-[80px] text-[#7B2D42]">
+                        cancel
+                    </span>
+</div>
+<!-- Titles -->
+<h1 class="font-headline text-4xl mb-3 text-[#F5F0E8] tracking-tight">
+                    Pagamento não aprovado
+                </h1>
+<p class="text-[#A89F91] text-lg mb-8 max-w-sm mx-auto">
+                    Seu pagamento foi recusado pelo Mercado Pago.
+                </p>
+<!-- Subtle Golden Separator -->
+<div class="w-24 h-[1px] bg-gradient-to-r from-transparent via-[#C9A55A]/50 to-transparent mb-8"></div>
+<!-- Reasons Box -->
+<div class="w-full bg-[#1A1A1A] border border-[#7B2D42]/30 p-6 mb-8 text-left">
+<h3 class="text-[#C9A55A] font-label text-[0.7rem] uppercase tracking-[0.2em] mb-4">
+                        MOTIVOS COMUNS
+                    </h3>
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-4">
+<li class="flex items-center gap-3 text-[#F5F0E8]/80 text-sm">
+<span class="text-[#C9A55A] text-lg leading-none">·</span>
+                            Saldo insuficiente
+                        </li>
+<li class="flex items-center gap-3 text-[#F5F0E8]/80 text-sm">
+<span class="text-[#C9A55A] text-lg leading-none">·</span>
+                            Dados incorretos
+                        </li>
+<li class="flex items-center gap-3 text-[#F5F0E8]/80 text-sm">
+<span class="text-[#C9A55A] text-lg leading-none">·</span>
+                            Limite atingido
+                        </li>
+<li class="flex items-center gap-3 text-[#F5F0E8]/80 text-sm">
+<span class="text-[#C9A55A] text-lg leading-none">·</span>
+                            Bloqueio bancário
+                        </li>
+</ul>
+</div>
+<!-- Instruction -->
+<p class="text-[#A89F91] text-sm mb-8">
+                    Tente novamente com outro método de pagamento ou entre em contato com nosso suporte especializado.
+                </p>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-4">
+<button class="w-full bg-[#C9A55A] hover:bg-[#E8C675] text-[#0A0A0A] font-bold py-5 px-8 transition-all duration-300 flex items-center justify-center gap-2 group tracking-widest text-xs">
+                        TENTAR NOVAMENTE
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="w-full border border-[#C9A55A]/40 hover:border-[#C9A55A] bg-transparent text-[#C9A55A] font-bold py-5 px-8 transition-all duration-300 flex items-center justify-center gap-3 tracking-widest text-xs">
+<span class="material-symbols-outlined text-lg">chat</span>
+                        FALAR NO WHATSAPP
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Simple Footer -->
+<footer class="w-full py-12 bg-[#1A1A1A] border-t border-[#C9A55A]/30">
+<div class="max-w-7xl mx-auto px-8 flex flex-col items-center gap-4">
+<!-- Decorative line logic -->
+<div class="w-full h-[1px] bg-gradient-to-r from-transparent via-[#C9A55A]/20 to-transparent mb-4"></div>
+<p class="text-[#C9A55A] font-label text-[0.7rem] uppercase tracking-[0.2em] text-center">
+                © 2024 ARCHITECTURAL MONOLITH. ALL RIGHTS RESERVED.
+            </p>
+<div class="flex gap-6 mt-2">
+<a class="text-[#F5F0E8]/40 hover:text-[#C9A55A] text-[0.65rem] uppercase tracking-widest transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#F5F0E8]/40 hover:text-[#C9A55A] text-[0.65rem] uppercase tracking-widest transition-colors" href="#">Terms of Service</a>
+<a class="text-[#F5F0E8]/40 hover:text-[#C9A55A] text-[0.65rem] uppercase tracking-widest transition-colors" href="#">Contact</a>
+</div>
+</div>
+</footer>
+</body></html>

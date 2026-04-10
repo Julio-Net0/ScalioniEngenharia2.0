@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&amp;family=Outfit:wght@300;400;500;600;700&amp;family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#402d00",
+                        "surface-tint": "#e8c173",
+                        "tertiary-container": "#f18ca2",
+                        "secondary-container": "#933800",
+                        "background": "#0A0A0A",
+                        "primary-fixed": "#ffdea0",
+                        "on-secondary-container": "#ffba9c",
+                        "outline-variant": "#4d4638",
+                        "surface-variant": "#353534",
+                        "secondary": "#B5501B",
+                        "on-background": "#F5F0E8",
+                        "tertiary": "#ffb1c0",
+                        "on-tertiary-fixed-variant": "#792c41",
+                        "primary-fixed-dim": "#e8c173",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-surface": "#e5e2e1",
+                        "error": "#7B2D42",
+                        "on-surface-variant": "#A89F91",
+                        "tertiary-fixed-dim": "#ffb1c0",
+                        "primary": "#C9A55A",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#360f00",
+                        "inverse-primary": "#775a16",
+                        "surface-container-highest": "#353534",
+                        "surface-container-low": "#111111",
+                        "on-primary-fixed": "#261a00",
+                        "surface": "#0A0A0A",
+                        "primary-container": "#C9A55A",
+                        "on-secondary": "#581e00",
+                        "on-tertiary-fixed": "#3f0017",
+                        "surface-container-high": "#1A1A1A",
+                        "tertiary-fixed": "#ffd9df",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#ffdbcd",
+                        "inverse-on-surface": "#313030",
+                        "outline": "#998f7f",
+                        "on-tertiary": "#5c152b",
+                        "on-surface": "#F5F0E8",
+                        "on-primary-container": "#523b00",
+                        "surface-container": "#111111",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#0A0A0A",
+                        "surface-bright": "#3a3939",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-tertiary-container": "#6f2339",
+                        "on-primary-fixed-variant": "#5c4300",
+                        "on-secondary-fixed-variant": "#7c2e00"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Playfair Display", "serif"],
+                        "body": ["Outfit", "sans-serif"],
+                        "label": ["Outfit", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #F5F0E8;
+            font-family: 'Outfit', sans-serif;
+            background-image: radial-gradient(circle at 50% 50%, rgba(201, 165, 90, 0.03) 0%, transparent 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .marble-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="flex min-h-screen overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<div class="marble-overlay"></div>
+<!-- SideNavBar (Shared Component JSON Source) -->
+<aside class="bg-[#111111] dark:bg-[#111111] h-screen w-64 border-r border-[#C9A55A]/15 flex flex-col h-full py-8 px-4 shadow-[40px_0_40px_-20px_rgba(181,80,27,0.05)] sticky top-0">
+<div class="mb-10 px-2">
+<h1 class="text-2xl font-serif tracking-[0.2em] text-[#C9A55A] font-headline">SCALIONI</h1>
+<p class="text-[10px] tracking-[0.4em] text-[#A89F91] mt-1 font-label">ENGENHARIA</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-3 py-3 text-[#A89F91] font-normal hover:text-[#F5F0E8] hover:bg-[#1A1A1A] transition-all duration-300 group" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="text-xs uppercase tracking-widest font-label">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#A89F91] font-normal hover:text-[#F5F0E8] hover:bg-[#1A1A1A] transition-all duration-300 group" href="#">
+<span class="material-symbols-outlined text-lg">shopping_cart</span>
+<span class="text-xs uppercase tracking-widest font-label">Pedidos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#A89F91] font-normal hover:text-[#F5F0E8] hover:bg-[#1A1A1A] transition-all duration-300 group" href="#">
+<span class="material-symbols-outlined text-lg">architecture</span>
+<span class="text-xs uppercase tracking-widest font-label">Projetos</span>
+</a>
+<!-- Active State: Plantas Prontas -->
+<a class="flex items-center gap-3 px-3 py-3 text-[#C9A55A] font-bold border-r-2 border-[#C9A55A] bg-[#1A1A1A] transition-all duration-300 scale-[0.98] brightness-110" href="#">
+<span class="material-symbols-outlined text-lg">precision_manufacturing</span>
+<span class="text-xs uppercase tracking-widest font-label">Plantas Prontas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#A89F91] font-normal hover:text-[#F5F0E8] hover:bg-[#1A1A1A] transition-all duration-300 group" href="#">
+<span class="material-symbols-outlined text-lg">chat_bubble_outline</span>
+<span class="text-xs uppercase tracking-widest font-label">Mensagens</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#A89F91] font-normal hover:text-[#F5F0E8] hover:bg-[#1A1A1A] transition-all duration-300 group" href="#">
+<span class="material-symbols-outlined text-lg">group</span>
+<span class="text-xs uppercase tracking-widest font-label">Usuários</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-[#A89F91] font-normal hover:text-[#F5F0E8] hover:bg-[#1A1A1A] transition-all duration-300 group" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="text-xs uppercase tracking-widest font-label">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-4 bg-[#C9A55A] text-on-primary text-[10px] uppercase tracking-[0.2em] font-bold hover:brightness-110 transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(201,165,90,0.3)]">
+                Novo Projeto
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-12 max-w-7xl mx-auto w-full">
+<!-- Header -->
+<header class="flex justify-between items-end mb-16 relative">
+<div class="space-y-2">
+<h2 class="text-5xl font-headline font-black text-on-background tracking-tight leading-none">PLANTAS PRONTAS</h2>
+<p class="text-on-surface-variant font-body font-light text-lg">Gerencie o catálogo de projetos para venda</p>
+</div>
+<button class="px-8 py-4 bg-primary text-on-primary font-label font-bold tracking-widest text-xs uppercase shadow-[0_15px_30px_-5px_rgba(201,165,90,0.2)] hover:scale-[1.02] transition-transform duration-300">
+                + NOVA PLANTA
+            </button>
+</header>
+<!-- Filters & Tools -->
+<div class="flex flex-wrap items-center justify-between gap-6 mb-8 border-b border-outline-variant/20 pb-8">
+<div class="flex gap-2">
+<button class="px-6 py-2 bg-primary text-on-primary font-label text-[10px] tracking-widest uppercase font-bold">TODAS</button>
+<button class="px-6 py-2 border border-outline-variant/30 text-on-surface-variant font-label text-[10px] tracking-widest uppercase hover:border-primary/50 hover:text-primary transition-colors">ATIVAS</button>
+<button class="px-6 py-2 border border-outline-variant/30 text-on-surface-variant font-label text-[10px] tracking-widest uppercase hover:border-primary/50 hover:text-primary transition-colors">INATIVAS</button>
+<button class="px-6 py-2 border border-outline-variant/30 text-on-surface-variant font-label text-[10px] tracking-widest uppercase hover:border-primary/50 hover:text-primary transition-colors">ESGOTADAS</button>
+</div>
+<div class="relative group">
+<div class="flex items-center gap-3 bg-surface-container-high px-4 py-2 cursor-pointer border border-transparent group-hover:border-primary/30 transition-all">
+<span class="text-[10px] font-label tracking-widest text-on-surface-variant uppercase">Ordenar por:</span>
+<span class="text-[10px] font-label tracking-widest text-on-surface uppercase font-bold">Mais recentes</span>
+<span class="material-symbols-outlined text-primary text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="bg-surface-container-low shadow-2xl relative overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/10">
+<th class="px-6 py-6 text-[10px] font-label tracking-[0.2em] text-on-surface-variant uppercase font-semibold">PLANTA</th>
+<th class="px-6 py-6 text-[10px] font-label tracking-[0.2em] text-on-surface-variant uppercase font-semibold">CATEGORIA</th>
+<th class="px-6 py-6 text-[10px] font-label tracking-[0.2em] text-on-surface-variant uppercase font-semibold">PREÇO</th>
+<th class="px-6 py-6 text-[10px] font-label tracking-[0.2em] text-on-surface-variant uppercase font-semibold">ÁREA</th>
+<th class="px-6 py-6 text-[10px] font-label tracking-[0.2em] text-on-surface-variant uppercase font-semibold">ATIVO</th>
+<th class="px-6 py-6 text-[10px] font-label tracking-[0.2em] text-on-surface-variant uppercase font-semibold text-right">AÇÕES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Modern architectural house exterior with golden lighting and sharp concrete angles in high contrast style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLASkI_rGnkZQND1cUOA25HT6kzdRqUuCK4kgr8nGLk7yqvaYG57LbCCJI7DUKVcRHQxXruF5bSHJUTKs0-U6y1sqaULOFAwe45LpP2gGoYYGX0rrUHMO9zARK1f1Rxnc8eV7XioL9zA3OGABKulEIq1tGxzTTGbM_4He_uULg6THh3KeXoBYU7cDuqqua-d2t9AByxATk0ZsCTw9fGtIiWvmAF17etRsuixF2jZUatQbtrEeIoTDM_fJb5CZUQ6htpg2rbOi-aA"/>
+</div>
+<div>
+<h4 class="font-headline text-on-surface text-lg">Residência Aurum</h4>
+<p class="text-xs font-label text-on-surface-variant tracking-wider uppercase mt-0.5">aurum-res-01</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-on-surface-variant">Residencial</span>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-primary font-bold">R$ 2.490</span>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-on-surface-variant">420m²</span>
+</td>
+<td class="px-6 py-6">
+<div class="w-10 h-5 bg-green-900/20 rounded-full p-1 cursor-pointer border border-green-500/30 flex justify-end">
+<div class="w-3 h-3 bg-green-400 rounded-full shadow-[0_0_8px_rgba(74,222,128,0.5)]"></div>
+</div>
+</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Interior of a luxury concrete minimalist villa with architectural shadows and warm wooden accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd3u90VTsNTPJSm7rfUa16wgfbJvhslK7ODx3VoMiRWvCb2RYle6MmoTP7aIeHVwIdWFoxkcLHjZEKzK6_pAcZqFhZwlq8kllX0c0JxoSZaDC8-SaWYemnoQv3FRrHSpkmcGS27k-Z9GIZThn6ZYe7rOWEtVZjxqWhJaEjcyBhe0abfxRrcuw7w3pfRV0WEncpOvvkr2c1C_UkCwWClgMZVpuYKAm-gL9xzifHSh1gnG9FRpQ9W0rJvt2O6tCYMeJGr8jNp3z0-g"/>
+</div>
+<div>
+<h4 class="font-headline text-on-surface text-lg">Villa Concrete</h4>
+<p class="text-xs font-label text-on-surface-variant tracking-wider uppercase mt-0.5">villa-con-05</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-on-surface-variant">Residencial</span>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-primary font-bold">R$ 1.850</span>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-on-surface-variant">310m²</span>
+</td>
+<td class="px-6 py-6">
+<div class="w-10 h-5 bg-green-900/20 rounded-full p-1 cursor-pointer border border-green-500/30 flex justify-end">
+<div class="w-3 h-3 bg-green-400 rounded-full shadow-[0_0_8px_rgba(74,222,128,0.5)]"></div>
+</div>
+</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-high transition-colors">
+<td class="px-6 py-6">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Monolithic platinum corporate building skyscraper facade with dramatic dark glass reflections and morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs-goIdqVh4aHaK8848_QlemaOBhPtjghpnNogdSPhOoezREt7zGlvOfeRnLWHCzm1FdhQODKyLy9Q3TXM9EKWiWXxchp8k-1sOTk4jIZ011LYAdkfLkQvIPKeUwwvFTDjaUvFI08T72Ifnxen9no13z831mdk0QF6mAKeCMIa_I72zeVgEjT7sluH6I-4AQHDbgCx1r_QQMNgGitM7r1-5f1RqnfQy1D_pF358kRh-CU5h-UfwYpzZPd9LXupBT8LMgLRCgICog"/>
+</div>
+<div>
+<h4 class="font-headline text-on-surface text-lg">Edifício Platinum</h4>
+<p class="text-xs font-label text-on-surface-variant tracking-wider uppercase mt-0.5">plat-bld-03</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-on-surface-variant">Comercial</span>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-primary font-bold">R$ 4.200</span>
+</td>
+<td class="px-6 py-6">
+<span class="text-xs font-label tracking-widest text-on-surface-variant">860m²</span>
+</td>
+<td class="px-6 py-6">
+<div class="w-10 h-5 bg-surface-variant/30 rounded-full p-1 cursor-pointer border border-outline-variant/30 flex justify-start">
+<div class="w-3 h-3 bg-on-surface-variant rounded-full"></div>
+</div>
+</td>
+<td class="px-6 py-6 text-right">
+<div class="flex justify-end gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<footer class="mt-8 flex flex-col md:flex-row justify-between items-center gap-6 border-t border-outline-variant/10 pt-8">
+<p class="text-xs font-label tracking-widest text-on-surface-variant uppercase">Mostrando 1–3 de 12 plantas</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-primary text-on-primary font-bold text-xs">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 text-on-surface-variant text-xs transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 text-on-surface-variant text-xs transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 text-on-surface-variant text-xs transition-colors">4</button>
+<button class="w-10 h-10 flex items-center justify-center border border-outline-variant/20 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">chevron_right</span>
+</button>
+</div>
+</footer>
+</main>
+</body></html>

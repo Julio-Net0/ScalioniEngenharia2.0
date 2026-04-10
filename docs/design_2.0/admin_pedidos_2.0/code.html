@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ScalioniEngenharia 2.0 - Gestão de Pedidos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Outfit:wght@100..900&amp;family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#e8c173",
+                        "primary-fixed": "#ffdea0",
+                        "on-secondary": "#581e00",
+                        "outline-variant": "#4d4638",
+                        "outline": "#998f7f",
+                        "surface-variant": "#353534",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "on-secondary-container": "#ffba9c",
+                        "on-primary-container": "#523b00",
+                        "inverse-surface": "#e5e2e1",
+                        "inverse-primary": "#775a16",
+                        "on-tertiary-fixed": "#3f0017",
+                        "surface-tint": "#e8c173",
+                        "primary-container": "#c9a55a",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary": "#402d00",
+                        "on-tertiary-container": "#6f2339",
+                        "on-primary-fixed-variant": "#5c4300",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#261a00",
+                        "surface-dim": "#131313",
+                        "surface-bright": "#3a3939",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed": "#ffd9df",
+                        "on-surface-variant": "#d1c5b3",
+                        "tertiary-container": "#f18ca2",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#ffb596",
+                        "secondary-fixed": "#ffdbcd",
+                        "secondary-container": "#933800",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#ffb1c0",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary": "#5c152b",
+                        "surface-container-highest": "#353534",
+                        "surface": "#131313",
+                        "primary-fixed-dim": "#e8c173",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#313030",
+                        "tertiary": "#ffb1c0",
+                        "on-secondary-fixed": "#360f00",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#ffb596",
+                        "on-tertiary-fixed-variant": "#792c41",
+                        "architect-gold": "#C9A55A",
+                        "architect-dark": "#0A0A0A",
+                        "architect-stone": "#A89F91",
+                        "architect-terracotta": "#B5501B"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Playfair Display", "serif"],
+                        "body": ["Outfit", "sans-serif"],
+                        "label": ["Outfit", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["Outfit", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>body {
+    background-color: #0A0A0A;
+    background-image: radial-gradient(circle at 50% 50%, rgba(201, 165, 90, 0.03) 0%, transparent 70%);
+    color: #F5F0E8;
+    font-family: "Outfit", sans-serif
+    }
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+    vertical-align: middle
+    }
+.marble-texture {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCuAzgQm0h-cpqTFHeaxnca7ftM9lS5CDlKAJSv33tSHbl1KtLqpjVEQXqnr-1esoQuZ9PQTZCCstjV-MO71kbxbT-dsndOY24cI9KVJkSb4mRnkBT7lbcNluQvGvukK9REothUfzT2j5iFTtVdftOEnM0X9oy3odhUx6DTI2yfxNu71UBvu87sUPE_2w28g__nhWcDeiCVbYHn0bRLCAnGm7H6YHRQkUq-TkSKdbligYSQNneZaT0e-atC58rzSrnvPGRJ2i_zWA);
+    opacity: 0.05
+    }</style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-72 flex-col fixed left-0 top-0 bg-[#111111] dark:bg-[#111111] border-r border-[#C9A55A]/10 shadow-[10px_0_30px_rgba(181,80,27,0.05)] flex py-8 px-6 space-y-6 z-50">
+<div class="flex flex-col space-y-1 mb-8">
+<h1 class="text-2xl font-serif italic text-[#C9A55A]">ARCHITECT</h1>
+<p class="text-[10px] font-sans tracking-[0.2em] text-[#A89F91] uppercase">Admin Console</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center space-x-4 py-3 text-[#A89F91] hover:bg-[#1A1A1A] hover:text-[#E8C675] transition-colors pl-4 group" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="text-xs uppercase tracking-widest font-sans">Dashboard</span>
+</a>
+<a class="flex items-center space-x-4 py-3 text-[#C9A55A] font-bold border-l-2 border-[#C9A55A] bg-[#1A1A1A] pl-4 group scale-95 duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined text-xl">shopping_cart</span>
+<span class="text-xs uppercase tracking-widest font-sans">Pedidos</span>
+</a>
+<a class="flex items-center space-x-4 py-3 text-[#A89F91] hover:bg-[#1A1A1A] hover:text-[#E8C675] transition-colors pl-4 group" href="#">
+<span class="material-symbols-outlined text-xl">architecture</span>
+<span class="text-xs uppercase tracking-widest font-sans">Projetos</span>
+</a>
+<a class="flex items-center space-x-4 py-3 text-[#A89F91] hover:bg-[#1A1A1A] hover:text-[#E8C675] transition-colors pl-4 group" href="#">
+<span class="material-symbols-outlined text-xl">floor</span>
+<span class="text-xs uppercase tracking-widest font-sans">Plantas Prontas</span>
+</a>
+<a class="flex items-center space-x-4 py-3 text-[#A89F91] hover:bg-[#1A1A1A] hover:text-[#E8C675] transition-colors pl-4 group" href="#">
+<span class="material-symbols-outlined text-xl">mail</span>
+<span class="text-xs uppercase tracking-widest font-sans">Mensagens</span>
+</a>
+<a class="flex items-center space-x-4 py-3 text-[#A89F91] hover:bg-[#1A1A1A] hover:text-[#E8C675] transition-colors pl-4 group" href="#">
+<span class="material-symbols-outlined text-xl">group</span>
+<span class="text-xs uppercase tracking-widest font-sans">Usuários</span>
+</a>
+<a class="flex items-center space-x-4 py-3 text-[#A89F91] hover:bg-[#1A1A1A] hover:text-[#E8C675] transition-colors pl-4 group" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="text-xs uppercase tracking-widest font-sans">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-[#C9A55A]/5 flex items-center space-x-4">
+<div class="w-10 h-10 bg-architect-gold/20 overflow-hidden border border-architect-gold/30">
+<img alt="User Profile Avatar" class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 transition-all duration-500" data-alt="close-up portrait of a professional architect man with a confident expression in a dark studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwt8oqYQvKtev77qakvIuRnZ9a52IYct7om9fGqRKEp8nqm1cZiMMrwMSqQr09yyxaTEVVjAo_8R6iAijZziO6nuRCqmH-WaEF1VALtD_KswiV0l0sTLJim3OxigOvh8Y8UTo9zZK-UdJMwCOzcsPy0c4sWknvTF-qCjmaf6dksZoDET2obrOs4en0VJhhLXyqT3KLW9HFglyoQm0iSs8-pKKySUTKv8xHleKrIEJUJDLgQLoPs9CqyRzdoXpQnhFp7UfhLIhUng"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-sans text-[#F5F0E8] font-semibold">Admin Master</span>
+<span class="text-[10px] text-[#A89F91] uppercase tracking-tighter">Sair da Sessão</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-72 relative">
+<!-- TopAppBar (Shared Component) -->
+<header class="full-width h-16 sticky top-0 z-40 bg-[#1A1A1A]/90 backdrop-blur-md flex items-center justify-between px-8 text-[#C9A55A]">
+<div class="flex items-center space-x-4">
+<span class="text-xs font-sans tracking-widest text-architect-stone uppercase">ScalioniEngenharia 2.0</span>
+</div>
+<div class="flex items-center space-x-8">
+<div class="relative group">
+<input class="bg-transparent border-b border-[#C9A55A]/20 focus:border-[#C9A55A] text-xs py-1 px-2 outline-none transition-all w-48 focus:w-64 font-sans text-[#F5F0E8]" placeholder="Buscar pedidos..." type="text"/>
+<span class="material-symbols-outlined absolute right-0 top-1 text-architect-gold text-lg cursor-pointer hover:opacity-80 transition-opacity">search</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity cursor-pointer text-xl">notifications</span>
+<span class="material-symbols-outlined hover:opacity-80 transition-opacity cursor-pointer text-xl">account_circle</span>
+</div>
+</div>
+</header>
+<div class="p-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-12 border-l-4 border-architect-gold pl-8">
+<h2 class="text-6xl font-headline italic text-on-surface mb-2 tracking-tight">PEDIDOS</h2>
+<p class="text-architect-stone font-sans text-sm tracking-[0.15em] uppercase">Histórico de compras de plantas arquitetônicas</p>
+</div>
+<!-- Filters & Actions -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-2 bg-architect-gold text-architect-dark text-[10px] font-sans font-bold tracking-widest uppercase transition-all hover:bg-architect-gold/90">TODOS</button>
+<button class="px-6 py-2 border border-architect-gold/20 text-architect-stone text-[10px] font-sans font-bold tracking-widest uppercase hover:border-architect-gold/60 hover:text-architect-gold transition-all">PAGOS</button>
+<button class="px-6 py-2 border border-architect-gold/20 text-architect-stone text-[10px] font-sans font-bold tracking-widest uppercase hover:border-architect-gold/60 hover:text-architect-gold transition-all">PENDENTES</button>
+<button class="px-6 py-2 border border-architect-gold/20 text-architect-stone text-[10px] font-sans font-bold tracking-widest uppercase hover:border-architect-gold/60 hover:text-architect-gold transition-all">REJEITADOS</button>
+<button class="px-6 py-2 border border-architect-gold/20 text-architect-stone text-[10px] font-sans font-bold tracking-widest uppercase hover:border-architect-gold/60 hover:text-architect-gold transition-all">CANCELADOS</button>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex flex-col">
+<label class="text-[10px] font-sans uppercase tracking-[0.1em] text-architect-stone mb-1 ml-1">Período</label>
+<select class="bg-architect-dark border border-architect-gold/20 text-on-surface text-xs py-2 pl-4 pr-10 focus:ring-1 focus:ring-architect-gold focus:border-architect-gold outline-none font-sans appearance-none cursor-pointer">
+<option>Últimos 30 dias</option>
+<option>Último trimestre</option>
+<option>Ano atual (2026)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Orders Table -->
+<div class="bg-[#111111] relative overflow-hidden group">
+<div class="marble-texture absolute inset-0 pointer-events-none"></div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-[#C9A55A]/10">
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold">ID</th>
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold">Cliente</th>
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold">Planta</th>
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold">Valor</th>
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold">Status</th>
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold">Data</th>
+<th class="py-6 px-6 text-[10px] font-sans uppercase tracking-[0.2em] text-architect-stone font-bold text-right">Ações</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#C9A55A]/5">
+<!-- Line 1 -->
+<tr class="group hover:bg-[#1A1A1A] transition-colors">
+<td class="py-6 px-6 text-sm font-sans text-architect-gold">#001</td>
+<td class="py-6 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-sans font-medium text-on-surface">Ana Silva</span>
+<span class="text-xs font-sans text-architect-stone">ana@email.com</span>
+</div>
+</td>
+<td class="py-6 px-6 text-sm font-sans text-on-surface italic">Residência Aurum</td>
+<td class="py-6 px-6 text-sm font-sans font-bold text-on-surface tracking-wide">R$ 2.490</td>
+<td class="py-6 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold tracking-tighter uppercase bg-green-950/40 text-green-400 border border-green-900/50">
+                                        PAGO
+                                    </span>
+</td>
+<td class="py-6 px-6 text-sm font-sans text-architect-stone">17/03/2026</td>
+<td class="py-6 px-6 text-right space-x-3">
+<button class="p-2 text-architect-stone hover:text-architect-gold transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<button class="p-2 text-architect-stone hover:text-architect-gold transition-colors" title="Reenviar E-mail">
+<span class="material-symbols-outlined text-lg">forward_to_inbox</span>
+</button>
+</td>
+</tr>
+<!-- Line 2 -->
+<tr class="group hover:bg-[#1A1A1A] transition-colors">
+<td class="py-6 px-6 text-sm font-sans text-architect-gold">#002</td>
+<td class="py-6 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-sans font-medium text-on-surface">Carlos Mota</span>
+<span class="text-xs font-sans text-architect-stone">carlos@email.com</span>
+</div>
+</td>
+<td class="py-6 px-6 text-sm font-sans text-on-surface italic">Villa Concrete</td>
+<td class="py-6 px-6 text-sm font-sans font-bold text-on-surface tracking-wide">R$ 1.850</td>
+<td class="py-6 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold tracking-tighter uppercase bg-yellow-950/40 text-[#C9A55A] border border-yellow-900/50">
+                                        PENDENTE
+                                    </span>
+</td>
+<td class="py-6 px-6 text-sm font-sans text-architect-stone">17/03/2026</td>
+<td class="py-6 px-6 text-right space-x-3">
+<button class="p-2 text-architect-stone hover:text-architect-gold transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Line 3 -->
+<tr class="group hover:bg-[#1A1A1A] transition-colors">
+<td class="py-6 px-6 text-sm font-sans text-architect-gold">#003</td>
+<td class="py-6 px-6">
+<div class="flex flex-col">
+<span class="text-sm font-sans font-medium text-on-surface">Beatriz Lima</span>
+<span class="text-xs font-sans text-architect-stone">bea@email.com</span>
+</div>
+</td>
+<td class="py-6 px-6 text-sm font-sans text-on-surface italic">Mansão Horizon</td>
+<td class="py-6 px-6 text-sm font-sans font-bold text-on-surface tracking-wide">R$ 8.900</td>
+<td class="py-6 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 text-[10px] font-bold tracking-tighter uppercase bg-orange-950/40 text-architect-terracotta border border-orange-900/50">
+                                        REJEITADO
+                                    </span>
+</td>
+<td class="py-6 px-6 text-sm font-sans text-architect-stone">16/03/2026</td>
+<td class="py-6 px-6 text-right space-x-3">
+<button class="p-2 text-architect-stone hover:text-architect-gold transition-colors" title="Ver Detalhes">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-architect-gold/10 pt-8">
+<span class="text-xs font-sans text-architect-stone tracking-wide">
+                    Mostrando <span class="text-architect-gold font-bold">1–3</span> de 47 pedidos
+                </span>
+<div class="flex items-center space-x-2">
+<button class="w-10 h-10 flex items-center justify-center border border-architect-gold/10 text-architect-stone hover:border-architect-gold hover:text-architect-gold transition-all">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center border border-architect-gold bg-architect-gold/5 text-architect-gold font-bold text-xs">1</button>
+<button class="w-10 h-10 flex items-center justify-center border border-architect-gold/10 text-architect-stone hover:border-architect-gold hover:text-architect-gold transition-all text-xs">2</button>
+<button class="w-10 h-10 flex items-center justify-center border border-architect-gold/10 text-architect-stone hover:border-architect-gold hover:text-architect-gold transition-all text-xs">3</button>
+<span class="text-architect-stone px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center border border-architect-gold/10 text-architect-stone hover:border-architect-gold hover:text-architect-gold transition-all text-xs">16</button>
+<button class="w-10 h-10 flex items-center justify-center border border-architect-gold/10 text-architect-stone hover:border-architect-gold hover:text-architect-gold transition-all">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Decorative Element -->
+<div class="absolute bottom-12 right-12 opacity-10 pointer-events-none select-none">
+<h3 class="text-9xl font-headline italic tracking-tighter text-architect-gold">SCALIONI</h3>
+</div>
+</main>
+</body></html>

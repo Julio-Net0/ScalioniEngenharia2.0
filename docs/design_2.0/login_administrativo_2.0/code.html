@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Scalioni Engenharia 2.0 | Painel Administrativo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Outfit:wght@300;400;600&amp;family=Noto+Serif:wght@400;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353534",
+                        "surface": "#131313",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#f18ca2",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "primary": "#e8c173",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "on-background": "#e5e2e1",
+                        "surface-tint": "#e8c173",
+                        "tertiary": "#ffb1c0",
+                        "surface-container-low": "#1c1b1b",
+                        "primary-fixed": "#ffdea0",
+                        "secondary": "#ffb596",
+                        "on-secondary-fixed": "#360f00",
+                        "on-primary": "#402d00",
+                        "secondary-fixed": "#ffdbcd",
+                        "outline": "#998f7f",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#775a16",
+                        "on-tertiary-fixed": "#3f0017",
+                        "secondary-container": "#933800",
+                        "inverse-surface": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#792c41",
+                        "primary-fixed-dim": "#e8c173",
+                        "on-secondary-container": "#ffba9c",
+                        "primary-container": "#c9a55a",
+                        "on-secondary": "#581e00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d1c5b3",
+                        "on-primary-fixed": "#261a00",
+                        "secondary-fixed-dim": "#ffb596",
+                        "surface-variant": "#353534",
+                        "tertiary-fixed-dim": "#ffb1c0",
+                        "surface-dim": "#131313",
+                        "surface-container": "#201f1f",
+                        "on-tertiary": "#5c152b",
+                        "on-primary-container": "#523b00",
+                        "on-primary-fixed-variant": "#5c4300",
+                        "outline-variant": "#4d4638",
+                        "tertiary-fixed": "#ffd9df",
+                        "on-tertiary-container": "#6f2339",
+                        "background": "#131313",
+                        "on-surface": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Playfair Display", "Noto Serif", "serif"],
+                        "body": ["Outfit", "Manrope", "sans-serif"],
+                        "label": ["Outfit", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24
+    }
+.marble-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBxm5iUfP2_eHSOpqhfxjPhaE9KKmXr-HyMvlpp2ELZj3KwpMsFUxM6fGOyOa809rmoB4s8Osbx_jgMkml4toHXaNYb6CqcVXHsbwFVQoldiYzgD0fp8jl7zxZb39ULuNjsTdAp7LEXpS6Hx7NS9xoiuGDrwZ1OZN_5oII3LUG2Q25Q-WmwUZZT05A99D4HPhfFoBg_oYgQ1zTyqmX_NJgNuElDjI5W2O--vLGwwGMNWT16leTaPNMwESvU6WvTL_Cd6uZ3blbk-Q);
+    opacity: 0.05
+    }
+.gold-glow {
+    box-shadow: 0 0 40px rgba(181, 80, 27, 0.1)
+    }
+.text-copper {
+    color: #C9A55A
+    }
+.bg-obsidian {
+    background-color: #111
+    }</style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Hero Background Wrapper -->
+<div class="fixed inset-0 z-0">
+<img alt="high-end corporate skyscraper architecture with deep shadows and metallic details at night" class="w-full h-full object-cover" data-alt="dramatic low angle shot of a modern glass and steel skyscraper at dusk with warm interior lights and deep obsidian shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiZcN33wDhHR7uigRsBAmKis6fr87AE9YuMYl5goTei8vVqAvwlUa4gDuGP3hiHw05lnJ3xc05ONjQU4KmP88xfePob-9qk67mOSym32O6mS_XwtoS3N2s_nsmumaaHTPTbpyw5V7nwCPKKWjxWpGkYgSGzSPEPG1nB5SzKbGmBMIKgryFryrlcWtZMJMhzM_Eqm-OfJrbASIYIqrC3jJWANazCqoTN2cZ7WMYq7Vxu3XM4c68j_qrUVxixxfPOpSVB0a7Ef3Ycg"/>
+<!-- Dense Overlay & Marble Texture -->
+<div class="absolute inset-0 bg-[#0A0A0A]/85 backdrop-blur-sm"></div>
+<div class="absolute inset-0 marble-overlay"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex min-h-screen items-center justify-center p-6">
+<!-- Login Card -->
+<div class="w-full max-w-[420px] bg-obsidian border border-primary/20 p-10 gold-glow relative">
+<!-- Architectural Line Detail -->
+<div class="absolute top-0 left-0 w-1 h-full bg-primary/10"></div>
+<!-- Logo Section -->
+<header class="text-center mb-8">
+<h1 class="font-headline text-2xl font-bold tracking-tighter text-copper mb-1">
+                    SCALIONI | ENGENHARIA
+                </h1>
+<p class="font-label text-[10px] tracking-[0.25em] text-on-surface-variant font-semibold">
+                    PAINEL ADMINISTRATIVO
+                </p>
+<div class="mt-6 h-px w-12 bg-primary/40 mx-auto"></div>
+</header>
+<!-- Form -->
+<form action="#" class="space-y-6">
+<!-- E-mail Input -->
+<div class="space-y-2">
+<label class="block font-label text-[10px] tracking-widest text-on-surface-variant uppercase font-semibold" for="email">
+                        E-MAIL
+                    </label>
+<div class="relative">
+<input class="w-full bg-[#1A1A1A] border-b border-outline-variant text-on-surface px-0 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-outline/30 placeholder:text-xs" id="email" name="email" placeholder="Digite seu e-mail corporativo" required="" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label text-[10px] tracking-widest text-on-surface-variant uppercase font-semibold" for="password">
+                            SENHA
+                        </label>
+<a class="font-label text-[10px] text-primary/70 hover:text-primary tracking-widest uppercase transition-colors" href="#">
+                            Esqueci minha senha
+                        </a>
+</div>
+<div class="relative">
+<input class="w-full bg-[#1A1A1A] border-b border-outline-variant text-on-surface px-0 py-3 focus:outline-none focus:border-primary transition-colors placeholder:text-outline/30 placeholder:text-xs" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-0 top-3 text-on-surface-variant hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="group w-full bg-primary py-4 text-surface font-bold text-xs tracking-[0.2em] hover:bg-primary-fixed transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                        ENTRAR 
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</form>
+<!-- Card Footer -->
+<footer class="mt-10 text-center">
+<p class="text-[11px] text-outline leading-relaxed max-w-[280px] mx-auto opacity-60">
+                    Acesso restrito. Não compartilhe suas credenciais.
+                </p>
+</footer>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="fixed bottom-0 w-full px-12 py-8 flex justify-between items-center z-20 pointer-events-none">
+<div class="flex gap-8 opacity-40">
+<!-- Hidden as per requirement, but structure kept for architectural balance -->
+</div>
+<p class="font-label text-[10px] tracking-[0.2em] text-on-surface-variant uppercase pointer-events-auto">
+            © 2026 Scalioni Engenharia
+        </p>
+</footer>
+<!-- Decorative Corner Elements (Vault Aesthetic) -->
+<div class="fixed top-8 left-8 w-16 h-16 border-t border-l border-primary/20 pointer-events-none z-10"></div>
+<div class="fixed top-8 right-8 w-16 h-16 border-t border-r border-primary/20 pointer-events-none z-10"></div>
+<div class="fixed bottom-24 left-8 w-16 h-16 border-b border-l border-primary/20 pointer-events-none z-10"></div>
+<div class="fixed bottom-24 right-8 w-16 h-16 border-b border-r border-primary/20 pointer-events-none z-10"></div>
+</body></html>
