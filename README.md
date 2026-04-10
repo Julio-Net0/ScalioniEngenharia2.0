@@ -29,7 +29,7 @@ Backend robusto para o escritório **Scalioni Engenharia**. Inclui portfólio, l
    docker compose exec backend python -m backend.scripts.seed
    ```
 
-## Como rodar testes (Pytest)
+## Rodar testes (Pytest)
 
 Os testes devem ser executados dentro do container para garantir a estrutura de módulos correta:
 
