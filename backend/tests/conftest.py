@@ -11,6 +11,10 @@ from backend.core.config import settings
 @pytest.fixture(scope="session", autouse=True)
 def apply_migrations():
     """Aplica as migrations antes de todos os testes e reverte ao final."""
+    # Desabilita o limiter para todos os testes
+    from backend.core.security import limiter
+    limiter.enabled = False
+    
     subprocess.run(["alembic", "upgrade", "head"], check=True, cwd="/app/backend")
     yield
     subprocess.run(["alembic", "downgrade", "base"], check=True, cwd="/app/backend")

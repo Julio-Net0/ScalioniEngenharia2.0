@@ -4,6 +4,7 @@ import enum
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
+from backend.core.timezone import now_utc
 from decimal import Decimal
 
 
@@ -27,5 +28,5 @@ class Pedido:
     mp_payment_id: str | None = None
     download_token: uuid.UUID | None = None
     expires_at: datetime | None = None
-    criado_em: datetime = field(default_factory=datetime.utcnow)
-    atualizado_em: datetime = field(default_factory=datetime.utcnow)
+    criado_em: datetime = field(default_factory=now_utc)
+    atualizado_em: datetime = field(default_factory=now_utc)

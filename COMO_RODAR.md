@@ -39,7 +39,7 @@ docker compose down
 ## 3. Rodar os testes unitários
 
 ```bash
-# Todos os testes (24 testes)
+# Todos os testes com cobertura (padrão — relatório no terminal + htmlcov/)
 docker compose exec backend pytest backend/tests/ -v
 
 # Um arquivo específico
@@ -47,6 +47,30 @@ docker compose exec backend pytest backend/tests/test_contato.py -v
 ```
 
 > ✅ Os testes aplicam migrations automaticamente via fixture `apply_migrations` no `conftest.py`.
+
+---
+
+## 4. Relatório de cobertura de código
+
+Ao rodar `pytest`, a cobertura é gerada automaticamente via `pytest-cov`.
+
+```bash
+# Rodar testes + ver cobertura no terminal (padrão)
+docker compose exec backend pytest backend/tests/ -v
+
+# Apenas relatório resumido (sem detalhes de linhas)
+docker compose exec backend pytest --cov-report=term
+
+# Gerar relatório HTML interativo em htmlcov/
+docker compose exec backend pytest --cov-report=html:htmlcov
+
+# Rodar sem cobertura (mais rápido, para debug pontual)
+docker compose exec backend pytest backend/tests/ -v --no-cov
+```
+
+O relatório HTML fica em `backend/htmlcov/index.html` — abra no navegador para ver quais linhas estão sem cobertura.
+
+> ⚠️ A suíte falha automaticamente se a cobertura cair abaixo de **80%** (configurado em `pytest.ini`).
 
 ---
 

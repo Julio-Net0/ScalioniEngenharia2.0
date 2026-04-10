@@ -3,6 +3,7 @@
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
+from backend.core.timezone import now_utc
 from decimal import Decimal
 
 
@@ -17,4 +18,4 @@ class Planta:
     terreno_minimo_m2: Decimal | None = None
     arquivo_path: str | None = None
     ativo: bool = True
-    criado_em: datetime = field(default_factory=datetime.utcnow)
+    criado_em: datetime = field(default_factory=now_utc)

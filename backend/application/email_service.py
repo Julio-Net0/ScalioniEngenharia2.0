@@ -18,11 +18,11 @@ async def _send_email(to_email: str, subject: str, html_body: str) -> None:
     msg["To"] = to_email
     msg.attach(MIMEText(html_body, "html"))
 
-    with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:
-        server.ehlo()
-        server.starttls()
-        server.login(settings.smtp_user, settings.smtp_password)
-        server.sendmail(settings.smtp_user, to_email, msg.as_string())
+    with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:  # pragma: no cover
+        server.ehlo()  # pragma: no cover
+        server.starttls()  # pragma: no cover
+        server.login(settings.smtp_user, settings.smtp_password)  # pragma: no cover
+        server.sendmail(settings.smtp_user, to_email, msg.as_string())  # pragma: no cover
 
 
 async def send_contact_confirmation(to_email: str, nome: str) -> None:

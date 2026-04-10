@@ -3,6 +3,7 @@
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
+from backend.core.timezone import now_utc
 
 
 @dataclass
@@ -13,4 +14,4 @@ class MensagemContato:
     id: uuid.UUID = field(default_factory=uuid.uuid4)
     telefone: str | None = None
     lida: bool = False
-    criada_em: datetime = field(default_factory=datetime.utcnow)
+    criada_em: datetime = field(default_factory=now_utc)
