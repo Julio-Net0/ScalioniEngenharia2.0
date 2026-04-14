@@ -18,8 +18,8 @@ SYNC_DB_URL = TEST_DB_URL  # psycopg2 para inspeção síncrona
 
 def run_alembic(command: list[str]) -> subprocess.CompletedProcess:
     return subprocess.run(
-        ["alembic", "-c", "backend/alembic.ini"] + command,
-        cwd=".",
+        ["alembic"] + command,
+        cwd="/app/backend",     # must match onde fica alembic.ini
         capture_output=True,
         text=True,
     )
@@ -35,7 +35,7 @@ def engine():
 def test_upgrade_head_cria_tabelas(engine):
     """Após upgrade head, todas as tabelas esperadas devem existir."""
     result = run_alembic(["upgrade", "head"])
-    assert result.returncode == 0, f"alembic upgrade head falhou:\n{result.stderr}"
+    assert result.returncode == 0, f"alembic upgrade head falhou:\n{result.stderr}\n{result.stdout}"
 
     inspector = inspect(engine)
     tabelas = inspector.get_table_names()
@@ -85,15 +85,33 @@ def test_constraints_presentes(engine):
         assert count > 0, "FK constraint pedidos → plantas não encontrada"
 
 
-def test_downgrade_reverte_estado(engine):
-    """Após downgrade -1, as tabelas devem ser removidas (estado inicial)."""
+def test_downgrade_seed_reverte_migration_seed(engine):
+    """Downgrade -1 remove a migration de seed (0002) mas mantém o schema (0001)."""
     result = run_alembic(["downgrade", "-1"])
-    assert result.returncode == 0, f"alembic downgrade -1 falhou:\n{result.stderr}"
+    assert result.returncode == 0, f"alembic downgrade -1 falhou:\n{result.stderr}\n{result.stdout}"
+
+    # Verifica que ainda estamos em 0001 (tabelas existem)
+    inspector = inspect(engine)
+    tabelas = inspector.get_table_names()
+    assert "projetos" in tabelas, "Tabela 'projetos' removida indevidamente pelo downgrade -1"
+
+    # Verifica a versão atual no banco
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT version_num FROM alembic_version"))
+        version = result.scalar()
+    assert version == "0001_initial", f"Versão esperada '0001_initial', obtida: {version}"
+
+
+def test_downgrade_base_remove_todas_tabelas(engine):
+    """Downgrade base remove todas as tabelas do domínio."""
+    result = run_alembic(["downgrade", "base"])
+    assert result.returncode == 0, f"alembic downgrade base falhou:\n{result.stderr}\n{result.stdout}"
 
     inspector = inspect(engine)
     tabelas = inspector.get_table_names()
     tabelas_dominio = [t for t in tabelas if t not in ("alembic_version",)]
-    assert len(tabelas_dominio) == 0, f"Tabelas ainda presentes após downgrade: {tabelas_dominio}"
+    assert len(tabelas_dominio) == 0, f"Tabelas ainda presentes após downgrade base: {tabelas_dominio}"
 
     # Restaurar para o estado HEAD ao fim do teste
     run_alembic(["upgrade", "head"])
+

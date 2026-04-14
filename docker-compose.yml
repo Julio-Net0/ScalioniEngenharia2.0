@@ -53,6 +53,23 @@ services:
     depends_on:
       - postgres
 
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+      NEXT_PUBLIC_JWT_SECRET: ${SECRET_KEY:-dev-secret-key}
+      NEXT_PUBLIC_WHATSAPP: "5511999999999"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+
 volumes:
   postgres_data:
   uploads_data:

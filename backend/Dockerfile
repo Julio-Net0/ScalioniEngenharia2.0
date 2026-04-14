@@ -25,3 +25,13 @@ RUN pip install --no-cache-dir -r requirements-dev.txt
 
 # uvicorn backend.main:app (suporta imports from backend...)
 CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+# ── Prod ──────────────────────────────────────────────────────────────────────
+FROM base AS prod
+
+# Usuário não-root para segurança
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+USER appuser
+
+# 2 workers Uvicorn — ajustar conforme CPU disponível em prod
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]

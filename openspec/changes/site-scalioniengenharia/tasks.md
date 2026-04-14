@@ -84,5 +84,5 @@
 
 - [x] `task-069` Configurar `docker-compose.yml` simplificado — Sem Traefik/Prod/Frontend.
 - [x] `task-070` Criar script de seed — AdminUser padrão + dados de demo.
-- [ ] `task-071` Revisar segurança do backend — Rate limit e validação de tokens.
-- [ ] `task-072` Finalização do README focado nos testes de backend.
+- [x] `task-071` Revisar segurança do backend — Rate limit e validação de tokens.
+- [x] `task-072` Finalização do README focado nos testes de backend.

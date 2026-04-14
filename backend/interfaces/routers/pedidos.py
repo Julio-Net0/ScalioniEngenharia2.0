@@ -1,9 +1,10 @@
 """Router FastAPI para POST /api/pedidos."""
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel, EmailStr
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend.core.security import limiter
 from backend.infrastructure.database.models import Pedido, PedidoStatus
 from backend.infrastructure.database.session import get_db
 from backend.infrastructure.repositories.planta_repository import PlantaRepository
@@ -13,7 +14,9 @@ router = APIRouter(prefix="/api/pedidos", tags=["pedidos"])
 
 
 @router.post("", response_model=PedidoResponse, status_code=status.HTTP_201_CREATED)
+@limiter.limit("10/minute")
 async def create_pedido(
+    request: Request,
     data: PedidoCreate,
     db: AsyncSession = Depends(get_db),
 ):
