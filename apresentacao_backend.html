@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend - Scalioni Engenharia 2.0</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES (THEME: BOLD SIGNAL)
+           =========================================== */
+        :root {
+            --bg-primary: #121212;
+            --bg-gradient: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+            --card-bg: #FF5722; /* Vibrant Orange */
+            --accent: #FF5722;
+            --text-primary: #ffffff;
+            --text-on-card: #121212;
+            --text-secondary: #a0a0a0;
+            
+            --font-display: 'Archivo Black', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+
+            /* Viewport scaling */
+            --title-size: clamp(2.5rem, 8vw, 5rem);
+            --h2-size: clamp(1.8rem, 5vw, 3rem);
+            --h3-size: clamp(1.2rem, 3vw, 1.8rem);
+            --body-size: clamp(1rem, 1.5vw, 1.2rem);
+            --slide-padding: clamp(1.5rem, 5vw, 5rem);
+            --content-gap: clamp(1rem, 3vh, 2.5rem);
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.8s;
+        }
+
+        /* ===========================================
+           VIEWPORT FITTING & BASE STYLES
+           =========================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: var(--bg-gradient);
+            padding: var(--slide-padding);
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ===========================================
+           ELEMENT STYLES
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: var(--content-gap);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        p, li {
+            font-size: var(--body-size);
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        li::before {
+            content: "→";
+            color: var(--accent);
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* High Impact Orange Card */
+        .impact-card {
+            background-color: var(--card-bg);
+            color: var(--text-on-card);
+            padding: 2.5rem;
+            border-radius: 4px; /* Industrial look */
+            box-shadow: 20px 20px 0px rgba(255, 87, 34, 0.2);
+            position: relative;
+        }
+
+        /* ===========================================
+           DEEP DIVE MODALS
+           =========================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .modal {
+            background: #111;
+            border: 1px solid var(--accent);
+            width: 100%;
+            max-width: 1100px;
+            max-height: 85vh;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            color: var(--accent);
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .modal-close {
+            background: none;
+            border: 1px solid #444;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 40px;
+            overflow-y: auto;
+            color: #eee;
+            line-height: 1.7;
+        }
+
+        .modal-body h2 { color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+        .modal-body h3 { color: #fff; margin-top: 2rem; font-size: 1.2rem; }
+        .modal-body p { margin-bottom: 1rem; color: #bbb; }
+
+        .modal-body pre {
+            background: #000;
+            padding: 25px;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent);
+            margin: 20px 0;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            overflow-x: auto;
+            color: #e0e0e0;
+            white-space: pre-wrap;
+        }
+
+        .modal-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .modal-body th, .modal-body td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #222;
+        }
+
+        .modal-body th { color: var(--accent); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
+
+        .details-trigger {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 87, 34, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .details-trigger:hover {
+            background: var(--accent);
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.4);
+        }
+
+
+        /* ===========================================
+           PROGRESS BAR
+           =========================================== */
+        .progress-bar {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            background: var(--accent);
+            z-index: 1000;
+            transition: width 0.1s linear;
+            width: 0%;
+        }
+
+        /* ===========================================
+           NAV DOTS
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.4);
+        }
+
+        /* ===========================================
+           SLIDE NUMBER
+           =========================================== */
+        .slide-number {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+            opacity: 0.5;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        /* ===========================================
+           SPLIT LAYOUT
+           =========================================== */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .split { grid-template-columns: 1fr; }
+        }
+
+        /* ===========================================
+           CODE BLOCK
+           =========================================== */
+        code-block {
+            display: block;
+            background: #000;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+            line-height: 1.7;
+            margin-top: 1rem;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        code-block .keyword { color: #c084fc; }
+        code-block .func    { color: #38bdf8; }
+        code-block .string  { color: #86efac; }
+        code-block .comment { color: #6b7280; font-style: italic; }
+
+        /* ===========================================
+           REVEAL ANIMATION
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+        }
+
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide.visible .reveal:nth-child(2) { transition-delay: 0.15s; }
+        .slide.visible .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .slide.visible .reveal:nth-child(4) { transition-delay: 0.45s; }
+
+        /* ===========================================
+           NAVIGATION ARROWS (Linear Flow)
+           =========================================== */
+        .nav-arrows {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255,87,34,0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+            backdrop-filter: blur(6px);
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,87,34,0.5);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.25;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        /* ===========================================
+           EDIT MODE
+           =========================================== */
+        .edit-hotzone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            z-index: 900;
+        }
+
+        .edit-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            background: rgba(30,30,30,0.8);
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            backdrop-filter: blur(6px);
+        }
+
+        .edit-toggle.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .edit-toggle.active {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* title-slide accent */
+        .title-slide { background: var(--bg-gradient); }
+        .title-slide h1 span { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <!-- Progress & Modal Container -->
+    <div class="progress-bar" id="progressBar"></div>
+    <nav class="nav-dots" id="navDots"></nav>
+    <div class="edit-hotzone"></div>
+    <button class="edit-toggle" id="editToggle" title="Modo Edição (E)">✏️</button>
+
+    <!-- Linear Navigation Arrows -->
+    <div class="nav-arrows">
+        <button class="nav-btn" id="btnPrev" title="Slide anterior (↑)" onclick="presentation.navigate(-1)">↑</button>
+        <button class="nav-btn" id="btnNext" title="Próximo slide (↓)" onclick="presentation.navigate(1)">↓</button>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title" id="modalTitle">Detalhes Técnicos</span>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content injected via template items -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 1: CAPA -->
+    <section class="slide title-slide">
+        <div class="slide-number">01</div>
+        <div class="slide-content">
+            <h1 class="reveal">Scalioni<br>Engenharia 2.0</h1>
+            <h3 class="reveal" style="color: var(--accent);">Defesa Técnica: Arquitetura Backend</h3>
+            <p class="reveal" style="margin-top: 2rem;">Apresentado por: Julio Neto e Victor Couto</p>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: AGENDA -->
+    <section class="slide">
+        <div class="slide-number">02</div>
+        <div class="slide-content">
+            <h2 class="reveal">Pilha de Avaliação</h2>
+            <div class="grid" style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div class="reveal">
+                    <h3 style="color: var(--accent);">01. Arquitetura</h3>
+                    <p>Domínio puro vs Infraestrutura (DIP).</p>
+                </div>
+                <div class="reveal">
+                    <h3 style="color: var(--accent);">02. Infra</h3>
+                    <p>Docker, Async DB e Mercado Pago.</p>
+                </div>
+                <div class="reveal">
+                    <h3 style="color: var(--accent);">03. Segurança</h3>
+                    <p>JWT, Bcrypt e Rate Limiting.</p>
+                </div>
+                <div class="reveal">
+                    <h3 style="color: var(--accent);">04. Qualidade</h3>
+                    <p>Testes Unitários e Cobertura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 3: DOMÍNIO VS BACKEND -->
+    <section class="slide">
+        <div class="slide-number">03</div>
+        <div class="slide-content">
+            <div class="split">
+                <div class="reveal">
+                    <h2>Domínio vs Backend</h2>
+                    <h3>O Princípio da Independência</h3>
+                    <p>Aplicamos o Dependency Inversion Principle para garantir que as regras de negócio nunca dependam de frameworks.</p>
+                    <ul>
+                        <li><strong>Domínio:</strong> Regras de negócio puras (sem FastAPI/SQLAlchemy).</li>
+                        <li><strong>Backend:</strong> Interfaces, Roteadores e Infraestrutura.</li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <div class="impact-card">
+                        <h3>Vantagem Crucial</h3>
+                        <p>"Se amanhã trocarmos o FastAPI pelo Django, ou o PostgreSQL pelo MongoDB, o coração do negócio (Domínio) permanece intocado."</p>
+                    </div>
+                </div>
+            </div>
+            <button class="details-trigger" onclick="openDetails('dominio')">🔍 Ver Arquitetura DIP</button>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: CÓDIGO NA PRÁTICA -->
+    <section class="slide">
+        <div class="slide-number">04</div>
+        <div class="slide-content">
+            <h2 class="reveal">Camadas na Prática</h2>
+            <div class="split" style="gap: 2rem;">
+                <div class="reveal">
+                    <h3>Puro (Domínio)</h3>
+                    <code-block>
+<span class="keyword">@dataclass</span>
+<span class="keyword">class</span> <span class="func">Pedido</span>:
+    id: UUID
+    status: PedidoStatus
+    total: Decimal
+    <span class="comment"># Zero dependência externa</span>
+                    </code-block>
+                </div>
+                <div class="reveal">
+                    <h3>Framework (Router)</h3>
+                    <code-block>
+<span class="keyword">@router</span>.<span class="func">post</span>(<span class="string">"/pedidos"</span>)
+<span class="keyword">async def</span> <span class="func">create_pedido</span>(
+    db: Session = <span class="func">Depends</span>(get_db)
+):
+    <span class="comment"># Infraestrutura FastAPI</span>
+                    </code-block>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: INFRAESTRUTURA -->
+    <section class="slide">
+        <div class="slide-number">05</div>
+        <div class="slide-content">
+            <h2 class="reveal">Especificações de Infra</h2>
+            <div class="reveal">
+                <p>O ecossistema é modernizado via Docker para garantir consistência entre ambientes.</p>
+                <ul style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <li><strong>Backend:</strong> Python 3.12 + FastAPI (Uvicorn).</li>
+                    <li><strong>Banco:</strong> PostgreSQL 16 (Async via SQLAlchemy 2.0).</li>
+                    <li><strong>Integração:</strong> Mercado Pago (SDK Oficial + Webhooks).</li>
+                    <li><strong>Migrações:</strong> Alembic (Controle de Versão de Schema).</li>
+                    <li><strong>Email:</strong> SMTP Seguro com e-mails transacionais.</li>
+                    <li><strong>Volume:</strong> Armazenamento persistente para plantas (.zip).</li>
+                </ul>
+            </div>
+            <button class="details-trigger" onclick="openDetails('infra')">🔍 Ver Stack & Webhook</button>
+        </div>
+    </section>
+
+    <!-- SLIDE 6: WEBHOOK SEGURO -->
+    <section class="slide">
+        <div class="slide-number">06</div>
+        <div class="slide-content">
+            <div class="impact-card reveal">
+                <h2>Fluxo de Webhook Seguro</h2>
+                <div class="split" style="margin-top: 1.5rem; gap: 2rem;">
+                    <div>
+                        <h3>Blindagem HMAC</h3>
+                        <p>Cada requisição do Mercado Pago é validada com um hash HMAC-SHA256, impedindo requisições falsas.</p>
+                    </div>
+                    <div>
+                        <h3>Double-Check</h3>
+                        <p>O sistema não confia apenas no Webhook; ele faz uma consulta ativa à API do MP para confirmar o status antes de liberar o download.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: AUTENTICAÇÃO -->
+    <section class="slide">
+        <div class="slide-number">07</div>
+        <div class="slide-content">
+            <h2 class="reveal">Autenticação e Senhas</h2>
+            <div class="split">
+                <div class="reveal">
+                    <h3>Segurança Admin</h3>
+                    <p>O acesso ao painel administrativo é protegido por uma cadeia de confiança moderna.</p>
+                    <ul>
+                        <li><strong>JWT (JSON Web Token):</strong> Algoritmo HS256 para sessões stateless.</li>
+                        <li><strong>Bcrypt:</strong> Hashing de senhas com sal (Salt) dinâmico e custo computacional adaptativo.</li>
+                        <li><strong>Injeção de Dependências:</strong> Rotas protegidas via OAuth2PasswordBearer.</li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <div class="impact-card" style="background-color: #333; color: white; box-shadow: 20px 20px 0px rgba(0,0,0,0.5);">
+                        <h3 style="color: var(--accent);">Anti-Brute Force</h3>
+                        <p>Implementamos o <strong>SlowAPI</strong> para limitar o número de tentativas de login por IP, mitigando ataques de força bruta.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="details-trigger" onclick="openDetails('auth')">🔍 Ver JWT & Bcrypt</button>
+        </div>
+    </section>
+
+    <!-- SLIDE 8: TESTES E QUALIDADE -->
+    <section class="slide">
+        <div class="slide-number">08</div>
+        <div class="slide-content">
+            <h2 class="reveal">Estratégia de Testes</h2>
+            <div class="reveal">
+                <h3>A Pirâmide de Qualidade</h3>
+                <p>Nossa suíte de testes não apenas mede cobertura, mas garante consistência real com banco de dados.</p>
+                <ul style="margin-top: 1rem;">
+                    <li><strong>Pytest + Pytest-Asyncio:</strong> Framework base assíncrono.</li>
+                    <li><strong>Banco Real:</strong> Usamos containers PostgreSQL reais para os testes, validando Constraints e Foreign Keys.</li>
+                    <li><strong>Pytest-Cov:</strong> Monitoramento contínuo de cobertura.</li>
+                </ul>
+            </div>
+            <button class="details-trigger" onclick="openDetails('testes')">🔍 Ver Cobertura & Justificativas</button>
+        </div>
+    </section>
+
+    <!-- SLIDE 9: JUSTIFICATIVA COBERTURA -->
+    <section class="slide">
+        <div class="slide-number">09</div>
+        <div class="slide-content">
+            <div class="impact-card reveal">
+                <h2>O Desafio dos 80%</h2>
+                <p>O projeto mantém uma média global acima de 80%, mas justifica as exceções pontuais:</p>
+                <div class="split" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>
+                        <h3 style="font-size: 1.1rem;">Por que não 100%?</h3>
+                        <p>Webhook do Mercado Pago exige assinaturas HMAC complexas; priorizamos validação manual via Sandbox para maior realismo.</p>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 1.1rem;">Foco no Domínio</h3>
+                        <p>Garantimos 100% de cobertura no <strong>Domínio</strong>. Blocos de erro defensivos na Infra (ex: servidor de e-mail fora) são raramente atingidos em CI mas fundamentais para resiliência.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 10: SWAGGER E DEMO -->
+    <section class="slide">
+        <div class="slide-number">10</div>
+        <div class="slide-content">
+            <h2 class="reveal">Swagger: A Documentação Viva</h2>
+            <div class="split">
+                <div class="reveal">
+                    <h3>Ponto de Entrada</h3>
+                    <p>Abaixo, o roteiro sugerido para a banca examinar a API em tempo real via <code>/docs</code>.</p>
+                    <ul>
+                        <li><strong>Fluxo Cliente:</strong> Criar Pedido → Validar Pagamento.</li>
+                        <li><strong>Fluxo Admin:</strong> Login JWT → Gestão de Projetos → Vendas.</li>
+                        <li><strong>Segurança:</strong> Testar acesso proibido em rotas sensíveis.</li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <div class="impact-card">
+                        <h3>Demo Tool</h3>
+                        <p>Acesse o Swagger e mostre os Schemas Pydantic. Eles provam que os dados são validados antes mesmo de chegarem ao banco.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="details-trigger" onclick="openDetails('swagger')">🔍 Ver Roteiro Demo</button>
+        </div>
+    </section>
+
+    <!-- SLIDE 11: CAMINHO DO USUÁRIO -->
+    <section class="slide">
+        <div class="slide-number">11</div>
+        <div class="slide-content">
+            <h2 class="reveal">O Caminho Dourado</h2>
+            <div class="reveal" style="display: flex; gap: 2rem; overflow-x: auto; padding-bottom: 2rem;">
+                <!-- Step cards -->
+                <div style="min-width: 250px; background: rgba(255,255,255,0.05); padding: 1.5rem; border-top: 4px solid var(--accent);">
+                    <h3 style="font-size: 1rem;">1. Lead</h3>
+                    <p style="font-size: 0.8rem;">O cliente envia uma dúvida via /contato.</p>
+                </div>
+                <div style="min-width: 250px; background: rgba(255,255,255,0.05); padding: 1.5rem; border-top: 4px solid var(--accent);">
+                    <h3 style="font-size: 1rem;">2. Pedido</h3>
+                    <p style="font-size: 0.8rem;">Criação do pagamento no Mercado Pago.</p>
+                </div>
+                <div style="min-width: 250px; background: rgba(255,255,255,0.05); padding: 1.5rem; border-top: 4px solid var(--accent);">
+                    <h3 style="font-size: 1rem;">3. Webhook</h3>
+                    <p style="font-size: 0.8rem;">Status 'Aprovado' dispara o backend.</p>
+                </div>
+                <div style="min-width: 250px; background: rgba(255,255,255,0.05); padding: 1.5rem; border-top: 4px solid var(--accent);">
+                    <h3 style="font-size: 1rem;">4. Entrega</h3>
+                    <p style="font-size: 0.8rem;">E-mail com Token de Download seguro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 12: CONCLUSÃO -->
+    <section class="slide">
+        <div class="slide-number">12</div>
+        <div class="slide-content">
+            <h1 class="reveal">Pronto para<br>Escalar</h1>
+            <div class="reveal" style="margin-top: 2rem;">
+                <h3>Obrigado!</h3>
+                <p>Perguntas?</p>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <div style="background: var(--accent); width: 50px; height: 4px;"></div>
+                    <div style="background: var(--accent); width: 100px; height: 4px; opacity: 0.5;"></div>
+                    <div style="background: var(--accent); width: 30px; height: 4px; opacity: 0.2;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.dotsContainer = document.getElementById('navDots');
+                this.progressBar = document.getElementById('progressBar');
+                this.btnPrev = document.getElementById('btnPrev');
+                this.btnNext = document.getElementById('btnNext');
+                this.currentSlide = 0;
+                this.editing = false;
+                
+                this.init();
+            }
+
+            init() {
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupNavDots();
+                this.setupScrollListener();
+                this.setupEditMode();
+                this.updateNavButtons();
+            }
+
+            setupIntersectionObserver() {
+                // threshold 0.6 → slide is considered active when >60% visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const index = Array.from(this.slides).indexOf(entry.target);
+                            this.updateActiveDot(index);
+                            this.updateNavButtons();
+                        }
+                    });
+                }, { threshold: 0.6 });
+
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.target.getAttribute('contenteditable')) return;
+                    if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown' || e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        this.navigate(1);
+                    } else if (e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        this.navigate(-1);
+                    }
+                });
+            }
+
+            navigate(direction) {
+                const next = this.currentSlide + direction;
+                if (next >= 0 && next < this.slides.length) {
+                    // Update currentSlide immediately so rapid key-presses feel responsive
+                    this.currentSlide = next;
+                    this.slides[next].scrollIntoView({ behavior: 'smooth' });
+                    this.updateNavButtons();
+                }
+            }
+
+            setupNavDots() {
+                this.slides.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    dot.title = `Slide ${i + 1}`;
+                    dot.addEventListener('click', () => {
+                        this.currentSlide = i;
+                        this.slides[i].scrollIntoView({ behavior: 'smooth' });
+                        this.updateNavButtons();
+                    });
+                    this.dotsContainer.appendChild(dot);
+                });
+                this.updateActiveDot(0);
+            }
+
+            updateActiveDot(index) {
+                this.currentSlide = index;
+                const dots = this.dotsContainer.querySelectorAll('.dot');
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            }
+
+            updateNavButtons() {
+                if (this.btnPrev) this.btnPrev.disabled = this.currentSlide === 0;
+                if (this.btnNext) this.btnNext.disabled = this.currentSlide === this.slides.length - 1;
+            }
+
+            setupScrollListener() {
+                window.addEventListener('scroll', () => {
+                    const max = document.documentElement.scrollHeight - window.innerHeight;
+                    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+                    this.progressBar.style.width = pct + '%';
+                });
+            }
+
+            setupEditMode() {
+                const hotzone = document.querySelector('.edit-hotzone');
+                const toggle = document.getElementById('editToggle');
+                let hideTimeout;
+
+                const show = () => { clearTimeout(hideTimeout); toggle.classList.add('show'); };
+                const hide = () => { hideTimeout = setTimeout(() => { if (!this.editing) toggle.classList.remove('show'); }, 500); };
+
+                hotzone.addEventListener('mouseenter', show);
+                hotzone.addEventListener('mouseleave', hide);
+                toggle.addEventListener('mouseenter', show);
+                toggle.addEventListener('mouseleave', hide);
+
+                toggle.addEventListener('click', () => {
+                    this.editing = !this.editing;
+                    toggle.classList.toggle('active', this.editing);
+                    document.body.querySelectorAll('h1, h2, h3, p, li').forEach(el => {
+                        el.contentEditable = this.editing;
+                    });
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable')) {
+                        toggle.click();
+                    }
+                });
+            }
+        }
+
+        // Expose globally so onclick="presentation.navigate()" works
+        let presentation;
+
+        /* ── Deep Dive Content Data ────────────────────────────────────────── */
+        const TECH_DETAILS = {
+            dominio: {
+                title: "Domínio vs Backend - Arquitetura DIP",
+                body: `
+                    <h2>O Domínio Puro</h2>
+                    <p>O coração da aplicação vive em <code>domain/entities/</code> e não tem dependências de frameworks externos.</p>
+                    <pre>
+@dataclass
+class Pedido:
+    planta_id:      uuid.UUID
+    email:          str
+    nome:           str
+    valor:          Decimal
+    status:         PedidoStatus = PedidoStatus.pendente
+    criado_em:      datetime = field(default_factory=now_utc)
+                    </pre>
+                    <h3>A Separação de Responsabilidades</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Camada</th><th>Responsabilidade</th><th>Arquivos</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Domain</td><td>Regras de Negócio e Entidades Puras</td><td>domain/entities/</td></tr>
+                            <tr><td>Interfaces</td><td>Schemas Pydantic e Routers FastAPI</td><td>interfaces/routers/</td></tr>
+                            <tr><td>Infrastructure</td><td>SQLAlchemy Models e Repositórios</td><td>infrastructure/database/</td></tr>
+                            <tr><td>Application</td><td>Serviços de Terceiros (MP, E-mail)</td><td>application/</td></tr>
+                        </tbody>
+                    </table>
+                    <p>Essa arquitetura garante que o sistema seja testável sem banco de dados e resiliente a trocas de pacotes.</p>
+                `
+            },
+            infra: {
+                title: "Infraestrutura assíncrona & Webhooks",
+                body: `
+                    <h2>Stack de Infraestrutura</h2>
+                    <p>Utilizamos <strong>PostgreSQL 16</strong> com driver assíncrono <code>asyncpg</code>.</p>
+                    <pre>
+# Dockerfile Multi-stage
+FROM python:3.12-slim AS base
+WORKDIR /app
+RUN pip install --no-cache-dir -r requirements.txt
+...
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+                    </pre>
+                    <h3>Segurança no Webhook Mercado Pago</h3>
+                    <p>O sistema processa webhooks usando validadores de integridade:</p>
+                    <ul>
+                        <li><strong>HMAC-SHA256:</strong> Valida se o sinal veio realmente do MP.</li>
+                        <li><strong>Idempotência:</strong> O banco rejeita pedidos duplicados via UniqueConstraint.</li>
+                        <li><strong>Double-Check:</strong> Consultamos a API do MP de volta para confirmar o status.</li>
+                    </ul>
+                `
+            },
+            auth: {
+                title: "Autorização JWT e Hashing Bcrypt",
+                body: `
+                    <h2>Arquitetura de Segurança</h2>
+                    <p>O sistema é <strong>Stateless</strong> — o backend não armazena sessões, apenas valida tokens.</p>
+                    <pre>
+# core/security.py
+def verify_password(plain, hashed):
+    return pwd_context.verify(plain, hashed)
+
+def create_access_token(data):
+    to_encode = data.copy()
+    expire = datetime.now(...) + timedelta(minutes=1440)
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, SECRET_KEY, algorithm="HS256")
+                    </pre>
+                    <h3>Proteção Anti-Abuso</h3>
+                    <p>Implementamos <strong>SlowAPI</strong> para limitar tentativas de invasão:</p>
+                    <code-block>@router.post("/login") @limiter.limit("5/minute")</code-block>
+                `
+            },
+            testes: {
+                title: "Qualidade e Cobertura de Testes",
+                body: `
+                    <h2>Métrica Global: > 80%</h2>
+                    <p>Nossa suíte de testes utiliza containers reais para garantir fidelidade SQL.</p>
+                    <table>
+                        <thead>
+                            <tr><th>Camada</th><th>Cobertura</th><th>Foco</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Domínio</td><td>100%</td><td>Regras Críticas</td></tr>
+                            <tr><td>Models</td><td>100%</td><td>Mapeamento DB</td></tr>
+                            <tr><td>Application</td><td>~85%</td><td>Serviços</td></tr>
+                            <tr><td>Interfaces</td><td>~65%</td><td>Entradas HTTP</td></tr>
+                        </tbody>
+                    </table>
+                    <h3>Justificativas Técnicas</h3>
+                    <p><strong>Webhook (38%):</strong> Dependência de assinaturas dinâmicas externas e Sandbox real.</p>
+                    <p><strong>Download (57%):</strong> Erros de sistema de arquivos simulados são instáveis em containers.</p>
+                `
+            },
+            swagger: {
+                title: "Roteiro de Demonstração (Live Specs)",
+                body: `
+                    <h2>Guia para a Banca</h2>
+                    <p>Siga este fluxo para demonstrar a robustez da API:</p>
+                    <ol>
+                        <li>Acesse <code>/docs</code> e mostre a documentação OpenAPI gerada automaticamente.</li>
+                        <li>Exiba o endpoint <code>POST /api/pedidos</code> e como o Pydantic valida e-mails e tipos.</li>
+                        <li>Tente acessar <code>GET /api/admin/pedidos</code> sem token para mostrar o erro 401.</li>
+                        <li>Faça login para gerar o token JWT e use o botão "Authorize" do Swagger para liberar as rotas.</li>
+                    </ol>
+                    <p>Isso prova que a segurança está embutida nas dependências do roteador.</p>
+                `
+            }
+        };
+
+        /* ── Modal Controller ──────────────────────────────────────────────── */
+        function openDetails(id) {
+            const data = TECH_DETAILS[id];
+            if (!data) return;
+
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalBody').innerHTML = data.body;
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Lock scroll
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = ''; // Unlock scroll
+        }
+
+        // Close on ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Close on Overlay click
+        document.getElementById('modalOverlay').addEventListener('click', (e) => {
+            if (e.target.id === 'modalOverlay') closeModal();
+        });
+
+        window.addEventListener('load', () => { presentation = new SlidePresentation(); });
+    </script>
+</body>
+</html>
