@@ -8,9 +8,10 @@ const CATEGORIES = ['Todos', 'Residencial Luxo', 'Corporativo', 'Interiores', 'R
 
 interface Props {
     projetos: Projeto[]
+    hasError?: boolean
 }
 
-export function PortfolioFilterGrid({ projetos }: Props) {
+export function PortfolioFilterGrid({ projetos, hasError }: Props) {
     const [activeCategory, setActiveCategory] = useState('Todos')
 
     const filtered = activeCategory === 'Todos'
@@ -68,8 +69,12 @@ export function PortfolioFilterGrid({ projetos }: Props) {
 
                 {/* Empty state */}
                 {filtered.length === 0 && (
-                    <div className="col-span-3 text-center py-20">
-                        <p className="text-slate-500">Nenhum projeto nesta categoria.</p>
+                    <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-20 bg-card-bg border border-white/5">
+                        <p className="text-slate-500">
+                            {hasError 
+                                ? 'Ocorreu um erro ao carregar os projetos. Por favor, tente novamente mais tarde.' 
+                                : 'Nenhum projeto nesta categoria.'}
+                        </p>
                     </div>
                 )}
             </div>

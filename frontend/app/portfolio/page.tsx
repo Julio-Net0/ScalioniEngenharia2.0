@@ -9,9 +9,13 @@ export const metadata: Metadata = {
 
 export default async function PortfolioPage() {
     let projetos = []
+    let hasError = false
     try {
         projetos = await getProjetos()
-    } catch { }
+    } catch (error) {
+        console.error('[PortfolioPage] Erro ao carregar projetos:', error)
+        hasError = true
+    }
 
     return (
         <>
@@ -43,7 +47,7 @@ export default async function PortfolioPage() {
             {/* Grid */}
             <section className="bg-main-bg py-16">
                 <div className="max-w-7xl mx-auto px-6">
-                    <PortfolioFilterGrid projetos={projetos} />
+                    <PortfolioFilterGrid projetos={projetos} hasError={hasError} />
                 </div>
             </section>
         </>

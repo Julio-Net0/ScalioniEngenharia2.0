@@ -55,14 +55,14 @@ export function PortfolioGrid({ projetos }: Props) {
 
                     {/* Placeholder cards if no data */}
                     {featured.length === 0 && [
-                        { cat: 'RESIDENCIAL', title: 'Residência Alpha', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', tall: true },
-                        { cat: 'CORPORATIVO', title: 'Edifício Beta', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80', wide: true },
-                        { cat: 'INTERIORES', title: 'Loft Contemporâneo', img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80' },
-                        { cat: 'RESIDENCIAL', title: 'Villa Toscana', img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80' },
+                        { slug: 'residencia-alpha', cat: 'RESIDENCIAL', title: 'Residência Alpha', img: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', tall: true },
+                        { slug: 'corporativo-beta', cat: 'CORPORATIVO', title: 'Edifício Beta', img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80', wide: true },
+                        { slug: 'loft-contemporaneo', cat: 'INTERIORES', title: 'Loft Contemporâneo', img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80' },
+                        { slug: 'villa-toscana', cat: 'RESIDENCIAL', title: 'Villa Toscana', img: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80' },
                     ].map((p, i) => (
                         <Link
                             key={i}
-                            href="/portfolio"
+                            href={`/portfolio/${p.slug}`}
                             className={`relative overflow-hidden group ${p.tall ? 'masonry-item-tall' : ''} ${p.wide ? 'masonry-item-wide' : ''}`}
                         >
                             <div
