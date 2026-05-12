@@ -43,7 +43,10 @@ app.include_router(contato.router)
 app.include_router(admin.router)
 app.include_router(upload.router)
 app.include_router(webhook.router)
+from fastapi.staticfiles import StaticFiles
 from backend.interfaces.routers.download import router_download
+
+app.mount("/uploads", StaticFiles(directory="/app/uploads"), name="uploads")
 app.include_router(router_download)
 
 

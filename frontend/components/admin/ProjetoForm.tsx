@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import NextImage from 'next/image'
 import { Loader2, Save, X, Plus, Trash2, Image as ImageIcon } from 'lucide-react'
 import { adminCreateProjeto, adminUpdateProjeto, uploadFile } from '@/lib/api'
 import { getToken } from '@/lib/auth'
@@ -153,7 +154,7 @@ export function ProjetoForm({ initialData }: Props) {
                     <div className="flex gap-6">
                         <div className="w-40 aspect-video bg-main-bg border border-white/10 flex items-center justify-center relative overflow-hidden group">
                             {capa ? (
-                                <img src={capa} className="w-full h-full object-cover" />
+                                <NextImage src={capa} alt="Capa" fill className="object-cover" sizes="(max-width: 768px) 100vw, 160px" />
                             ) : (
                                 <ImageIcon size={24} className="text-slate-700" />
                             )}
@@ -175,7 +176,7 @@ export function ProjetoForm({ initialData }: Props) {
                     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                         {imagens.map((url, i) => (
                             <div key={i} className="relative aspect-square border border-white/10 group overflow-hidden">
-                                <img src={url} className="w-full h-full object-cover" />
+                                <NextImage src={url} alt={`Projeto ${i}`} fill className="object-cover" sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 16vw" />
                                 <button
                                     type="button"
                                     onClick={() => setValue('imagens', imagens.filter((_, idx) => idx !== i))}

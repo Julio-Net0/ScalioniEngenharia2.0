@@ -135,3 +135,38 @@ async def reenviar_email_download(
         raise HTTPException(status_code=500, detail="Falha ao enviar e-mail")
 
     return {"status": "enviado"}
+class StatusUpdateRequest(BaseModel):
+    status: str
+
+
+@router.patch("/pedidos/{pedido_id}/status", status_code=200)
+async def update_pedido_status(
+    pedido_id: str,
+    data: StatusUpdateRequest,
+    db: AsyncSession = Depends(get_db),
+    _: dict = Depends(get_current_admin),
+):
+    import uuid as uuid_mod
+    stmt = select(Pedido).where(Pedido.id == uuid_mod.UUID(pedido_id))
+    result = await db.execute(stmt)
+    pedido = result.scalar_one_or_none()
+    if not pedido:
+        raise HTTPException(status_code=404, detail="Pedido não encontrado")
+    
+    try:
+        pedido.status = PedidoStatus(data.status)
+    except ValueError:
+        raise HTTPException(status_code=400, detail="Status inválido")
+        
+    await db.flush()
+    return {"status": "atualizado"}
+
+
+@router.get("/usuarios")
+async def list_usuarios(
+    db: AsyncSession = Depends(get_db),
+    _: dict = Depends(get_current_admin),
+):
+    stmt = select(AdminUser).order_by(AdminUser.nome)
+    result = await db.execute(stmt)
+    return result.scalars().all()

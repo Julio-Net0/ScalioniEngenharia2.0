@@ -16,9 +16,9 @@ router = APIRouter(prefix="/api/projetos", tags=["projetos"])
 
 
 @router.get("", response_model=list[ProjetoResponse])
-async def list_projetos(db: AsyncSession = Depends(get_db)):
+async def list_projetos(only_active: bool = True, db: AsyncSession = Depends(get_db)):
     repo = ProjectRepository(db)
-    return await repo.list_all(only_active=True)
+    return await repo.list_all(only_active=only_active)
 
 
 @router.get("/{slug}", response_model=ProjetoResponse)

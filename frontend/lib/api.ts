@@ -1,7 +1,7 @@
 const isServer = typeof window === 'undefined'
 const API_URL = isServer 
     ? (process.env.INTERNAL_API_URL ?? 'http://backend:8000')
-    : (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000')
+    : '' // No cliente, usa caminhos relativos para passar pelo proxy do Next.js
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -78,8 +78,8 @@ export interface ContatoCreate {
 
 // ── Public API ─────────────────────────────────────────────────────────────
 
-export async function getProjetos(): Promise<Projeto[]> {
-    const res = await fetch(`${API_URL}/api/projetos`, {
+export async function getProjetos(onlyActive: boolean = true): Promise<Projeto[]> {
+    const res = await fetch(`${API_URL}/api/projetos?only_active=${onlyActive}`, {
         next: { revalidate: 3600 },
     })
     if (!res.ok) throw new Error('Erro ao carregar projetos')
@@ -164,11 +164,29 @@ export async function getAdminMensagens(token: string): Promise<{ mensagens: Men
     return res.json()
 }
 
-export async function marcarMensagemLida(token: string, id: string): Promise<void> {
+export async function adminMarkMensagemLida(token: string, id: string): Promise<void> {
     await fetch(`${API_URL}/api/admin/mensagens/${id}/lida`, {
         method: 'PATCH',
         headers: authHeaders(token),
     })
+}
+
+export async function adminUpdatePedidoStatus(token: string, id: string, status: string): Promise<void> {
+    const res = await fetch(`${API_URL}/api/admin/pedidos/${id}/status`, {
+        method: 'PATCH',
+        headers: authHeaders(token),
+        body: JSON.stringify({ status }),
+    })
+    if (!res.ok) throw new Error('Erro ao atualizar status')
+}
+
+export async function getAdminUsuarios(token: string): Promise<any[]> {
+    const res = await fetch(`${API_URL}/api/admin/usuarios`, {
+        headers: authHeaders(token),
+        cache: 'no-store',
+    })
+    if (!res.ok) throw new Error('Erro ao carregar usuários')
+    return res.json()
 }
 
 export async function getAdminPedidos(token: string): Promise<Pedido[]> {

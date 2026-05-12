@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import {
     Plus,
     Search,
-    Edit,
+    Pencil,
     Trash2,
     Eye,
     Loader2,
@@ -18,6 +19,7 @@ import { cn } from '@/lib/utils'
 import type { Projeto } from '@/lib/api'
 
 export default function AdminProjetosPage() {
+    const router = useRouter()
     const [projetos, setProjetos] = useState<Projeto[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
@@ -26,7 +28,7 @@ export default function AdminProjetosPage() {
     async function loadProjetos() {
         setLoading(true)
         try {
-            const data = await getProjetos()
+            const data = await getProjetos(false)
             setProjetos(data)
         } catch {
             toast('Erro ao carregar projetos', 'error')
@@ -128,9 +130,13 @@ export default function AdminProjetosPage() {
                                                 <Link href={`/portfolio/${p.slug}`} target="_blank" className="p-2 bg-main-bg border border-white/10 text-slate-400 hover:text-white transition-all" title="Ver no site">
                                                     <Eye size={14} />
                                                 </Link>
-                                                <Link href={`/admin/projetos/${p.slug}`} className="p-2 bg-main-bg border border-white/10 text-primary hover:bg-primary hover:text-main-bg transition-all" title="Editar">
-                                                    <Edit size={14} />
-                                                </Link>
+                                                <button 
+                                                    onClick={() => router.push(`/admin/projetos/${p.slug}`)}
+                                                    className="p-2 bg-main-bg border border-white/10 text-primary hover:bg-primary hover:text-main-bg transition-all" 
+                                                    title="Editar"
+                                                >
+                                                    <Pencil size={14} />
+                                                </button>
                                                 <button
                                                     onClick={() => handleDelete(p.slug)}
                                                     className="p-2 bg-main-bg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"

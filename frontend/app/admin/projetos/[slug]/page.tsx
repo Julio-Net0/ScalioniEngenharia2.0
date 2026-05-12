@@ -1,19 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import { ProjetoForm } from '@/components/admin/ProjetoForm'
 import { getProjeto } from '@/lib/api'
 import { Loader2 } from 'lucide-react'
 import type { Projeto } from '@/lib/api'
 
-export default function AdminEditarProjetoPage({ params }: { params: { slug: string } }) {
+export default function AdminEditarProjetoPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = use(params)
     const [projeto, setProjeto] = useState<Projeto | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function load() {
             try {
-                const data = await getProjeto(params.slug)
+                const data = await getProjeto(slug)
                 setProjeto(data)
             } catch {
                 console.error('Erro ao carregar projeto')
@@ -22,7 +23,7 @@ export default function AdminEditarProjetoPage({ params }: { params: { slug: str
             }
         }
         load()
-    }, [params.slug])
+    }, [slug])
 
     if (loading) return (
         <div className="flex h-96 items-center justify-center">

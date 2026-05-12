@@ -26,4 +26,4 @@ async def upload_file(
     contents = await file.read()
     dest.write_bytes(contents)
 
-    return {"path": f"/uploads/{filename}"}
+    return {"url": f"/uploads/{filename}"}
