@@ -13,7 +13,7 @@ import {
 import { KpiCard } from '@/components/admin/KpiCard'
 import { getAdminPedidos, getAdminMensagens, getPlantas, getProjetos } from '@/lib/api'
 import { getToken } from '@/lib/auth'
-import { formatCurrency, formatDate, STATUS_LABELS, STATUS_COLORS } from '@/lib/utils'
+import { cn, formatCurrency, formatDate, STATUS_LABELS, STATUS_COLORS } from '@/lib/utils'
 import Link from 'next/link'
 
 export default function AdminDashboard() {

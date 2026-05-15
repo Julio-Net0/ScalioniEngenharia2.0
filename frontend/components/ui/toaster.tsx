@@ -22,7 +22,8 @@ export function useToast() {
     return useContext(ToastContext)
 }
 
-export function Toaster() {
+// Provider que envolve toda a aplicação — deve ser usado no layout raiz
+export function ToastProvider({ children }: { children: React.ReactNode }) {
     const [toasts, setToasts] = useState<Toast[]>([])
 
     const toast = useCallback((message: string, type: ToastType = 'info') => {
@@ -35,6 +36,7 @@ export function Toaster() {
 
     return (
         <ToastContext.Provider value={{ toast }}>
+            {children}
             <div className="fixed bottom-6 left-6 z-[100] flex flex-col gap-3 max-w-sm">
                 {toasts.map((t) => (
                     <div
@@ -57,4 +59,9 @@ export function Toaster() {
             </div>
         </ToastContext.Provider>
     )
+}
+
+// Mantido para compatibilidade — agora é apenas um alias do ToastProvider sem children próprios
+export function Toaster() {
+    return null
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getAdminMensagens, adminMarkMensagemLida } from '@/lib/api'
+import { getAdminMensagens, marcarMensagemLida } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
 import { formatDate } from '@/lib/utils'
@@ -42,7 +42,7 @@ export default function AdminMensagensPage() {
         const token = getToken()
         if (!token) return
         try {
-            await adminMarkMensagemLida(token, id)
+            await marcarMensagemLida(token, id)
             setMensagens(msgs => msgs.map(m => m.id === id ? { ...m, lida: true } : m))
             toast('Mensagem marcada como lida', 'success')
         } catch {
