@@ -11,11 +11,12 @@ import {
     Loader2,
     AlertCircle
 } from 'lucide-react'
-import { getPlantas, adminDeletePlanta } from '@/lib/api'
+import { adminDeletePlanta } from '@/lib/api'
+import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
-import { cn, formatCurrency, formatM2 } from '@/lib/utils'
-import type { Planta } from '@/lib/api'
+import { cn, formatM2 } from '@/lib/utils'
+import type { Planta } from '@/core/domain/entities/Planta'
 
 export default function AdminPlantasPage() {
     const [plantas, setPlantas] = useState<Planta[]>([])
@@ -26,7 +27,12 @@ export default function AdminPlantasPage() {
     async function loadPlantas() {
         setLoading(true)
         try {
-            const data = await getPlantas()
+            const isServer = typeof window === 'undefined'
+            const apiUrl = isServer
+                ? (process.env.INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000')
+                : ''
+            const repo = new HttpPlantaRepository(apiUrl)
+            const data = await repo.getPlantas()
             setPlantas(data)
         } catch {
             toast('Erro ao carregar plantas', 'error')
@@ -112,8 +118,8 @@ export default function AdminPlantasPage() {
                                                 <span className="text-[11px] font-bold text-white uppercase tracking-wider">{p.titulo}</span>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-5 text-[11px] text-white font-bold">{formatM2(p.terreno_minimo_m2)}</td>
-                                        <td className="px-6 py-5 text-[11px] text-primary font-bold">{formatCurrency(p.preco)}</td>
+                                        <td className="px-6 py-5 text-[11px] text-white font-bold">{formatM2(p.terrenoMinimoM2)}</td>
+                                        <td className="px-6 py-5 text-[11px] text-primary font-bold">{p.preco.formatarBRL()}</td>
                                         <td className="px-6 py-5">
                                             <span className={cn(
                                                 "px-2 py-0.5 border text-[9px] font-black uppercase tracking-widest",
@@ -124,7 +130,7 @@ export default function AdminPlantasPage() {
                                         </td>
                                         <td className="px-8 py-5 text-right">
                                             <div className="flex justify-end gap-2">
-                                                <Link href={`/loja/${p.slug}`} target="_blank" className="p-2 bg-main-bg border border-white/10 text-slate-400 hover:text-white transition-all" title="Ver no site">
+                                                <Link href={`/plantas/${p.slug}`} target="_blank" className="p-2 bg-main-bg border border-white/10 text-slate-400 hover:text-white transition-all" title="Ver no site">
                                                     <Eye size={14} />
                                                 </Link>
                                                 <Link href={`/admin/plantas/${p.slug}`} className="p-2 bg-main-bg border border-white/10 text-primary hover:bg-primary hover:text-main-bg transition-all" title="Editar">

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getPlantas } from '@/lib/api'
+import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { PlantaFilterGrid } from '@/components/loja/PlantaFilterGrid'
 import { Download, ShieldCheck, Headphones, Award } from 'lucide-react'
 
@@ -16,10 +16,31 @@ const features = [
 ]
 
 export default async function LojaPage() {
-    let plantas = []
+    let plantas: any[] = []
     try {
-        plantas = await getPlantas()
-    } catch { }
+        const isServer = typeof window === 'undefined'
+        const apiUrl = isServer
+            ? (process.env.INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000')
+            : ''
+        const repo = new HttpPlantaRepository(apiUrl)
+        const data = await repo.getPlantas()
+        plantas = JSON.parse(JSON.stringify(data.map(p => ({
+            id: p.id,
+            slug: p.slug,
+            titulo: p.titulo,
+            descricao: p.descricao,
+            preco: {
+                valor: p.preco.valor
+            },
+            imagens: p.imagens,
+            terrenoMinimoM2: p.terrenoMinimoM2,
+            ativo: p.ativo,
+            arquivoPath: p.arquivoPath
+        }))))
+        console.log("--> RENDERIZANDO LOJAPAGE COM SUCESSO. QUANTIDADE:", plantas.length)
+    } catch (e) {
+        console.error('Erro ao carregar plantas via Clean Arch repository:', e)
+    }
 
     return (
         <>

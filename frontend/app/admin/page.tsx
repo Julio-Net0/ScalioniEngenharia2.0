@@ -11,7 +11,8 @@ import {
     Loader2
 } from 'lucide-react'
 import { KpiCard } from '@/components/admin/KpiCard'
-import { getAdminPedidos, getAdminMensagens, getPlantas, getProjetos } from '@/lib/api'
+import { getAdminPedidos, getAdminMensagens, getProjetos } from '@/lib/api'
+import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { getToken } from '@/lib/auth'
 import { cn, formatCurrency, formatDate, STATUS_LABELS, STATUS_COLORS } from '@/lib/utils'
 import Link from 'next/link'
@@ -25,10 +26,16 @@ export default function AdminDashboard() {
             const token = getToken()
             if (!token) return
             try {
+                const isServer = typeof window === 'undefined'
+                const apiUrl = isServer
+                    ? (process.env.INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000')
+                    : ''
+                const repo = new HttpPlantaRepository(apiUrl)
+
                 const [pedidos, mensagens, plantas, projetos] = await Promise.all([
                     getAdminPedidos(token),
                     getAdminMensagens(token),
-                    getPlantas(),
+                    repo.getPlantas(),
                     getProjetos(),
                 ])
                 setData({

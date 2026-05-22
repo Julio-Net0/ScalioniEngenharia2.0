@@ -18,18 +18,6 @@ export interface Projeto {
     criado_em: string
 }
 
-export interface Planta {
-    id: string
-    slug: string
-    titulo: string
-    descricao: string
-    preco: string
-    imagens: string[]
-    terreno_minimo_m2: number | null
-    arquivo_path: string | null
-    ativo: boolean
-    criado_em: string
-}
 
 export interface Pedido {
     id: string
@@ -90,17 +78,6 @@ export async function getProjeto(slug: string): Promise<Projeto> {
     return res.json()
 }
 
-export async function getPlantas(): Promise<Planta[]> {
-    const res = await fetch(`${API_URL}/api/plantas`)
-    if (!res.ok) throw new Error('Erro ao carregar plantas')
-    return res.json()
-}
-
-export async function getPlanta(slug: string): Promise<Planta> {
-    const res = await fetch(`${API_URL}/api/plantas/${slug}`)
-    if (!res.ok) throw new Error('Planta não encontrada')
-    return res.json()
-}
 
 export async function createPedido(data: PedidoCreate): Promise<PedidoResponse> {
     const res = await fetch(`${API_URL}/api/pedidos`, {
@@ -213,7 +190,7 @@ export async function adminDeleteProjeto(token: string, slug: string): Promise<v
     })
 }
 
-export async function adminCreatePlanta(token: string, data: Omit<Planta, 'id' | 'criado_em'>): Promise<Planta> {
+export async function adminCreatePlanta(token: string, data: any): Promise<any> {
     const res = await fetch(`${API_URL}/api/plantas`, {
         method: 'POST',
         headers: authHeaders(token),
@@ -226,7 +203,7 @@ export async function adminCreatePlanta(token: string, data: Omit<Planta, 'id' |
     return res.json()
 }
 
-export async function adminUpdatePlanta(token: string, slug: string, data: Partial<Planta>): Promise<Planta> {
+export async function adminUpdatePlanta(token: string, slug: string, data: any): Promise<any> {
     const res = await fetch(`${API_URL}/api/plantas/${slug}`, {
         method: 'PUT',
         headers: authHeaders(token),

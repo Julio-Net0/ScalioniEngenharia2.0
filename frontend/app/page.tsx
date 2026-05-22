@@ -4,7 +4,7 @@ import { StatsSection } from '@/components/home/StatsSection'
 import { PortfolioGrid } from '@/components/home/PortfolioGrid'
 import { ServicesSection } from '@/components/home/ServicesSection'
 import { StoreCTA } from '@/components/home/StoreCTA'
-import { getProjetos } from '@/lib/api'
+import { getProjetos, Projeto } from '@/lib/api'
 
 export const metadata: Metadata = {
     title: 'Scalioni Engenharia — Arquitetura e Engenharia de Alto Padrão',
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-    let projetos = []
+    let projetos: Projeto[] = []
     try {
         projetos = await getProjetos()
     } catch {

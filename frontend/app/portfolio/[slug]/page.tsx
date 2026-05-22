@@ -8,7 +8,7 @@ import { FichaTecnica } from '@/components/portfolio/FichaTecnica'
 import type { Projeto } from '@/lib/api'
 
 interface Props {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }
 
 // Fallback para projetos de demonstração

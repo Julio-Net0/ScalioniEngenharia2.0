@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getProjetos } from '@/lib/api'
+import { getProjetos, Projeto } from '@/lib/api'
 import { PortfolioFilterGrid } from '@/components/portfolio/PortfolioFilterGrid'
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 export default async function PortfolioPage() {
-    let projetos = []
+    let projetos: Projeto[] = []
     let hasError = false
     try {
         projetos = await getProjetos()

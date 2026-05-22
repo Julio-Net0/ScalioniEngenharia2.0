@@ -1,19 +1,26 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import { PlantaForm } from '@/components/admin/PlantaForm'
-import { getPlanta } from '@/lib/api'
+import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { Loader2 } from 'lucide-react'
-import type { Planta } from '@/lib/api'
+import { Planta } from '@/core/domain/entities/Planta'
 
-export default function AdminEditarPlantaPage({ params }: { params: { slug: string } }) {
+export default function AdminEditarPlantaPage({ params }: { params: Promise<{ slug: string }> }) {
+    const resolvedParams = use(params)
+    const slug = resolvedParams.slug
     const [planta, setPlanta] = useState<Planta | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function load() {
             try {
-                const data = await getPlanta(params.slug)
+                const isServer = typeof window === 'undefined'
+                const apiUrl = isServer
+                    ? (process.env.INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000')
+                    : ''
+                const repo = new HttpPlantaRepository(apiUrl)
+                const data = await repo.getPlanta(slug)
                 setPlanta(data)
             } catch {
                 console.error('Erro ao carregar planta')
@@ -22,7 +29,7 @@ export default function AdminEditarPlantaPage({ params }: { params: { slug: stri
             }
         }
         load()
-    }, [params.slug])
+    }, [slug])
 
     if (loading) return (
         <div className="flex h-96 items-center justify-center">

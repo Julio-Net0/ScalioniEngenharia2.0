@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import type { Planta } from '@/lib/api'
+import { PlainPlanta } from '@/core/domain/entities/Planta'
 import { PlantaCard } from './PlantaCard'
 
 const FILTERS = [
@@ -13,7 +13,7 @@ const FILTERS = [
 ]
 
 interface Props {
-    plantas: Planta[]
+    plantas: PlainPlanta[]
 }
 
 export function PlantaFilterGrid({ plantas }: Props) {
@@ -22,7 +22,7 @@ export function PlantaFilterGrid({ plantas }: Props) {
     const currentFilter = FILTERS.find((f) => f.label === activeFilter) || FILTERS[0]
 
     const filtered = plantas.filter((p) => {
-        const m2 = p.terreno_minimo_m2 || 0
+        const m2 = p.terrenoMinimoM2 || 0
         return m2 >= currentFilter.min && m2 < currentFilter.max
     })
 

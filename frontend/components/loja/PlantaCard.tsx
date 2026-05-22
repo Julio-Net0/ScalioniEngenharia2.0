@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { Home, Maximize2, Bath, Car } from 'lucide-react'
 import { formatCurrency, formatM2 } from '@/lib/utils'
-import type { Planta } from '@/lib/api'
+import { PlainPlanta } from '@/core/domain/entities/Planta'
 
 interface Props {
-    planta: Planta
+    planta: PlainPlanta
 }
 
 export function PlantaCard({ planta }: Props) {
@@ -21,13 +21,13 @@ export function PlantaCard({ planta }: Props) {
                     }}
                 />
                 <div className="absolute top-4 left-4 flex gap-2">
-                    {planta.terreno_minimo_m2 && planta.terreno_minimo_m2 > 300 && (
+                    {planta.terrenoMinimoM2 && planta.terrenoMinimoM2 > 300 && (
                         <span className="bg-terracotta text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
                             Luxo
                         </span>
                     )}
                     <span className="bg-primary text-main-bg text-[10px] font-bold px-3 py-1 uppercase tracking-widest">
-                        {planta.terreno_minimo_m2 ? `< ${planta.terreno_minimo_m2} m²` : 'Planta'}
+                        {planta.terrenoMinimoM2 ? `< ${planta.terrenoMinimoM2} m²` : 'Planta'}
                     </span>
                 </div>
             </div>
@@ -41,7 +41,7 @@ export function PlantaCard({ planta }: Props) {
                 <div className="grid grid-cols-2 gap-y-3 mb-6">
                     <div className="flex items-center gap-2 text-slate-400 text-xs">
                         <Maximize2 size={14} className="text-primary" />
-                        <span>{formatM2(planta.terreno_minimo_m2)}</span>
+                        <span>{formatM2(planta.terrenoMinimoM2)}</span>
                     </div>
                     <div className="flex items-center gap-2 text-slate-400 text-xs">
                         <Home size={14} className="text-primary" />
@@ -61,11 +61,11 @@ export function PlantaCard({ planta }: Props) {
                     <div className="flex flex-col">
                         <span className="text-[10px] tracking-widest text-slate-500 uppercase font-bold">Preço</span>
                         <span className="text-xl font-playfair font-black text-primary">
-                            {formatCurrency(planta.preco)}
+                            {formatCurrency(planta.preco.valor)}
                         </span>
                     </div>
                     <Link
-                        href={`/loja/${planta.slug}`}
+                        href={`/plantas/${planta.slug}`}
                         className="px-4 py-2 bg-primary/10 border border-primary/30 text-primary text-[10px] font-black tracking-widest hover:bg-primary hover:text-main-bg transition-all uppercase"
                     >
                         Ver Detalhes

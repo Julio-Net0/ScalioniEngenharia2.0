@@ -9,7 +9,7 @@ import { Loader2, Save, X, Plus, Trash2, Image as ImageIcon, FileText } from 'lu
 import { adminCreatePlanta, adminUpdatePlanta, uploadFile } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
-import type { Planta } from '@/lib/api'
+import { Planta } from '@/core/domain/entities/Planta'
 
 const plantaSchema = z.object({
     titulo: z.string().min(3, 'Título muito curto'),
@@ -37,9 +37,14 @@ export function PlantaForm({ initialData }: Props) {
     const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm<PlantaValues>({
         resolver: zodResolver(plantaSchema),
         defaultValues: initialData ? {
-            ...initialData,
-            preco: String(initialData.preco),
-            terreno_minimo_m2: initialData.terreno_minimo_m2
+            titulo: initialData.titulo,
+            slug: initialData.slug,
+            descricao: initialData.descricao,
+            preco: String(initialData.preco.valor),
+            terreno_minimo_m2: initialData.terrenoMinimoM2,
+            imagens: initialData.imagens || [],
+            arquivo_path: initialData.arquivoPath || null,
+            ativo: initialData.ativo
         } : {
             ativo: true,
             imagens: [],

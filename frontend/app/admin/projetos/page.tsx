@@ -28,7 +28,7 @@ export default function AdminProjetosPage() {
     async function loadProjetos() {
         setLoading(true)
         try {
-            const data = await getProjetos(false)
+            const data = await getProjetos()
             setProjetos(data)
         } catch {
             toast('Erro ao carregar projetos', 'error')
