@@ -28,7 +28,7 @@ async def test_criar_pedido_planta_nao_encontrada(client):
 
 @pytest.mark.asyncio
 async def test_criar_pedido_planta_inativa(client, db):
-    """Planta inativa retorna 404."""
+    """Planta inativa retorna 422."""
     planta_id = uuid.uuid4()
     await db.execute(
         insert(Planta).values(
@@ -49,7 +49,7 @@ async def test_criar_pedido_planta_inativa(client, db):
         "telefone": None,
     }
     response = await client.post("/api/pedidos", json=payload)
-    assert response.status_code == 404
+    assert response.status_code == 422
 
 
 @pytest.mark.asyncio
@@ -93,8 +93,8 @@ async def test_criar_pedido_sucesso(client, db, monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_criar_pedido_mp_falha_retorna_201(client, db, monkeypatch):
-    """Se MP falhar, pedido ainda é criado com init_point vazio → 201."""
+async def test_criar_pedido_mp_falha_retorna_502(client, db, monkeypatch):
+    """Se MP falhar, retorna 502 e o pedido não é criado."""
     planta_id = uuid.uuid4()
     await db.execute(
         insert(Planta).values(
@@ -118,5 +118,4 @@ async def test_criar_pedido_mp_falha_retorna_201(client, db, monkeypatch):
         "telefone": None,
     }
     response = await client.post("/api/pedidos", json=payload)
-    # Pedido criado mas init_point vazio
-    assert response.status_code == 201
+    assert response.status_code == 502

@@ -50,27 +50,31 @@ async def send_contact_admin_notification(nome: str, email: str, mensagem: str) 
     await _send_email(settings.admin_email, subject, body)
 
 
-async def send_download_email(to_email: str, nome: str, download_token: str) -> None:
+async def send_download_email(to_email: str, nome: str, download_token: str, planta_titulo: str) -> None:
     """E-mail com link de download após pagamento aprovado."""
-    subject = "Seu arquivo está pronto — Scalioni Engenharia"
-    download_url = f"{settings.frontend_url}/api/download/{download_token}"
+    subject = f"Seu arquivo está pronto: {planta_titulo} — Scalioni Engenharia"
+    download_url = f"{settings.frontend_url}/download/{download_token}"
     body = f"""
     <h2>Olá, {nome}!</h2>
-    <p>Seu pagamento foi confirmado. Baixe sua planta pelo link abaixo:</p>
+    <p>Seu pagamento foi confirmado. Baixe seu arquivo para a planta <strong>{planta_titulo}</strong> pelo link abaixo:</p>
     <p><a href="{download_url}" style="color:#C9A55A; font-weight:bold;">Baixar arquivo (válido por 72h)</a></p>
+    <p>Caso precise de suporte, você pode entrar em contato conosco pelo WhatsApp no número (11) 99999-9999.</p>
     <p>Atenciosamente,<br><strong>Scalioni Engenharia</strong></p>
     """
     await _send_email(to_email, subject, body)
 
 
-async def send_payment_failed_email(email: str, nome: str) -> None:
+async def send_payment_failed_email(email: str, nome: str, planta_slug: str, motivo: str) -> None:
     """E-mail notificando falha/cancelamento do pagamento."""
     subject = "Problema com seu pagamento — Scalioni Engenharia"
-    retry_url = f"{settings.frontend_url}/loja"
+    retry_url = f"{settings.frontend_url}/loja/{planta_slug}"
     body = f"""
     <h2>Olá, {nome}!</h2>
-    <p>Houve um problema com seu pagamento. Tente novamente:</p>
+    <p>Houve um problema com seu pagamento para o projeto solicitado.</p>
+    <p><strong>Motivo do cancelamento:</strong> {motivo}</p>
+    <p>Tente novamente através do link abaixo:</p>
     <p><a href="{retry_url}" style="color:#C9A55A; font-weight:bold;">Tentar novamente</a></p>
     <p>Atenciosamente,<br><strong>Scalioni Engenharia</strong></p>
     """
     await _send_email(email, subject, body)
+

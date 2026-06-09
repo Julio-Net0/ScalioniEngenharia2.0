@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { BotaoWhatsApp } from '@/components/layout/BotaoWhatsApp'
 import { ToastProvider } from '@/components/ui/toaster'
+import { DependencyProvider } from '@/core/infra/di/DependencyContext'
 
 const outfit = Outfit({
     subsets: ['latin'],
@@ -37,12 +38,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="pt-BR" className="dark" suppressHydrationWarning>
             <body className={`${outfit.variable} ${playfair.variable}`}>
-                <ToastProvider>
-                    <Navbar />
-                    <main>{children}</main>
-                    <Footer />
-                    <BotaoWhatsApp />
-                </ToastProvider>
+                <DependencyProvider>
+                    <ToastProvider>
+                        <Navbar />
+                        <main>{children}</main>
+                        <Footer />
+                        <BotaoWhatsApp />
+                    </ToastProvider>
+                </DependencyProvider>
             </body>
         </html>
     )

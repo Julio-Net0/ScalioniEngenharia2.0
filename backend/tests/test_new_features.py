@@ -69,9 +69,20 @@ async def test_pedido_rate_limit_decorator_existe():
 
 
 @pytest.mark.asyncio
-async def test_pedido_endpoint_acessivel_sem_rate_limit(client, db):
+async def test_pedido_endpoint_acessivel_sem_rate_limit(client, db, monkeypatch):
     """O endpoint POST /api/pedidos funciona normalmente (limiter desabilitado em testes)."""
     from backend.infrastructure.database.models import Planta
+    import mercadopago
+
+    class FakePref:
+        def create(self, data):
+            return {"response": {"init_point": "https://mp.com/checkout/123"}}
+
+    class FakeSDK:
+        def preference(self):
+            return FakePref()
+
+    monkeypatch.setattr(mercadopago, "SDK", lambda token: FakeSDK())
 
     planta_id = uuid.uuid4()
     await db.execute(
@@ -93,13 +104,12 @@ async def test_pedido_endpoint_acessivel_sem_rate_limit(client, db):
         "telefone": None,
     }
     response = await client.post("/api/pedidos", json=payload)
-    # Mesmo com falha no MP, deve retornar 201 (MP mock não configurado aqui)
     assert response.status_code == 201
 
 
 @pytest.mark.asyncio
-async def test_pedido_retorna_init_point_vazio_sem_mp(client, db, monkeypatch):
-    """Quando Mercado Pago falha, pedido é criado com init_point='' → 201."""
+async def test_pedido_retorna_502_sem_mp(client, db, monkeypatch):
+    """Quando Mercado Pago falha, retorna 502 Bad Gateway."""
     from backend.infrastructure.database.models import Planta
     import mercadopago
 
@@ -128,9 +138,7 @@ async def test_pedido_retorna_init_point_vazio_sem_mp(client, db, monkeypatch):
         "telefone": None,
     }
     response = await client.post("/api/pedidos", json=payload)
-    assert response.status_code == 201
-    data = response.json()
-    assert data["init_point"] == ""
+    assert response.status_code == 502
 
 
 @pytest.mark.asyncio
@@ -394,3 +402,28 @@ async def test_download_pedido_pago_sem_arquivo_retorna_404(client, db):
 
     response = await client.get(f"/api/download/{token}")
     assert response.status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_startup_validation_raises_runtime_error(monkeypatch):
+    """Verifica que o lifespan de startup lança exceção se variáveis MUST estiverem ausentes."""
+    import os
+    from backend.main import lifespan
+    from backend.core.config import settings
+
+    monkeypatch.setenv("FORCE_STARTUP_VALIDATION", "true")
+    
+    # Salva configurações originais
+    orig_token = settings.mp_access_token
+    
+    try:
+        # Testa token ausente
+        settings.mp_access_token = ""
+        with pytest.raises(RuntimeError) as excinfo:
+            async with lifespan(None):
+                pass
+        assert "MP_ACCESS_TOKEN" in str(excinfo.value)
+    finally:
+        # Restaura
+        settings.mp_access_token = orig_token
+

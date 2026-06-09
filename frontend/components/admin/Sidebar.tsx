@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
@@ -12,8 +13,10 @@ import {
     LogOut,
     ChevronRight
 } from 'lucide-react'
-import { removeToken } from '@/lib/auth'
+import { removeToken, getToken } from '@/lib/auth'
 import { cn } from '@/lib/utils'
+import { useDependencies } from '@/core/infra/di/DependencyContext'
+import { Badge } from '@/components/ui/badge'
 
 const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, href: '/admin' },
@@ -27,6 +30,22 @@ const menuItems = [
 export function Sidebar() {
     const pathname = usePathname()
     const router = useRouter()
+    const { listarMensagensUseCase } = useDependencies()
+    const [naoLidasCount, setNaoLidasCount] = useState(0)
+
+    useEffect(() => {
+        async function fetchUnreadCount() {
+            const token = getToken()
+            if (!token) return
+            try {
+                const res = await listarMensagensUseCase.execute(token)
+                setNaoLidasCount(res.nao_lidas)
+            } catch (err) {
+                console.error("Erro ao carregar mensagens pendentes:", err)
+            }
+        }
+        fetchUnreadCount()
+    }, [pathname, listarMensagensUseCase])
 
     function handleLogout() {
         removeToken()
@@ -58,6 +77,14 @@ export function Sidebar() {
                             <div className="flex items-center gap-4">
                                 <item.icon size={18} />
                                 {item.label}
+                                {item.id === 'mensagens' && naoLidasCount > 0 && (
+                                    <Badge variant="destructive" className={cn(
+                                        "ml-2",
+                                        isActive ? "bg-main-bg text-primary hover:bg-main-bg/90 border-transparent" : ""
+                                    )}>
+                                        {naoLidasCount}
+                                    </Badge>
+                                )}
                             </div>
                             {isActive && <ChevronRight size={14} />}
                         </Link>

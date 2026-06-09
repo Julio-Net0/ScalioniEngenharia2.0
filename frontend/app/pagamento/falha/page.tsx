@@ -1,7 +1,15 @@
 import Link from 'next/link'
 import { XCircle, ShoppingBag, ArrowRight, HelpCircle } from 'lucide-react'
 
-export default function PagamentoFalha() {
+interface Props {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function PagamentoFalha({ searchParams }: Props) {
+    const resolvedParams = await searchParams
+    const produto = typeof resolvedParams.produto === 'string' ? resolvedParams.produto : undefined
+    const retryUrl = produto ? `/loja/${produto}` : '/loja'
+
     return (
         <div className="min-h-screen bg-main-bg flex items-center justify-center py-20 px-6">
             <div className="max-w-2xl w-full bg-card-bg border border-red-500/20 p-12 text-center relative overflow-hidden">
@@ -34,7 +42,7 @@ export default function PagamentoFalha() {
 
                     <div className="flex flex-col md:flex-row gap-4 justify-center">
                         <Link
-                            href="/loja"
+                            href={retryUrl}
                             className="px-10 py-5 bg-red-600/20 border border-red-500/30 text-red-500 font-black text-xs tracking-[0.2em] transition-all hover:bg-red-500 hover:text-white uppercase flex items-center justify-center gap-2"
                         >
                             TENTAR NOVAMENTE <ArrowRight size={16} />

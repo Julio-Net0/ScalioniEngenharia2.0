@@ -1,14 +1,14 @@
 """Router FastAPI para POST /api/pedidos."""
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from pydantic import BaseModel, EmailStr
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.core.security import limiter
-from backend.infrastructure.database.models import Pedido, PedidoStatus
 from backend.infrastructure.database.session import get_db
-from backend.infrastructure.repositories.planta_repository import PlantaRepository
 from backend.interfaces.schemas.pedido import PedidoCreate, PedidoResponse
+
+from backend.application import pedido_service
+
 
 router = APIRouter(prefix="/api/pedidos", tags=["pedidos"])
 
@@ -20,50 +20,22 @@ async def create_pedido(
     data: PedidoCreate,
     db: AsyncSession = Depends(get_db),
 ):
-    planta_repo = PlantaRepository(db)
-    planta = await planta_repo.get_by_id(data.planta_id)
-    if not planta or not planta.ativo:
-        raise HTTPException(status_code=404, detail="Planta não encontrada")
-
-    pedido = Pedido(
-        planta_id=data.planta_id,
-        email=data.email,
-        nome=data.nome,
-        telefone=data.telefone,
-        valor=planta.preco,
-        status=PedidoStatus.pendente,
-    )
-    db.add(pedido)
-    await db.flush()
-    await db.refresh(pedido)
-
-    # Integração Mercado Pago — gera preference e retorna init_point
     try:
-        import mercadopago
-        from backend.core.config import settings
-        sdk = mercadopago.SDK(settings.mp_access_token)
-        preference_data = {
-            "items": [
-                {
-                    "id": str(planta.id),
-                    "title": planta.titulo,
-                    "quantity": 1,
-                    "unit_price": float(planta.preco),
-                }
-            ],
-            "payer": {"email": data.email, "name": data.nome},
-            "external_reference": str(pedido.id),
-            "back_urls": {
-                "success": f"{settings.frontend_url}/pagamento/sucesso",
-                "failure": f"{settings.frontend_url}/pagamento/falha",
-                "pending": f"{settings.frontend_url}/pagamento/pendente",
-            },
-            "auto_return": "approved",
-            "notification_url": f"{settings.frontend_url.replace('3000', '8000')}/api/webhooks/mercadopago",
-        }
-        preference_response = sdk.preference().create(preference_data)
-        init_point = preference_response["response"].get("init_point", "")
-    except Exception:
-        init_point = ""
+        pedido, init_point = await pedido_service.create_pedido(
+            db=db,
+            planta_id=data.planta_id,
+            email=data.email,
+            nome=data.nome,
+            telefone=data.telefone,
+        )
+    except ValueError as exc:
+        msg = str(exc)
+        if "não encontrada" in msg:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=msg)
+        else:
+            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail=msg)
+    except pedido_service.MercadoPagoError as exc:
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=str(exc))
 
-    return {**pedido.__dict__, "init_point": init_point}
+    pedido.init_point = init_point
+    return pedido

@@ -4,13 +4,15 @@ import logging
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.application import webhook_service
 from backend.core.security import limiter
-from backend.infrastructure.database.models import Pedido, PedidoStatus
+from backend.infrastructure.database.models import PedidoStatus
 from backend.infrastructure.database.session import get_db
+
+from backend.infrastructure.repositories.pedido_repository import PedidoRepository
+from backend.infrastructure.repositories.planta_repository import PlantaRepository
 
 router = APIRouter(prefix="/api/webhooks", tags=["webhooks"])
 logger = logging.getLogger(__name__)
@@ -35,10 +37,10 @@ async def mercadopago_webhook(
     if not payment_id:
         return {"status": "ignored"}
 
-    # 2. Verificar idempotência por mp_payment_id
-    stmt = select(Pedido).where(Pedido.mp_payment_id == payment_id)
-    result = await db.execute(stmt)
-    existing = result.scalar_one_or_none()
+    pedido_repo = PedidoRepository(db)
+
+    # 2. Verificar idempotência por mp_payment_id (com LOCK)
+    existing = await pedido_repo.get_by_mp_payment_id(payment_id, for_update=True)
     if existing and existing.status == PedidoStatus.pago:
         logger.info("Pagamento %s já processado (idempotência)", payment_id)
         return {"status": "already_processed"}
@@ -53,16 +55,13 @@ async def mercadopago_webhook(
         return {"status": "error"}
 
     # Buscar pedido pelo external_reference (UUID do pedido)
-    from backend.infrastructure.database.models import Pedido as PedidoModel
     import uuid as uuid_mod
     try:
         pedido_id = uuid_mod.UUID(external_reference)
     except (ValueError, TypeError):
         return {"status": "ignored"}
 
-    stmt2 = select(PedidoModel).where(PedidoModel.id == pedido_id)
-    result2 = await db.execute(stmt2)
-    pedido = result2.scalar_one_or_none()
+    pedido = await pedido_repo.get_by_id(pedido_id)
     if not pedido:
         return {"status": "not_found"}
 
@@ -74,17 +73,30 @@ async def mercadopago_webhook(
     elif mp_status == "pending":
         pedido.status = PedidoStatus.in_process
         pedido.atualizado_em = datetime.now(timezone.utc)
+        await pedido_repo.update(pedido)
     elif mp_status in ("rejected", "cancelled"):
         pedido.status = PedidoStatus[mp_status]
         pedido.atualizado_em = datetime.now(timezone.utc)
+        await pedido_repo.update(pedido)
+        
+        planta_repo = PlantaRepository(db)
+        planta = await planta_repo.get_by_id(pedido.planta_id)
+        planta_slug = planta.slug if planta else "planta"
+        
         from backend.application.email_service import send_payment_failed_email
         try:
-            await send_payment_failed_email(email=pedido.email, nome=pedido.nome)
+            await send_payment_failed_email(
+                email=pedido.email,
+                nome=pedido.nome,
+                planta_slug=planta_slug,
+                motivo="Pagamento recusado pela operadora ou cancelado pelo Mercado Pago",
+            )
         except Exception as exc:
             logger.error("Falha ao enviar e-mail de falha: %s", exc)
     else:
         pedido.status = PedidoStatus.in_process
         pedido.atualizado_em = datetime.now(timezone.utc)
+        await pedido_repo.update(pedido)
 
-    await db.flush()
     return {"status": "processed"}
+

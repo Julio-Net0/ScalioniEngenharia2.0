@@ -24,4 +24,14 @@ export class HttpPlantaRepository implements IPlantaRepository {
       p.id, p.slug, p.titulo, p.descricao, new Preco(Number(p.preco)), p.imagens, p.terreno_minimo_m2, p.ativo, p.arquivo_path
     );
   }
+
+  public async deletePlanta(token: string, slug: string): Promise<void> {
+    const res = await fetch(`${this.apiUrl}/api/plantas/${slug}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    if (!res.ok) throw new Error("Falha ao excluir planta");
+  }
 }

@@ -48,3 +48,30 @@ async def test_webhook_double_check_pending(client, monkeypatch):
     monkeypatch.setattr(webhook_service, "check_payment_status", mock_check_payment, raising=False)
     # O teste verifica o comportamento do serviço — não o HTTP em si
     assert True  # placeholder até o serviço existir
+
+
+@pytest.mark.asyncio
+async def test_webhook_hmac_valido(client, monkeypatch):
+    """Webhook com assinatura HMAC válida passa da validação (mockando o double-check)."""
+    import hmac
+    import hashlib
+    from backend.core.config import settings
+    from backend.application import webhook_service
+
+    body = b'{"type": "payment", "data": {"id": "12345"}}'
+    settings.mp_webhook_secret = "test-secret"
+    expected_hash = hmac.new(b"test-secret", body, hashlib.sha256).hexdigest()
+    
+    monkeypatch.setattr(webhook_service, "check_payment_status", lambda *a: {"status": "pending", "external_reference": "inv"})
+
+    response = await client.post(
+        "/api/webhooks/mercadopago",
+        content=body,
+        headers={
+            "x-signature": f"v1={expected_hash}",
+            "x-request-id": "req-2",
+            "Content-Type": "application/json",
+        },
+    )
+    assert response.status_code == 200
+
