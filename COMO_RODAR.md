@@ -3,7 +3,6 @@
 ## Pré-requisitos
 
 - Docker e Docker Compose instalados
-
 ---
 
 ## 1. Primeira vez (setup completo)
