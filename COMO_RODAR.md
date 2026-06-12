@@ -1,5 +1,4 @@
 # Como Rodar e Testar — Scalioni Engenharia 2.0
-
 ## Pré-requisitos
 
 - Docker e Docker Compose instalados
