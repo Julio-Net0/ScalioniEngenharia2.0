@@ -4,18 +4,15 @@ import logging
 
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel, EmailStr
-from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.core.security import create_access_token, limiter, verify_password
-from backend.infrastructure.database.models import (
-    AdminUser,
-    MensagemContato,
-    Pedido,
-    PedidoStatus,
-)
+from backend.infrastructure.database.models import PedidoStatus
 from backend.infrastructure.database.session import get_db
 from backend.interfaces.dependencies import get_current_admin
+from backend.infrastructure.repositories.admin_user_repository import AdminUserRepository
+from backend.infrastructure.repositories.mensagem_contato_repository import MensagemContatoRepository
+from backend.infrastructure.repositories.pedido_repository import PedidoRepository
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 logger = logging.getLogger(__name__)
@@ -35,9 +32,8 @@ async def admin_login(
     data: LoginRequest,
     db: AsyncSession = Depends(get_db),
 ):
-    stmt = select(AdminUser).where(AdminUser.email == data.email, AdminUser.ativo == True)  # noqa
-    result = await db.execute(stmt)
-    admin = result.scalar_one_or_none()
+    admin_repo = AdminUserRepository(db)
+    admin = await admin_repo.get_by_email(data.email, only_active=True)
 
     if not admin or not verify_password(data.senha, admin.senha_hash):
         raise HTTPException(status_code=401, detail="Credenciais inválidas")
@@ -54,12 +50,15 @@ async def list_mensagens(
     db: AsyncSession = Depends(get_db),
     _: dict = Depends(get_current_admin),
 ):
-    stmt = select(MensagemContato).order_by(MensagemContato.criada_em.desc())
+    msg_repo = MensagemContatoRepository(db)
+    all_msgs = await msg_repo.list_all()
+    nao_lidas = sum(1 for m in all_msgs if not m.lida)
+    
     if lida is not None:
-        stmt = stmt.where(MensagemContato.lida == lida)
-    result = await db.execute(stmt)
-    mensagens = result.scalars().all()
-    nao_lidas = sum(1 for m in mensagens if not m.lida)
+        mensagens = [m for m in all_msgs if m.lida == lida]
+    else:
+        mensagens = all_msgs
+        
     return {"mensagens": mensagens, "nao_lidas": nao_lidas}
 
 
@@ -70,13 +69,12 @@ async def marcar_lida(
     _: dict = Depends(get_current_admin),
 ):
     import uuid as uuid_mod
-    stmt = select(MensagemContato).where(MensagemContato.id == uuid_mod.UUID(mensagem_id))
-    result = await db.execute(stmt)
-    mensagem = result.scalar_one_or_none()
+    msg_repo = MensagemContatoRepository(db)
+    mensagem = await msg_repo.get_by_id(uuid_mod.UUID(mensagem_id))
     if not mensagem:
         raise HTTPException(status_code=404, detail="Mensagem não encontrada")
     mensagem.lida = True
-    await db.flush()
+    await msg_repo.update(mensagem)
     return {"status": "ok"}
 
 
@@ -87,9 +85,8 @@ async def list_pedidos(
     db: AsyncSession = Depends(get_db),
     _: dict = Depends(get_current_admin),
 ):
-    stmt = select(Pedido).order_by(Pedido.criado_em.desc())
-    result = await db.execute(stmt)
-    return result.scalars().all()
+    pedido_repo = PedidoRepository(db)
+    return await pedido_repo.list_all()
 
 
 @router.get("/pedidos/{pedido_id}")
@@ -99,9 +96,8 @@ async def get_pedido(
     _: dict = Depends(get_current_admin),
 ):
     import uuid as uuid_mod
-    stmt = select(Pedido).where(Pedido.id == uuid_mod.UUID(pedido_id))
-    result = await db.execute(stmt)
-    pedido = result.scalar_one_or_none()
+    pedido_repo = PedidoRepository(db)
+    pedido = await pedido_repo.get_by_id(uuid_mod.UUID(pedido_id))
     if not pedido:
         raise HTTPException(status_code=404, detail="Pedido não encontrado")
     return pedido
@@ -115,26 +111,33 @@ async def reenviar_email_download(
 ):
     import uuid as uuid_mod
     from backend.application.email_service import send_download_email
+    from backend.infrastructure.repositories.planta_repository import PlantaRepository
 
-    stmt = select(Pedido).where(Pedido.id == uuid_mod.UUID(pedido_id))
-    result = await db.execute(stmt)
-    pedido = result.scalar_one_or_none()
+    pedido_repo = PedidoRepository(db)
+    pedido = await pedido_repo.get_by_id(uuid_mod.UUID(pedido_id))
     if not pedido:
         raise HTTPException(status_code=404, detail="Pedido não encontrado")
     if pedido.status != PedidoStatus.pago or not pedido.download_token:
         raise HTTPException(status_code=400, detail="Pedido sem token de download")
+
+    planta_repo = PlantaRepository(db)
+    planta = await planta_repo.get_by_id(pedido.planta_id)
+    planta_titulo = planta.titulo if planta else "Planta"
 
     try:
         await send_download_email(
             to_email=pedido.email,
             nome=pedido.nome,
             download_token=str(pedido.download_token),
+            planta_titulo=planta_titulo,
         )
     except Exception as exc:
         logger.error("Falha ao reenviar e-mail: %s", exc)
         raise HTTPException(status_code=500, detail="Falha ao enviar e-mail")
 
     return {"status": "enviado"}
+
+
 class StatusUpdateRequest(BaseModel):
     status: str
 
@@ -147,9 +150,8 @@ async def update_pedido_status(
     _: dict = Depends(get_current_admin),
 ):
     import uuid as uuid_mod
-    stmt = select(Pedido).where(Pedido.id == uuid_mod.UUID(pedido_id))
-    result = await db.execute(stmt)
-    pedido = result.scalar_one_or_none()
+    pedido_repo = PedidoRepository(db)
+    pedido = await pedido_repo.get_by_id(uuid_mod.UUID(pedido_id))
     if not pedido:
         raise HTTPException(status_code=404, detail="Pedido não encontrado")
     
@@ -158,7 +160,7 @@ async def update_pedido_status(
     except ValueError:
         raise HTTPException(status_code=400, detail="Status inválido")
         
-    await db.flush()
+    await pedido_repo.update(pedido)
     return {"status": "atualizado"}
 
 
@@ -167,6 +169,6 @@ async def list_usuarios(
     db: AsyncSession = Depends(get_db),
     _: dict = Depends(get_current_admin),
 ):
-    stmt = select(AdminUser).order_by(AdminUser.nome)
-    result = await db.execute(stmt)
-    return result.scalars().all()
+    admin_repo = AdminUserRepository(db)
+    return await admin_repo.list_all()
+

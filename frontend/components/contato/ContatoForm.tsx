@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { Loader2, Send } from 'lucide-react'
-import { sendContato } from '@/lib/api'
-import { useToast } from '@/components/ui/toaster'
+import { Loader2, Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { useDependencies } from '@/core/infra/di/DependencyContext'
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 
 const contatoSchema = z.object({
     nome: z.string().min(3, 'Nome muito curto'),
@@ -19,7 +19,8 @@ type ContatoValues = z.infer<typeof contatoSchema>
 
 export function ContatoForm() {
     const [loading, setLoading] = useState(false)
-    const { toast } = useToast()
+    const [status, setStatus] = useState<null | { type: 'success' | 'error'; message: string }>(null)
+    const { submeterContatoUseCase } = useDependencies()
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ContatoValues>({
         resolver: zodResolver(contatoSchema),
@@ -28,12 +29,25 @@ export function ContatoForm() {
 
     async function onSubmit(data: ContatoValues) {
         setLoading(true)
+        setStatus(null)
         try {
-            await sendContato(data)
-            toast('Mensagem enviada com sucesso! Logo entraremos em contato.', 'success')
+            await submeterContatoUseCase.execute(
+                data.nome,
+                data.email,
+                data.mensagem,
+                undefined,
+                data.assunto
+            )
+            setStatus({
+                type: 'success',
+                message: 'Mensagem enviada com sucesso! Logo entraremos em contato.'
+            })
             reset()
         } catch (err: any) {
-            toast(err.message || 'Erro ao enviar mensagem', 'error')
+            setStatus({
+                type: 'error',
+                message: err.message || 'Erro ao enviar mensagem. Tente novamente mais tarde.'
+            })
         } finally {
             setLoading(false)
         }
@@ -41,6 +55,20 @@ export function ContatoForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 bg-card-bg border border-white/5 p-10 shadow-2xl">
+            {status && (
+                <Alert variant={status.type === 'success' ? 'default' : 'destructive'} className="mb-6 animate-fade-in">
+                    {status.type === 'success' ? (
+                        <CheckCircle className="h-4 w-4" />
+                    ) : (
+                        <AlertCircle className="h-4 w-4" />
+                    )}
+                    <AlertTitle>
+                        {status.type === 'success' ? 'Sucesso' : 'Erro'}
+                    </AlertTitle>
+                    <AlertDescription>{status.message}</AlertDescription>
+                </Alert>
+            )}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                     <label className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Seu Nome</label>

@@ -8,21 +8,33 @@ import {
     Edit,
     Trash2,
     Eye,
-    Loader2,
     AlertCircle
 } from 'lucide-react'
-import { adminDeletePlanta } from '@/lib/api'
 import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
 import { cn, formatM2 } from '@/lib/utils'
 import type { Planta } from '@/core/domain/entities/Planta'
+import { useDependencies } from '@/core/infra/di/DependencyContext'
+import { Skeleton } from '@/components/ui/skeleton'
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 
 export default function AdminPlantasPage() {
     const [plantas, setPlantas] = useState<Planta[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
+    const [deleteTarget, setDeleteTarget] = useState<string | null>(null)
     const { toast } = useToast()
+    const { deletarPlantaUseCase } = useDependencies()
 
     async function loadPlantas() {
         setLoading(true)
@@ -43,12 +55,14 @@ export default function AdminPlantasPage() {
 
     useEffect(() => { loadPlantas() }, [])
 
-    async function handleDelete(slug: string) {
-        if (!confirm('Tem certeza que deseja excluir esta planta?')) return
+    async function confirmDelete() {
+        if (!deleteTarget) return
+        const slug = deleteTarget
+        setDeleteTarget(null)
         const token = getToken()
         if (!token) return
         try {
-            await adminDeletePlanta(token, slug)
+            await deletarPlantaUseCase.execute(token, slug)
             toast('Planta excluída com sucesso', 'success')
             loadPlantas()
         } catch (err: any) {
@@ -94,7 +108,12 @@ export default function AdminPlantasPage() {
             {/* Table */}
             <div className="bg-card-bg border border-white/5 overflow-hidden">
                 {loading ? (
-                    <div className="py-24 flex justify-center"><Loader2 className="animate-spin text-primary" size={32} /></div>
+                    <div className="p-8 space-y-4">
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                    </div>
                 ) : filtered.length > 0 ? (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
@@ -137,7 +156,7 @@ export default function AdminPlantasPage() {
                                                     <Edit size={14} />
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDelete(p.slug)}
+                                                    onClick={() => setDeleteTarget(p.slug)}
                                                     className="p-2 bg-main-bg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"
                                                     title="Excluir"
                                                 >
@@ -157,6 +176,23 @@ export default function AdminPlantasPage() {
                     </div>
                 )}
             </div>
+
+            <AlertDialog open={deleteTarget !== null} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Excluir Planta</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Tem certeza que deseja excluir esta planta? Esta ação é irreversível e removerá o item da loja.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmDelete} className="bg-red-600 hover:bg-red-700 text-white border-transparent">
+                            Confirmar Exclusão
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     )
 }

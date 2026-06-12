@@ -52,6 +52,7 @@ async def test_send_download_email_chama_send_email(monkeypatch):
         to_email="comprador@test.com",
         nome="Carlos",
         download_token="abc-token-123",
+        planta_titulo="Planta Teste",
     )
 
     mock_send.assert_called_once()
@@ -68,7 +69,7 @@ async def test_send_payment_failed_email_chama_send_email(monkeypatch):
     monkeypatch.setattr(email_service, "_send_email", mock_send)
 
     await email_service.send_payment_failed_email(
-        email="falhou@test.com", nome="Ana"
+        email="falhou@test.com", nome="Ana", planta_slug="planta-teste", motivo="saldo insuficiente"
     )
 
     mock_send.assert_called_once()

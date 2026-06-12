@@ -9,26 +9,38 @@ import {
     Pencil,
     Trash2,
     Eye,
-    Loader2,
     AlertCircle
 } from 'lucide-react'
-import { getProjetos, adminDeleteProjeto } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
 import { cn } from '@/lib/utils'
-import type { Projeto } from '@/lib/api'
+import type { Projeto } from '@/core/domain/entities/Projeto'
+import { useDependencies } from '@/core/infra/di/DependencyContext'
+import { Skeleton } from '@/components/ui/skeleton'
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 
 export default function AdminProjetosPage() {
     const router = useRouter()
     const [projetos, setProjetos] = useState<Projeto[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
+    const [deleteTarget, setDeleteTarget] = useState<string | null>(null)
     const { toast } = useToast()
+    const { listarProjetosUseCase, deletarProjetoUseCase } = useDependencies()
 
     async function loadProjetos() {
         setLoading(true)
         try {
-            const data = await getProjetos()
+            const data = await listarProjetosUseCase.execute()
             setProjetos(data)
         } catch {
             toast('Erro ao carregar projetos', 'error')
@@ -39,12 +51,14 @@ export default function AdminProjetosPage() {
 
     useEffect(() => { loadProjetos() }, [])
 
-    async function handleDelete(slug: string) {
-        if (!confirm('Tem certeza que deseja excluir este projeto?')) return
+    async function confirmDelete() {
+        if (!deleteTarget) return
+        const slug = deleteTarget
+        setDeleteTarget(null)
         const token = getToken()
         if (!token) return
         try {
-            await adminDeleteProjeto(token, slug)
+            await deletarProjetoUseCase.execute(token, slug)
             toast('Projeto excluído com sucesso', 'success')
             loadProjetos()
         } catch (err: any) {
@@ -91,7 +105,12 @@ export default function AdminProjetosPage() {
             {/* Table */}
             <div className="bg-card-bg border border-white/5 overflow-hidden">
                 {loading ? (
-                    <div className="py-24 flex justify-center"><Loader2 className="animate-spin text-primary" size={32} /></div>
+                    <div className="p-8 space-y-4">
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                        <Skeleton className="h-16 w-full" />
+                    </div>
                 ) : filtered.length > 0 ? (
                     <div className="overflow-x-auto">
                         <table className="w-full text-left">
@@ -110,7 +129,7 @@ export default function AdminProjetosPage() {
                                         <td className="px-8 py-5">
                                             <div className="flex items-center gap-4">
                                                 <div className="w-16 aspect-video bg-main-bg border border-white/10 shrink-0 overflow-hidden">
-                                                    {p.imagem_capa && <img src={p.imagem_capa} className="w-full h-full object-cover" />}
+                                                    {p.imagemCapa && <img src={p.imagemCapa} className="w-full h-full object-cover" />}
                                                 </div>
                                                 <span className="text-[11px] font-bold text-white uppercase tracking-wider">{p.titulo}</span>
                                             </div>
@@ -138,7 +157,7 @@ export default function AdminProjetosPage() {
                                                     <Pencil size={14} />
                                                 </button>
                                                 <button
-                                                    onClick={() => handleDelete(p.slug)}
+                                                    onClick={() => setDeleteTarget(p.slug)}
                                                     className="p-2 bg-main-bg border border-white/10 text-red-500 hover:bg-red-500 hover:text-white transition-all"
                                                     title="Excluir"
                                                 >
@@ -158,6 +177,23 @@ export default function AdminProjetosPage() {
                     </div>
                 )}
             </div>
+
+            <AlertDialog open={deleteTarget !== null} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Excluir Projeto</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Tem certeza que deseja excluir este projeto? Esta ação é irreversível e removerá o item do portfólio.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmDelete} className="bg-red-600 hover:bg-red-700 text-white border-transparent">
+                            Confirmar Exclusão
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     )
 }

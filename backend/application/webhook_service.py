@@ -18,12 +18,10 @@ def validate_hmac_signature(payload: bytes, signature_header: str, request_id: s
     """Valida a assinatura HMAC-SHA256 do Mercado Pago."""
     try:
         parts = dict(item.split("=", 1) for item in signature_header.split(","))
-        ts = parts.get("ts", "")
         v1 = parts.get("v1", "")
-        manifest = f"id:{request_id};request-id:{request_id};ts:{ts};"
         expected = hmac.new(
             settings.mp_webhook_secret.encode(),
-            manifest.encode(),
+            payload,
             hashlib.sha256,
         ).hexdigest()
         return hmac.compare_digest(expected, v1)
@@ -48,19 +46,28 @@ async def check_payment_status(payment_id: str) -> dict:
 async def handle_approved(pedido: Pedido, db: AsyncSession) -> None:
     """Processa pagamento aprovado: gera token de download (72h) e envia e-mail."""
     from backend.application.email_service import send_download_email
+    from backend.infrastructure.repositories.pedido_repository import PedidoRepository
+    from backend.infrastructure.repositories.planta_repository import PlantaRepository
 
     pedido.status = PedidoStatus.pago
     pedido.download_token = uuid.uuid4()
     pedido.expires_at = datetime.now(timezone.utc) + timedelta(hours=72)
     pedido.atualizado_em = datetime.now(timezone.utc)
-    await db.flush()
-    await db.refresh(pedido)
+    
+    pedido_repo = PedidoRepository(db)
+    await pedido_repo.update(pedido)
+
+    planta_repo = PlantaRepository(db)
+    planta = await planta_repo.get_by_id(pedido.planta_id)
+    planta_titulo = planta.titulo if planta else "Planta"
 
     try:
         await send_download_email(
             to_email=pedido.email,
             nome=pedido.nome,
             download_token=str(pedido.download_token),
+            planta_titulo=planta_titulo,
         )
     except Exception as exc:
         logger.error("Falha ao enviar e-mail de download: %s", exc)
+

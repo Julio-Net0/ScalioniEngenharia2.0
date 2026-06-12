@@ -11,6 +11,8 @@ from backend.core.security import limiter
 from backend.infrastructure.database.models import MensagemContato
 from backend.infrastructure.database.session import get_db
 
+from backend.infrastructure.repositories.mensagem_contato_repository import MensagemContatoRepository
+
 router = APIRouter(prefix="/api/contato", tags=["contato"])
 logger = logging.getLogger(__name__)
 
@@ -35,8 +37,8 @@ async def create_contato(
         telefone=data.telefone,
         mensagem=data.mensagem,
     )
-    db.add(mensagem)
-    await db.flush()
+    repo = MensagemContatoRepository(db)
+    await repo.create(mensagem)
 
     # Tenta enviar e-mails; falha silenciosa (banco já salvo)
     try:
@@ -51,4 +53,5 @@ async def create_contato(
     except Exception as exc:
         logger.error("Falha ao enviar notificação admin: %s", exc)
 
-    return {"id": str(mensagem.id), "status": "recebido"}
+    return {"id": str(mensagem.id), "criada_em": mensagem.criada_em.isoformat()}
+

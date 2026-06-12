@@ -106,8 +106,8 @@
 ## Fase 7 — Qualidade e Finalização
 
 - [ ] `task-181` Adicionar metadados SEO em todas as pages: `<title>`, `<meta description>`, `<meta og:*>`; usar `generateMetadata()` onde dinâmico
-- [ ] `task-182` Implementar `loading.tsx` para rotas com SSG/ISR (spinner dourado) e `not-found.tsx` (404 dark luxury)
-- [ ] `task-183` Tornar o site responsivo: revisar Navbar mobile (Sheet), grades de portfólio/loja em mobile (1 col), admin sidebar colapsável
-- [ ] `task-184` Adicionar `next.config.ts` — domínios de imagem permitidos, output `standalone` para Docker prod
+- [x] `task-182` Implementar `loading.tsx` para rotas com SSG/ISR (spinner dourado) e `not-found.tsx` (404 dark luxury)
+- [x] `task-183` Tornar o site responsivo: revisar Navbar mobile (Sheet), grades de portfólio/loja em mobile (1 col), admin sidebar colapsável
+- [x] `task-184` Adicionar `next.config.ts` — domínios de imagem permitidos, output `standalone` para Docker prod
 - [ ] `task-185` Atualizar `README.md` — seção de setup do frontend: `npm install`, `npm run dev`, variáveis de ambiente necessárias
-- [ ] `task-186` Atualizar `docker-compose.yml` — adicionar service `frontend` com `target: dev`, volume hot-reload, porta `3000:3000`, `depends_on: backend`
+- [x] `task-186` Atualizar `docker-compose.yml` — adicionar service `frontend` com `target: dev`, volume hot-reload, porta `3000:3000`, `depends_on: backend`
