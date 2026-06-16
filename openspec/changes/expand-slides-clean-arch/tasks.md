@@ -1,6 +1,6 @@
 ## 1. Reorganização dos Slides em apresentacao_frontend.html
 
-- [x] 1.1 Atualizar o total de slides na contagem do cabeçalho de cada slide (ex: `01 / 24`, `02 / 24`, ..., `24 / 24`)
+- [x] 1.1 Atualizar o total de slides na contagem do cabeçalho de cada slide (ex: `01 / 24`, `02 / 24`, `03 / 24`..., `24 / 24`)
 - [x] 1.2 Atualizar os dots de navegação e as setas para refletirem a nova contagem de 24 slides
 
 ## 2. Divisão por Camadas e Subtópicos
