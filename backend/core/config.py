@@ -52,6 +52,9 @@ class Settings(BaseSettings):
     # Frontend
     frontend_url: str = "http://localhost:3000"
 
+    # URL pública deste backend (usada no notification_url do Mercado Pago)
+    backend_url: str = "http://localhost:8000"
+
     # Admin e-mail for notifications
     admin_email: str = ""
 

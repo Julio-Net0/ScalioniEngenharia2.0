@@ -55,6 +55,8 @@ A topologia de execução após o deploy segue o fluxo abaixo:
    * `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASSWORD`: E-mail SMTP de produção.
    * `ADMIN_EMAIL`: E-mail do administrador inicial.
    * `SEED_ENV`: `prod` (evita dados falsos de teste no banco Neon).
+   * `FRONTEND_URL`: URL pública real do frontend (Vercel), ex: `https://seu-projeto.vercel.app`. Sem isso o Mercado Pago rejeita a preferência de pagamento (back_urls apontando pra localhost).
+   * `BACKEND_URL`: URL pública real deste próprio backend (Render), ex: `https://scalioni-backend.onrender.com`. Usada para montar o `notification_url` do webhook do Mercado Pago — sem ela o webhook nunca chega no backend correto.
 5. Salve a **Deploy Hook URL** (Webhook para gatilho de deploy).
 6. **Plano Free**: sem Persistent Disk disponível. `/app/uploads` existe (criado no Dockerfile) então o app sobe normalmente, mas é filesystem efêmero — todo arquivo enviado via upload (imagens/PDFs de plantas) é perdido a cada redeploy ou restart do container. Reenvie os arquivos pelo admin sempre que isso ocorrer.
    * Para persistir de fato, migrar para plano pago com **Persistent Disk** (mount `/app/uploads`) ou storage de objeto (S3/R2) — sem isso é a limitação aceita no plano atual.

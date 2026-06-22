@@ -61,7 +61,7 @@ async def create_pedido(
                 "pending": f"{settings.frontend_url}/pagamento/pendente",
             },
             "auto_return": "approved",
-            "notification_url": f"{settings.frontend_url.replace('3000', '8000')}/api/webhooks/mercadopago",
+            "notification_url": f"{settings.backend_url}/api/webhooks/mercadopago",
         }
         preference_response = sdk.preference().create(preference_data)
         
