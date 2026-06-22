@@ -1,3 +1,5 @@
+from urllib.parse import parse_qs, urlencode, urlsplit, urlunsplit
+
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -20,8 +22,21 @@ class Settings(BaseSettings):
     @field_validator("database_url", mode="before")
     @classmethod
     def assemble_db_url(cls, v: str) -> str:
-        if v and v.startswith("postgresql://"):
-            return v.replace("postgresql://", "postgresql+asyncpg://", 1)
+        if not v:
+            return v
+        if v.startswith("postgresql://"):
+            v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
+
+        # asyncpg não entende os parâmetros sslmode/channel_binding do libpq
+        # (ex: strings de conexão do Neon) — traduz para o que o asyncpg aceita.
+        parts = urlsplit(v)
+        query = parse_qs(parts.query)
+        if "sslmode" in query or "channel_binding" in query:
+            query.pop("channel_binding", None)
+            sslmode = query.pop("sslmode", None)
+            if sslmode:
+                query["ssl"] = sslmode
+            v = urlunsplit(parts._replace(query=urlencode(query, doseq=True)))
         return v
 
     # Mercado Pago

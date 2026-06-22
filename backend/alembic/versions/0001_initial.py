@@ -19,7 +19,8 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-
+    # pgcrypto para gen_random_uuid() — precisa existir antes dos CREATE TABLE que a usam como default
+    op.execute("CREATE EXTENSION IF NOT EXISTS pgcrypto")
 
     # projetos
     op.create_table(
@@ -108,9 +109,6 @@ def upgrade() -> None:
         sa.CheckConstraint("length(mensagem) <= 2000", name="ck_mensagens_tamanho"),
     )
     op.create_index("idx_mensagens_lida", "mensagens_contato", ["lida"])
-
-    # pgcrypto para gen_random_uuid()
-    op.execute("CREATE EXTENSION IF NOT EXISTS pgcrypto")
 
 
 def downgrade() -> None:
