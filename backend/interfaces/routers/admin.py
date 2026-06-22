@@ -13,6 +13,7 @@ from backend.interfaces.dependencies import get_current_admin
 from backend.infrastructure.repositories.admin_user_repository import AdminUserRepository
 from backend.infrastructure.repositories.mensagem_contato_repository import MensagemContatoRepository
 from backend.infrastructure.repositories.pedido_repository import PedidoRepository
+from backend.infrastructure.repositories.planta_repository import PlantaRepository
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 logger = logging.getLogger(__name__)
@@ -86,7 +87,21 @@ async def list_pedidos(
     _: dict = Depends(get_current_admin),
 ):
     pedido_repo = PedidoRepository(db)
-    return await pedido_repo.list_all()
+    planta_repo = PlantaRepository(db)
+    pedidos = await pedido_repo.list_all()
+
+    plantas_by_id = {}
+    for pedido in pedidos:
+        if pedido.planta_id not in plantas_by_id:
+            plantas_by_id[pedido.planta_id] = await planta_repo.get_by_id(pedido.planta_id)
+
+    result = []
+    for pedido in pedidos:
+        planta = plantas_by_id.get(pedido.planta_id)
+        item = {c.name: getattr(pedido, c.name) for c in pedido.__table__.columns}
+        item["planta"] = {"titulo": planta.titulo} if planta else None
+        result.append(item)
+    return result
 
 
 @router.get("/pedidos/{pedido_id}")

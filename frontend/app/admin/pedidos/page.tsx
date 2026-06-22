@@ -55,7 +55,8 @@ export default function AdminPedidosPage() {
 
     const filtered = pedidos.filter(p =>
         p.nome.toLowerCase().includes(search.toLowerCase()) ||
-        p.email.toLowerCase().includes(search.toLowerCase())
+        p.email.toLowerCase().includes(search.toLowerCase()) ||
+        p.planta?.titulo?.toLowerCase().includes(search.toLowerCase())
     )
 
     return (

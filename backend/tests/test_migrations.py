@@ -86,11 +86,11 @@ def test_constraints_presentes(engine):
 
 
 def test_downgrade_seed_reverte_migration_seed(engine):
-    """Downgrade -1 remove a migration de seed (0002) mas mantém o schema (0001)."""
+    """Downgrade -1 remove a migration mais recente (0003) mas mantém o schema."""
     result = run_alembic(["downgrade", "-1"])
     assert result.returncode == 0, f"alembic downgrade -1 falhou:\n{result.stderr}\n{result.stdout}"
 
-    # Verifica que ainda estamos em 0001 (tabelas existem)
+    # Verifica que as tabelas ainda existem
     inspector = inspect(engine)
     tabelas = inspector.get_table_names()
     assert "projetos" in tabelas, "Tabela 'projetos' removida indevidamente pelo downgrade -1"
@@ -99,7 +99,7 @@ def test_downgrade_seed_reverte_migration_seed(engine):
     with engine.connect() as conn:
         result = conn.execute(text("SELECT version_num FROM alembic_version"))
         version = result.scalar()
-    assert version == "0001_initial", f"Versão esperada '0001_initial', obtida: {version}"
+    assert version == "0002_seed_dev", f"Versão esperada '0002_seed_dev', obtida: {version}"
 
 
 def test_downgrade_base_remove_todas_tabelas(engine):

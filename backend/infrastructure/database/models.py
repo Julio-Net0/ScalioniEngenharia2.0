@@ -136,6 +136,7 @@ class MensagemContato(Base):
     nome: Mapped[str] = mapped_column(Text, nullable=False)
     email: Mapped[str] = mapped_column(Text, nullable=False)
     telefone: Mapped[str | None] = mapped_column(Text, nullable=True)
+    assunto: Mapped[str | None] = mapped_column(Text, nullable=True)
     mensagem: Mapped[str] = mapped_column(Text, nullable=False)
     lida: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     criada_em: Mapped[datetime] = mapped_column(TIMESTAMP(timezone=True), nullable=False, server_default=func.now())

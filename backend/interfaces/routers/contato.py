@@ -21,6 +21,7 @@ class ContatoCreate(BaseModel):
     nome: str = Field(..., min_length=1)
     email: EmailStr
     telefone: str | None = None
+    assunto: str | None = None
     mensagem: str = Field(..., min_length=1, max_length=2000)
 
 
@@ -35,6 +36,7 @@ async def create_contato(
         nome=data.nome,
         email=data.email,
         telefone=data.telefone,
+        assunto=data.assunto,
         mensagem=data.mensagem,
     )
     repo = MensagemContatoRepository(db)
