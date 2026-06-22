@@ -17,6 +17,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copia o conteúdo para /app/backend para manter a estrutura de módulos
 COPY . ./backend/
 
+RUN mkdir -p /app/uploads
+
 # ── Dev ───────────────────────────────────────────────────────────────────────
 FROM base AS dev
 
@@ -31,6 +33,7 @@ FROM base AS prod
 
 # Usuário não-root para segurança
 RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN chown -R appuser:appgroup /app/uploads
 USER appuser
 
 # 2 workers Uvicorn — ajustar conforme CPU disponível em prod
