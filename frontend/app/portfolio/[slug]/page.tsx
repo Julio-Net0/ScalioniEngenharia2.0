@@ -11,6 +11,8 @@ interface Props {
     params: Promise<{ slug: string }>
 }
 
+export const revalidate = 60
+
 // Fallback para projetos de demonstração
 const MOCK_PROJETOS: Record<string, Partial<Projeto>> = {
     'residencia-alpha': {

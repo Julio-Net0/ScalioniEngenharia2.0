@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     description: 'Explore nosso portfólio de projetos residenciais, comerciais e de interiores. Mais de 150 projetos entregues.',
 }
 
+export const revalidate = 60
+
 export default async function PortfolioPage() {
     let projetos: Projeto[] = []
     let hasError = false

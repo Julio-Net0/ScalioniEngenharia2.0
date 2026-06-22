@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     description: 'Site oficial da Scalioni Engenharia. Portfólio de projetos residenciais e comerciais. Plantas prontas para compra online.',
 }
 
+export const revalidate = 60
+
 export default async function HomePage() {
     let projetos: Projeto[] = []
     try {

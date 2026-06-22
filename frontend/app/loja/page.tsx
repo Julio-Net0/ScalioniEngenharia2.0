@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     description: 'Projetos arquitetônicos de alto padrão prontos para download imediato. Economize tempo e dinheiro com design assinado.',
 }
 
+export const revalidate = 60
+
 const features = [
     { icon: Download, title: 'Download Imediato', desc: 'Receba o link em seu e-mail logo após a aprovação do pagamento.' },
     { icon: ShieldCheck, title: 'Segurança Total', desc: 'Pagamento processado via Mercado Pago com criptografia de ponta.' },
