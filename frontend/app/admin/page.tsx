@@ -11,14 +11,22 @@ import {
     Loader2
 } from 'lucide-react'
 import { KpiCard } from '@/components/admin/KpiCard'
-import { getAdminPedidos, getAdminMensagens, getProjetos } from '@/lib/api'
+import { getAdminPedidos, getAdminMensagens, getProjetos, type Pedido, type MensagemContato } from '@/lib/api'
 import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { getToken } from '@/lib/auth'
 import { cn, formatCurrency, formatDate, STATUS_LABELS, STATUS_COLORS } from '@/lib/utils'
 import Link from 'next/link'
 
+interface DashboardData {
+    pedidos: Pedido[]
+    mensagens: MensagemContato[]
+    nao_lidas: number
+    plantas_count: number
+    projetos_count: number
+}
+
 export default function AdminDashboard() {
-    const [data, setData] = useState<any>(null)
+    const [data, setData] = useState<DashboardData | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -61,7 +69,7 @@ export default function AdminDashboard() {
     )
 
     const ultimosPedidos = data?.pedidos?.slice(0, 5) ?? []
-    const vlrTotal = data?.pedidos?.filter((p: any) => p.status === 'pago').reduce((acc: number, p: any) => acc + Number(p.valor), 0) ?? 0
+    const vlrTotal = data?.pedidos?.filter((p) => p.status === 'pago').reduce((acc, p) => acc + Number(p.valor), 0) ?? 0
 
     return (
         <div className="space-y-12">
@@ -99,7 +107,7 @@ export default function AdminDashboard() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5">
-                                {ultimosPedidos.map((p: any) => (
+                                {ultimosPedidos.map((p) => (
                                     <tr key={p.id} className="hover:bg-white/5 transition-colors group">
                                         <td className="px-8 py-4 font-mono text-[10px] text-primary">#{p.id.slice(0, 5)}</td>
                                         <td className="px-4 py-4">
@@ -128,7 +136,7 @@ export default function AdminDashboard() {
                         </Link>
                     </div>
                     <div className="p-8 space-y-6">
-                        {data?.mensagens?.slice(0, 3).map((m: any) => (
+                        {data?.mensagens?.slice(0, 3).map((m) => (
                             <div key={m.id} className="flex gap-4 group">
                                 <div className="w-10 h-10 bg-main-bg border border-white/10 flex items-center justify-center shrink-0 group-hover:border-primary/50 transition-colors">
                                     <Clock size={16} className="text-primary" />

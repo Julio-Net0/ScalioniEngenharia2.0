@@ -22,6 +22,7 @@ export interface Projeto {
 export interface Pedido {
     id: string
     planta_id: string
+    planta?: { titulo: string } | null
     email: string
     nome: string
     telefone: string | null
@@ -39,6 +40,7 @@ export interface MensagemContato {
     nome: string
     email: string
     telefone: string | null
+    assunto?: string | null
     mensagem: string
     lida: boolean
     criada_em: string
@@ -190,7 +192,7 @@ export async function adminDeleteProjeto(token: string, slug: string): Promise<v
     })
 }
 
-export async function adminCreatePlanta(token: string, data: any): Promise<any> {
+export async function adminCreatePlanta(token: string, data: Record<string, unknown>): Promise<unknown> {
     const res = await fetch(`${API_URL}/api/plantas`, {
         method: 'POST',
         headers: authHeaders(token),
@@ -203,7 +205,7 @@ export async function adminCreatePlanta(token: string, data: any): Promise<any> 
     return res.json()
 }
 
-export async function adminUpdatePlanta(token: string, slug: string, data: any): Promise<any> {
+export async function adminUpdatePlanta(token: string, slug: string, data: Record<string, unknown>): Promise<unknown> {
     const res = await fetch(`${API_URL}/api/plantas/${slug}`, {
         method: 'PUT',
         headers: authHeaders(token),

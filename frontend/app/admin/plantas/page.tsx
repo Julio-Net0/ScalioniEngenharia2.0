@@ -13,7 +13,7 @@ import {
 import { HttpPlantaRepository } from '@/core/infra/http/HttpPlantaRepository'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
-import { cn, formatM2 } from '@/lib/utils'
+import { cn, formatM2, getErrorMessage } from '@/lib/utils'
 import type { Planta } from '@/core/domain/entities/Planta'
 import { useDependencies } from '@/core/infra/di/DependencyContext'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -53,7 +53,7 @@ export default function AdminPlantasPage() {
         }
     }
 
-    useEffect(() => { loadPlantas() }, [])
+    useEffect(() => { loadPlantas() }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function confirmDelete() {
         if (!deleteTarget) return
@@ -65,8 +65,8 @@ export default function AdminPlantasPage() {
             await deletarPlantaUseCase.execute(token, slug)
             toast('Planta excluída com sucesso', 'success')
             loadPlantas()
-        } catch (err: any) {
-            toast(err.message || 'Erro ao excluir planta', 'error')
+        } catch (err) {
+            toast(getErrorMessage(err) || 'Erro ao excluir planta', 'error')
         }
     }
 

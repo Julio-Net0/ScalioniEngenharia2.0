@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import {
     getAdminPedidos,
-    adminUpdatePedidoStatus
+    adminUpdatePedidoStatus,
+    type Pedido
 } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
@@ -14,13 +15,12 @@ import {
     ShoppingBag,
     Mail,
     Phone,
-    Download,
     AlertCircle,
     FileText
 } from 'lucide-react'
 
 export default function AdminPedidosPage() {
-    const [pedidos, setPedidos] = useState<any[]>([])
+    const [pedidos, setPedidos] = useState<Pedido[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
     const { toast } = useToast()
@@ -55,8 +55,7 @@ export default function AdminPedidosPage() {
 
     const filtered = pedidos.filter(p =>
         p.nome.toLowerCase().includes(search.toLowerCase()) ||
-        p.email.toLowerCase().includes(search.toLowerCase()) ||
-        p.planta?.titulo?.toLowerCase().includes(search.toLowerCase())
+        p.email.toLowerCase().includes(search.toLowerCase())
     )
 
     return (

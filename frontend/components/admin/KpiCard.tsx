@@ -4,10 +4,9 @@ interface Props {
     label: string
     value: string | number
     icon: LucideIcon
-    color?: string
 }
 
-export function KpiCard({ label, value, icon: Icon, color = 'primary' }: Props) {
+export function KpiCard({ label, value, icon: Icon }: Props) {
     return (
         <div className="bg-card-bg border border-white/5 p-8 flex items-start justify-between group hover:border-primary/30 transition-all">
             <div>

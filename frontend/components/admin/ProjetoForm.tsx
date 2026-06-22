@@ -6,10 +6,11 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import NextImage from 'next/image'
-import { Loader2, Save, X, Plus, Trash2, Image as ImageIcon } from 'lucide-react'
+import { Loader2, Save, Plus, Trash2, Image as ImageIcon } from 'lucide-react'
 import { adminCreateProjeto, adminUpdateProjeto, uploadFile } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
+import { getErrorMessage } from '@/lib/utils'
 import type { Projeto } from '@/lib/api'
 
 const projetoSchema = z.object({
@@ -86,8 +87,8 @@ export function ProjetoForm({ initialData }: Props) {
             }
             router.push('/admin/projetos')
             router.refresh()
-        } catch (err: any) {
-            toast(err.message || 'Erro ao salvar projeto', 'error')
+        } catch (err) {
+            toast(getErrorMessage(err) || 'Erro ao salvar projeto', 'error')
         } finally {
             setLoading(false)
         }

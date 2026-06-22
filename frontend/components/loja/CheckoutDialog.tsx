@@ -5,7 +5,7 @@ import { Lock, CreditCard, Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { formatCurrency } from '@/lib/utils'
+import { formatCurrency, getErrorMessage } from '@/lib/utils'
 import { useToast } from '@/components/ui/toaster'
 import { useDependencies } from '@/core/infra/di/DependencyContext'
 import {
@@ -52,8 +52,8 @@ export function CheckoutDialog({ plantaId, titulo, preco }: Props) {
             )
             // Redirect to Mercado Pago
             window.location.href = res.init_point
-        } catch (err: any) {
-            toast(err.message || 'Erro ao processar pedido', 'error')
+        } catch (err) {
+            toast(getErrorMessage(err) || 'Erro ao processar pedido', 'error')
             setLoading(false)
         }
     }

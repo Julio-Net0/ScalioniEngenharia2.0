@@ -4,7 +4,7 @@ import React from "react";
 import Link from 'next/link';
 import { usePlantaDetalhada } from "../hooks/usePlantaDetalhada";
 import { CheckoutDialog } from "./loja/CheckoutDialog";
-import { ChevronRight, Maximize2, Home, Bath, Car, CheckCircle2, FileText, Smartphone, Laptop, AlertCircle } from 'lucide-react';
+import { ChevronRight, Maximize2, Home, CheckCircle2, FileText, Smartphone, Laptop, AlertCircle } from 'lucide-react';
 
 interface PlantaDetalheViewProps {
   slug: string;

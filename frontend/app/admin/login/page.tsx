@@ -9,6 +9,7 @@ import { Loader2, Lock, Mail } from 'lucide-react'
 import { adminLogin } from '@/lib/api'
 import { setToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
+import { getErrorMessage } from '@/lib/utils'
 
 const loginSchema = z.object({
     email: z.string().email('E-mail inválido'),
@@ -33,8 +34,8 @@ export default function AdminLoginPage() {
             setToken(token)
             toast('Login realizado com sucesso', 'success')
             router.push('/admin')
-        } catch (err: any) {
-            toast(err.message || 'Credenciais inválidas', 'error')
+        } catch (err) {
+            toast(getErrorMessage(err) || 'Credenciais inválidas', 'error')
         } finally {
             setLoading(false)
         }

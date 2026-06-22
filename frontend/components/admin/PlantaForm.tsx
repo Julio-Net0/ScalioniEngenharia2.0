@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { Loader2, Save, X, Plus, Trash2, Image as ImageIcon, FileText } from 'lucide-react'
+import { Loader2, Save, Plus, Trash2, FileText } from 'lucide-react'
 import { adminCreatePlanta, adminUpdatePlanta, uploadFile } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
+import { getErrorMessage } from '@/lib/utils'
 import { Planta } from '@/core/domain/entities/Planta'
 
 const plantaSchema = z.object({
@@ -87,13 +88,13 @@ export function PlantaForm({ initialData }: Props) {
                 await adminUpdatePlanta(token, initialData.slug, data)
                 toast('Planta atualizada com sucesso', 'success')
             } else {
-                await adminCreatePlanta(token, data as any)
+                await adminCreatePlanta(token, data)
                 toast('Planta criada com sucesso', 'success')
             }
             router.push('/admin/plantas')
             router.refresh()
-        } catch (err: any) {
-            toast(err.message || 'Erro ao salvar planta', 'error')
+        } catch (err) {
+            toast(getErrorMessage(err) || 'Erro ao salvar planta', 'error')
         } finally {
             setLoading(false)
         }

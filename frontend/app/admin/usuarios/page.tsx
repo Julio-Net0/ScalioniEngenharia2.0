@@ -1,11 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getAdminUsuarios } from '@/lib/api'
+import { getAdminUsuarios, type AdminUser } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
 import {
-    Users,
     Search,
     Loader2,
     ShieldCheck,
@@ -13,10 +12,9 @@ import {
     Calendar,
     AlertCircle
 } from 'lucide-react'
-import { formatDate } from '@/lib/utils'
 
 export default function AdminUsuariosPage() {
-    const [usuarios, setUsuarios] = useState<any[]>([])
+    const [usuarios, setUsuarios] = useState<AdminUser[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
     const { toast } = useToast()

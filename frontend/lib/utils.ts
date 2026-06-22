@@ -5,6 +5,10 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
 }
 
+export function getErrorMessage(err: unknown): string | undefined {
+    return err instanceof Error ? err.message : undefined
+}
+
 export function formatCurrency(value: string | number): string {
     const num = typeof value === 'string' ? parseFloat(value) : value
     return new Intl.NumberFormat('pt-BR', {

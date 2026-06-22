@@ -15,8 +15,20 @@ const features = [
     { icon: Award, title: 'Design Assinado', desc: 'Projetos exclusivos desenvolvidos com a excelência Scalioni.' },
 ]
 
+type LojaPlanta = {
+    id: string
+    slug: string
+    titulo: string
+    descricao: string
+    preco: { valor: number }
+    imagens: string[]
+    terrenoMinimoM2: number | null
+    ativo: boolean
+    arquivoPath: string | null
+}
+
 export default async function LojaPage() {
-    let plantas: any[] = []
+    let plantas: LojaPlanta[] = []
     try {
         const isServer = typeof window === 'undefined'
         const apiUrl = isServer

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getAdminMensagens, marcarMensagemLida } from '@/lib/api'
+import { getAdminMensagens, marcarMensagemLida, type MensagemContato } from '@/lib/api'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
 import { formatDate } from '@/lib/utils'
@@ -11,13 +11,12 @@ import {
     MessageSquare,
     Mail,
     Clock,
-    Plus,
     CheckCircle2,
     AlertCircle
 } from 'lucide-react'
 
 export default function AdminMensagensPage() {
-    const [mensagens, setMensagens] = useState<any[]>([])
+    const [mensagens, setMensagens] = useState<MensagemContato[]>([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState('')
     const { toast } = useToast()

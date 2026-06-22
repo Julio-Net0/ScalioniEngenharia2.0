@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 import { getToken } from '@/lib/auth'
 import { useToast } from '@/components/ui/toaster'
-import { cn } from '@/lib/utils'
+import { cn, getErrorMessage } from '@/lib/utils'
 import type { Projeto } from '@/core/domain/entities/Projeto'
 import { useDependencies } from '@/core/infra/di/DependencyContext'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -49,7 +49,7 @@ export default function AdminProjetosPage() {
         }
     }
 
-    useEffect(() => { loadProjetos() }, [])
+    useEffect(() => { loadProjetos() }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function confirmDelete() {
         if (!deleteTarget) return
@@ -61,8 +61,8 @@ export default function AdminProjetosPage() {
             await deletarProjetoUseCase.execute(token, slug)
             toast('Projeto excluído com sucesso', 'success')
             loadProjetos()
-        } catch (err: any) {
-            toast(err.message || 'Erro ao excluir projeto', 'error')
+        } catch (err) {
+            toast(getErrorMessage(err) || 'Erro ao excluir projeto', 'error')
         }
     }
 

@@ -7,6 +7,7 @@ import * as z from 'zod'
 import { Loader2, Send, CheckCircle, AlertCircle } from 'lucide-react'
 import { useDependencies } from '@/core/infra/di/DependencyContext'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
+import { getErrorMessage } from '@/lib/utils'
 
 const contatoSchema = z.object({
     nome: z.string().min(3, 'Nome muito curto'),
@@ -43,10 +44,10 @@ export function ContatoForm() {
                 message: 'Mensagem enviada com sucesso! Logo entraremos em contato.'
             })
             reset()
-        } catch (err: any) {
+        } catch (err) {
             setStatus({
                 type: 'error',
-                message: err.message || 'Erro ao enviar mensagem. Tente novamente mais tarde.'
+                message: getErrorMessage(err) || 'Erro ao enviar mensagem. Tente novamente mais tarde.'
             })
         } finally {
             setLoading(false)
