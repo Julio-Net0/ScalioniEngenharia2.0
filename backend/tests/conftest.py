@@ -1,4 +1,5 @@
 import pytest
+import pytest_asyncio
 import asyncio
 import subprocess
 from httpx import AsyncClient, ASGITransport
@@ -26,13 +27,13 @@ def event_loop():
     yield loop
     loop.close()
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def engine():
     engine = create_async_engine(settings.database_url, echo=False)
     yield engine
     await engine.dispose()
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def db(engine):
     TestingSessionLocal = async_sessionmaker(
         autocommit=False, autoflush=False, bind=engine, expire_on_commit=False
@@ -45,7 +46,7 @@ async def db(engine):
             # mas aqui estamos usando await session.rollback() abaixo se não usarmos engine.begin()
         await session.rollback()
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def client(db):
     async def override_get_db():
         yield db
