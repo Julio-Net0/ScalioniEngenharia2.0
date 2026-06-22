@@ -56,6 +56,10 @@ A topologia de execução após o deploy segue o fluxo abaixo:
    * `ADMIN_EMAIL`: E-mail do administrador inicial.
    * `SEED_ENV`: `prod` (evita dados falsos de teste no banco Neon).
 5. Salve a **Deploy Hook URL** (Webhook para gatilho de deploy).
+6. Adicione um **Persistent Disk** (aba **Disks**) para os arquivos enviados via upload (imagens/PDFs de plantas), que sem isso são perdidos a cada redeploy (filesystem efêmero):
+   * **Mount Path**: `/app/uploads`
+   * **Size**: 1 GB é suficiente para começar (ajuste conforme volume de arquivos).
+   * Limitação: disco persistente é exclusivo de **1 instância** — não use com múltiplas instâncias/autoscale horizontal sem migrar para storage de objeto (S3/R2).
 
 ### Vercel (Next.js Frontend)
 1. Importe o repositório Git e aponte para a pasta `frontend` como diretório raiz.
