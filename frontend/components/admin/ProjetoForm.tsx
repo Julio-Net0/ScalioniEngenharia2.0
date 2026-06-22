@@ -19,7 +19,7 @@ const projetoSchema = z.object({
     descricao: z.string().min(10, 'Descrição muito curta'),
     categoria: z.string().min(1, 'Selecione uma categoria'),
     ano: z.coerce.number().min(1900).max(2100),
-    imagem_capa: z.string().url('URL de imagem inválida'),
+    imagem_capa: z.string().min(1, 'Imagem de capa é obrigatória'),
     imagens: z.array(z.string()).default([]),
     ativo: z.boolean().default(true),
 })
@@ -167,6 +167,7 @@ export function ProjetoForm({ initialData }: Props) {
                                 <input type="file" className="hidden" accept="image/*" onChange={(e) => handleUpload(e, 'imagem_capa')} />
                             </label>
                             <input {...register('imagem_capa')} className="text-[10px] bg-transparent border-b border-white/10 text-slate-400 outline-none w-64" placeholder="Ou cole a URL aqui" />
+                            {errors.imagem_capa && <p className="text-[10px] text-red-500 uppercase font-bold">{errors.imagem_capa.message}</p>}
                         </div>
                     </div>
                 </div>
