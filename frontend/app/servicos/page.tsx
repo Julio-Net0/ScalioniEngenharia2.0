@@ -20,7 +20,7 @@ export default function ServicosPage() {
         <>
             {/* Hero */}
             <section className="relative h-[400px] flex items-center bg-nav-bg pt-20 overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1503387762-592dea58ef21?w=1920&q=80')` }} />
+                <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1503387837-b154d5074bd2?w=1920&q=80')` }} />
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full text-center">
                     <span className="text-terracotta text-xs font-bold tracking-[0.3em] uppercase mb-4 block">Soluções Completas</span>
                     <h1 className="font-playfair text-5xl md:text-7xl font-black text-white mb-4">Nossos Serviços</h1>
@@ -47,7 +47,7 @@ export default function ServicosPage() {
                     title: 'Engenharia de Precisão',
                     desc: 'A robustez de uma obra depende da inteligência da sua engenharia. Realizamos cálculos estruturais avançados e projetos complementares que otimizam recursos e garantem a durabilidade máxima de cada edificação.',
                     features: ['Cálculo Estrutural Avançado', 'Projetos de Instalações Eficientes', 'Laudos e Perícias Técnicas'],
-                    img: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?w=1200&q=80',
+                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
                     side: 'left'
                 },
                 {
