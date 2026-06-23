@@ -18,7 +18,7 @@ async def _send_email(to_email: str, subject: str, html_body: str) -> None:
     msg["To"] = to_email
     msg.attach(MIMEText(html_body, "html"))
 
-    with smtplib.SMTP(settings.smtp_host, settings.smtp_port) as server:  # pragma: no cover
+    with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=5.0) as server:  # pragma: no cover
         server.ehlo()  # pragma: no cover
         server.starttls()  # pragma: no cover
         server.login(settings.smtp_user, settings.smtp_password)  # pragma: no cover
