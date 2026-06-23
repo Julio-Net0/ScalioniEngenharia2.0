@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta, timezone
 
+from fastapi import Request
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 from backend.core.config import settings
 
@@ -30,7 +30,19 @@ def decode_access_token(token: str) -> dict:
     return jwt.decode(token, settings.secret_key, algorithms=[settings.jwt_algorithm])
 
 
-limiter = Limiter(key_func=get_remote_address)
+def get_client_ip(request: Request) -> str:
+    """Extract real client IP considering reverse proxies like Vercel/Render."""
+    forwarded = request.headers.get("X-Forwarded-For")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    real_ip = request.headers.get("X-Real-IP")
+    if real_ip:
+        return real_ip
+    return request.client.host if request.client else "127.0.0.1"
+
+
+limiter = Limiter(key_func=get_client_ip)
 
 
 __all__ = ["hash_password", "verify_password", "create_access_token", "decode_access_token", "JWTError", "limiter"]
+
