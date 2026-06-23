@@ -58,5 +58,10 @@ class Settings(BaseSettings):
     # Admin e-mail for notifications
     admin_email: str = ""
 
+    # Cloudinary Config
+    cloudinary_cloud_name: str = ""
+    cloudinary_api_key: str = ""
+    cloudinary_api_secret: str = ""
+
 
 settings = Settings()

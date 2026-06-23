@@ -32,6 +32,9 @@ services:
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-}
       FRONTEND_URL: http://localhost:3000
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
       DEBUG: "true"
       TZ: America/Sao_Paulo
     volumes:
