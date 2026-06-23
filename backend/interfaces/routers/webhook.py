@@ -29,6 +29,11 @@ async def mercadopago_webhook(
     request_id = request.headers.get("x-request-id", "")
     data_id = request.query_params.get("data.id", "") or request.query_params.get("id", "")
 
+    logger.warning(
+        "Webhook raw: x-signature=%r x-request-id=%r query=%r",
+        signature, request_id, str(request.query_params),
+    )
+
     if not webhook_service.validate_hmac_signature(data_id.lower(), signature, request_id):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Assinatura inválida")
 
