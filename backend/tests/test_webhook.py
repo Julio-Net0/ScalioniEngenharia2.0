@@ -58,18 +58,22 @@ async def test_webhook_hmac_valido(client, monkeypatch):
     from backend.core.config import settings
     from backend.application import webhook_service
 
-    body = b'{"type": "payment", "data": {"id": "12345"}}'
     settings.mp_webhook_secret = "test-secret"
-    expected_hash = hmac.new(b"test-secret", body, hashlib.sha256).hexdigest()
+    ts = "12345678"
+    data_id = "12345"
+    request_id = "req-2"
+
+    manifest = f"id:{data_id};request-id:{request_id};ts:{ts};"
+    expected_hash = hmac.new(b"test-secret", manifest.encode(), hashlib.sha256).hexdigest()
     
     monkeypatch.setattr(webhook_service, "check_payment_status", lambda *a: {"status": "pending", "external_reference": "inv"})
 
     response = await client.post(
-        "/api/webhooks/mercadopago",
-        content=body,
+        f"/api/webhooks/mercadopago?data.id={data_id}",
+        content=b'{"type": "payment", "data": {"id": "12345"}}',
         headers={
-            "x-signature": f"v1={expected_hash}",
-            "x-request-id": "req-2",
+            "x-signature": f"ts={ts},v1={expected_hash}",
+            "x-request-id": request_id,
             "Content-Type": "application/json",
         },
     )
