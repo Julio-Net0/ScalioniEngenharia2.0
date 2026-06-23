@@ -44,6 +44,10 @@ async def create_pedido(
     )
     
     try:
+        logger.info(
+            "MP preference: frontend_url=%r backend_url=%r pedido_id=%s",
+            settings.frontend_url, settings.backend_url, pedido.id,
+        )
         sdk = mercadopago.SDK(settings.mp_access_token)
         preference_data = {
             "items": [
