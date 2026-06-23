@@ -26,7 +26,7 @@ export function HeroSection() {
                         Espaços
                     </h1>
                     <p className="text-lg md:text-xl text-slate-300 max-w-2xl mb-12 font-light leading-relaxed">
-                        Arquitetura de alto padrão e engenharia de precisão para criar espaços extraordinários.
+                        Arquitetura de alto padrão e regularização imobiliária para viabilizar espaços extraordinários.
                     </p>
                     <div className="flex flex-wrap gap-6">
                         <Link

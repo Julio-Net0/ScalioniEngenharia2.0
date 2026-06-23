@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Building2, HardHat, Layers, PenTool, ArrowRight } from 'lucide-react'
+import { Building2, FileText, Layers, PenTool, ArrowRight } from 'lucide-react'
 
 const services = [
     {
@@ -8,9 +8,9 @@ const services = [
         desc: 'Desenvolvimento de projetos residenciais e comerciais exclusivos, focados em estética, funcionalidade e sofisticação máxima.',
     },
     {
-        icon: HardHat,
-        title: 'Engenharia de Precisão',
-        desc: 'Cálculos estruturais complexos e gestão de obras com rigor técnico, garantindo segurança e fidelidade ao projeto original.',
+        icon: FileText,
+        title: 'Regularização Imobiliária',
+        desc: 'Regularização de imóveis perante órgãos públicos, prefeituras e cartórios, garantindo total conformidade legal e segurança jurídica.',
     },
     {
         icon: Building2,

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { PenTool, HardHat, Building2, CheckCircle2, ArrowRight } from 'lucide-react'
+import { PenTool, FileText, Building2, CheckCircle2, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
     title: 'Nossos Serviços',
-    description: 'Arquitetura de luxo, engenharia de precisão e gestão de obras. Conheça as soluções da Scalioni Engenharia.',
+    description: 'Arquitetura de luxo, regularização imobiliária e gestão de obras. Conheça as soluções da Scalioni Engenharia.',
 }
 
 const steps = [
@@ -42,12 +42,12 @@ export default function ServicosPage() {
                     side: 'right'
                 },
                 {
-                    id: 'engenharia',
-                    icon: HardHat,
-                    title: 'Engenharia de Precisão',
-                    desc: 'A robustez de uma obra depende da inteligência da sua engenharia. Realizamos cálculos estruturais avançados e projetos complementares que otimizam recursos e garantem a durabilidade máxima de cada edificação.',
-                    features: ['Cálculo Estrutural Avançado', 'Projetos de Instalações Eficientes', 'Laudos e Perícias Técnicas'],
-                    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=80',
+                    id: 'regularizacao',
+                    icon: FileText,
+                    title: 'Regularização Imobiliária',
+                    desc: 'Garantimos a total conformidade legal e documental do seu patrimônio. Atuamos na regularização de pendências junto a prefeituras, cartórios e órgãos ambientais, elaborando laudos técnicos, desdobros, unificações e obtenção de habite-se.',
+                    features: ['Laudos Técnicos e Habite-se', 'Desdobros e Unificação de Lotes', 'Retificação de Registro Imobiliário'],
+                    img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=80',
                     side: 'left'
                 },
                 {
