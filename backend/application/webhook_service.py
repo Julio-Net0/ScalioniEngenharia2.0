@@ -32,7 +32,13 @@ def validate_hmac_signature(data_id: str, signature_header: str, request_id: str
             manifest.encode(),
             hashlib.sha256,
         ).hexdigest()
-        return hmac.compare_digest(expected, v1)
+        match = hmac.compare_digest(expected, v1)
+        if not match:
+            logger.warning(
+                "HMAC mismatch: manifest=%r expected=%s received_v1=%s secret_len=%d",
+                manifest, expected, v1, len(settings.mp_webhook_secret),
+            )
+        return match
     except Exception:
         return False
 
