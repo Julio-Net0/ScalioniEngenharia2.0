@@ -14,14 +14,22 @@ from backend.infrastructure.database.models import Pedido, PedidoStatus
 logger = logging.getLogger(__name__)
 
 
-def validate_hmac_signature(payload: bytes, signature_header: str, request_id: str) -> bool:
-    """Valida a assinatura HMAC-SHA256 do Mercado Pago."""
+def validate_hmac_signature(data_id: str, signature_header: str, request_id: str) -> bool:
+    """Valida a assinatura HMAC-SHA256 do Mercado Pago.
+
+    O MP não assina o corpo bruto da requisição: assina o manifest
+    "id:{data.id};request-id:{x-request-id};ts:{ts};" montado a partir
+    do query param data.id e dos headers x-request-id / ts (extraído do
+    próprio x-signature). Ver https://www.mercadopago.com.br/developers/pt/docs/checkout-api/webhooks/additional-content/your-integrations/notifications/webhooks#editor_5
+    """
     try:
-        parts = dict(item.split("=", 1) for item in signature_header.split(","))
+        parts = dict(item.strip().split("=", 1) for item in signature_header.split(","))
+        ts = parts.get("ts", "")
         v1 = parts.get("v1", "")
+        manifest = f"id:{data_id};request-id:{request_id};ts:{ts};"
         expected = hmac.new(
             settings.mp_webhook_secret.encode(),
-            payload,
+            manifest.encode(),
             hashlib.sha256,
         ).hexdigest()
         return hmac.compare_digest(expected, v1)

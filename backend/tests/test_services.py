@@ -83,7 +83,7 @@ def test_validate_hmac_signature_invalida():
     from backend.application.webhook_service import validate_hmac_signature
 
     resultado = validate_hmac_signature(
-        payload=b'{"type":"payment"}',
+        data_id="164600965743",
         signature_header="ts=1,v1=assinatura_invalida",
         request_id="req-001",
     )
@@ -95,7 +95,7 @@ def test_validate_hmac_signature_header_vazio():
     from backend.application.webhook_service import validate_hmac_signature
 
     resultado = validate_hmac_signature(
-        payload=b'{"type":"payment"}',
+        data_id="164600965743",
         signature_header="",
         request_id="",
     )

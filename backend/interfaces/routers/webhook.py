@@ -27,13 +27,13 @@ async def mercadopago_webhook(
     # 1. Validar HMAC-SHA256
     signature = request.headers.get("x-signature", "")
     request_id = request.headers.get("x-request-id", "")
-    body = await request.body()
+    data_id = request.query_params.get("data.id", "") or request.query_params.get("id", "")
 
-    if not webhook_service.validate_hmac_signature(body, signature, request_id):
+    if not webhook_service.validate_hmac_signature(data_id.lower(), signature, request_id):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Assinatura inválida")
 
     data = await request.json()
-    payment_id = str(data.get("data", {}).get("id", ""))
+    payment_id = str(data.get("data", {}).get("id", "") or data_id)
     if not payment_id:
         return {"status": "ignored"}
 
