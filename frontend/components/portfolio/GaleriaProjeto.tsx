@@ -13,7 +13,7 @@ export function GaleriaProjeto({ imagens }: Props) {
 
     if (!imagens || imagens.length === 0) return null
 
-    // Layout assimétrico: 1 grande, 2 médias, 2 pequenas
+    // Layout assimétrico para 4 ou mais imagens: 1 grande, 2 médias, 2 pequenas
     const layoutClasses = [
         'md:col-span-2 md:row-span-2 h-[400px] md:h-full', // Principal
         'h-48 md:h-[200px]', // Média 1
@@ -22,17 +22,46 @@ export function GaleriaProjeto({ imagens }: Props) {
         'h-40 md:h-[180px]', // Pequena 2
     ]
 
+    const getLayoutConfig = () => {
+        const count = imagens.length
+        if (count === 1) {
+            return {
+                gridClass: 'w-full',
+                itemClass: () => 'h-[300px] md:h-[500px]',
+            }
+        }
+        if (count === 2) {
+            return {
+                gridClass: 'grid grid-cols-1 md:grid-cols-2 gap-4',
+                itemClass: () => 'h-[250px] md:h-[380px]',
+            }
+        }
+        if (count === 3) {
+            return {
+                gridClass: 'grid grid-cols-1 md:grid-cols-3 gap-4',
+                itemClass: () => 'h-[200px] md:h-[320px]',
+            }
+        }
+        return {
+            gridClass: 'grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-fr',
+            itemClass: (index: number) => layoutClasses[index] || 'h-48',
+        }
+    }
+
+    const { gridClass, itemClass } = getLayoutConfig()
+    const visibleImages = imagens.slice(0, 5)
+
     return (
         <div className="mt-16">
             <span className="text-terracotta text-[10px] font-bold tracking-[0.4em] uppercase mb-8 block">
                 Galeria de Fotos
             </span>
             
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-fr">
-                {imagens.slice(0, 5).map((img, i) => (
+            <div className={gridClass}>
+                {visibleImages.map((img, i) => (
                     <div
                         key={i}
-                        className={`relative group overflow-hidden cursor-pointer ${layoutClasses[i] || 'h-48'}`}
+                        className={`relative group overflow-hidden cursor-pointer ${itemClass(i)}`}
                         onClick={() => setSelectedImg(img)}
                     >
                         <Image
