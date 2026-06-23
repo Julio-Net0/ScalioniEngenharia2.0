@@ -34,6 +34,7 @@ async def create_pedido(
     pedido_repo = PedidoRepository(db)
     
     pedido = Pedido(
+        id=uuid.uuid4(),
         planta_id=planta_id,
         email=email,
         nome=nome,
